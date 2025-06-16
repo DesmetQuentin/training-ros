@@ -1,0 +1,4 @@
+/* Hide the primary sidebar toggle button */
+button.sidebar-toggle.primary-toggle {
+    display: none !important;
+}

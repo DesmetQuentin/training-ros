@@ -4,7 +4,7 @@ Initialization
 Although SYMPHONIE does not provide any preprocessing program, the
 ``symphonie.exe`` program **can be ran only for its initialization part**, i.e.,
 stopping right before entering the main model loop. This allows users to check whether
-the notebook configuration is well interpreted by the model, but also to trigger some,
+the notebook configuration is well interpreted by the model, but also to trigger some
 checks, debugging outputs or preliminary analyses without committing to book computing
 nodes for the long run.
 
@@ -44,8 +44,8 @@ First, change/check the values of the following **notebook parameters**:
 
 
 And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editing**
-``notebook_list.f``. 
-   
+``notebook_list.f``.
+
 Then, **edit the** ``job.sh`` **batch script**:
 
 * Set ``--job-name`` to ``'init'``.
@@ -91,7 +91,7 @@ Then, **edit the** ``job.sh`` **batch script**:
 
       mpiexec.hydra -np $NPROC $EXE $INPUT
 
-   
+
 
 Next, **submit the job** as follows
 (and use ``squeue -u $USER`` to check on its status):

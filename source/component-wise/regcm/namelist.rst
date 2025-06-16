@@ -2,15 +2,22 @@ Namelist essentials
 ===================
 
 Let us open ``namelist.f`` and span through its most important sections for the present
-training. Note that an actual Fortran namelist is a container formatted as follows for
-a namelist named ``name`` (``namelist.f`` contains several actual *namelists*):
+training.
 
-.. code:: fortran
+.. note::
 
-   &name
-     var = "value"  ! some variable here
-                    ! and more...
-   /
+   An actual Fortran namelist is a container formatted as follows, for
+   a namelist named ``name``:
+
+   .. code:: fortran
+
+      &name
+      var = "value"  ! some variable here
+                     ! and more...
+      /
+
+
+   ``namelist.f`` concretely contains several Fortran *namelists*.
 
 
 You can go through ``namelist.f`` in autonomy. It is fairly well commented. In addition,
@@ -36,4 +43,4 @@ however, the table below drags our attention on specific parts of the file.
    * - ``&physicsparam``
      - Scheme selection and switches, including for OASIS with the ``ioasiscpl`` switch (this should remain 0 for now)
    * - ``&oasisparam``
-     - Parameters to finely set up field exchanges through OASIS.
+     - Parameters to finely set up field exchanges through OASIS

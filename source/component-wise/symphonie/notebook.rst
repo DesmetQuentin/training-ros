@@ -15,10 +15,10 @@ here focus on specific files:
    * - ``notebook_grid.f``
      - Domain geolocation and discretization
    * - ``notebook_graph``
-     - ``GRAPHICS`` output control, i.e., exporting instantaneous fields.
+     - ``GRAPHICS`` output control, i.e., exporting instantaneous fields
    * - ``notebook_offline.f``
-     - ``OFFLINE`` ouput control, i.e., exporting time-averaged fields.
+     - ``OFFLINE`` ouput control, i.e., exporting time-averaged fields
    * - ``notebook_airseaflux_s26.f``
      - Air-sea interface control
    * - ``notebook_oasis_generic.f``
-     - Parameters to finely set up field exchanges through OASIS.
+     - Parameters to finely set up field exchanges through OASIS

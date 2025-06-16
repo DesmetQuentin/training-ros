@@ -44,8 +44,8 @@ this:
    TODO
 
 
-And the ``output`` directory should now contain several new files, i.e., the outputs
-of the simulation:
+And the ``output`` directory should now contain several new files, i.e., the **outputs
+of the simulation**:
 
 .. code:: console
 
@@ -68,7 +68,7 @@ Below is a brief description of what they contain:
    * - ``SAV`` and ``clm``
      - Data necessary for restarting
 
-   
+
 You may explore them using ``ncview`` and/or ``ncdump -h``.
 In any case, we are done with the uncoupled framework of RegCM and you can proceed to
 the next part.

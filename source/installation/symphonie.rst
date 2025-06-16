@@ -28,12 +28,12 @@ specific configuration in some way:
      - User Directory
      - Contain configuration-specific source code and Makefiles
 
-   
+
 .. note::
 
    The suffix put after ``CDIR_`` refers to the employed compiler. In our case, we will
    be using ``ifort``, hence focusing on ``CDIR_IFORT``.
-   
+
 
 When designing a configuration, each of these three folders will have one subdirectory
 named after it. We're now going to create our own. Let us start by installing an
@@ -81,15 +81,15 @@ two following:
    name as in ``$SYMPHONIE/SOURCES`` but placed in your configuration's user directory
    will be those actually considered for the compilation, allowing you to bring up some
    modifications to the code without permanently affecting the original source files
-   (other configuration could still be compiled using the original source, or different
-   user modifications). To implement this workflow safely, make sure first to copy the
-   file of interest from the sources:
+   (another configuration could still be compiled using the original source, or
+   different user modifications). To implement this workflow safely, make sure first to
+   copy the file of interest from the sources (from your user directory):
 
    .. code:: bash
 
       cp -p $SYMPHONIE/SOURCES/<some-file>.F90 .
 
-   
+
    Then only may you modify it.
 
 
@@ -141,7 +141,7 @@ Open it, and **edit the** ``KEY1`` variable to enable OASIS-related compilation 
 
 .. code:: make
 
-   KEY1=$(OASIS)
+   KEY1 = -Dstokes -Dkey_oasis_generic
 
 
 Then, **create a** ``makefile.inc`` **including the OASIS library**:

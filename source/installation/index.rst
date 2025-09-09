@@ -10,12 +10,20 @@ the one loaded in the following:
    module load intel/18.2
    module load intelmpi/18.2
    module load hdf5/1.10.2-intelmpi
-   module load netcdf/4.6.1-intelmpi
+   module load netcdf/4.7.4-intelmpi
    module load pnetcdf/1.9.0-intelmpi
 
 
-If this is not the case, you will need to adapt the various paths to ``include`` and
-``lib`` directories employed throughout the installation process.
+You can check which modules are loaded using:
+
+.. code:: bash
+
+   module list
+
+
+If you wish to proceed to the installation with a different set of modules, you will
+need to adapt the various paths to ``include`` and ``lib`` directories employed
+throughout the installation process.
 
 **OASIS3-MCT is not an executable but a Fortran library.** It will be used by RegCM and
 SYMPHONIE for their own installation. Therefore, this is the first code to install.

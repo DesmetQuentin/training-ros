@@ -43,8 +43,8 @@ expandable below.
       #
       # NETCDF library of the system
       #
-      NETCDF_INCLUDE = -I/usr/local/netcdf/4.6.1-intelmpi/include -I/usr/local/pnetcdf/1.9.0/include
-      NETCDF_LIBRARY = -L/usr/local/netcdf/4.6.1-intelmpi/lib -lnetcdff -Wl,-rpath,/usr/local/intel/2018.2.046/compilers_and_libraries/linux/lib/intel64 -Wl,-rpath,/usr/local/hdf5/1.10.2/intel_mpi/lib -lnetcdf -lnetcdf /usr/local/pnetcdf/1.9.0/lib/libpnetcdf.a
+      NETCDF_INCLUDE = -I/usr/local/netcdf/4.7.4-intelmpi/include -I/usr/local/pnetcdf/1.9.0/include
+      NETCDF_LIBRARY = -L/usr/local/netcdf/4.7.4-intelmpi/lib -lnetcdff -Wl,-rpath,/usr/local/intel/2018.2.046/compilers_and_libraries/linux/lib/intel64 -Wl,-rpath,/usr/local/hdf5/1.10.2/intel_mpi/lib -lnetcdf -lnetcdf /usr/local/pnetcdf/1.9.0/lib/libpnetcdf.a
       #
       # Compiling and other commands
       #

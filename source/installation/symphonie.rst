@@ -18,7 +18,7 @@ specific configuration in some way:
    * - Folder
      - Meaning
      - Function
-   * - ``CDIR_**``
+   * - ``CDIR_*``
      - Compiled Directory
      - Contain all compilation results
    * - ``RDIR``
@@ -126,6 +126,7 @@ Let us simply call it ``OASIS``:
 
 .. code:: bash
 
+   cd $SYMPHONIE
    mkdir -p {CDIR_IFORT,RDIR,UDIR}/OASIS
    cd UDIR/OASIS
 

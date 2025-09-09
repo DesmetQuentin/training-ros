@@ -64,14 +64,14 @@ Once this is finished, you should see many executables in ``$REGCM/bin``:
 
 .. code:: console
 
-   average                            icbcPNETCDF_CLM45_OASIS        pgwbcPNETCDF_CLM45_OASIS
-   chem_icbcPNETCDF_CLM45_OASIS       interp_bionox                  pgw_icbcPNETCDF_CLM45_OASIS
-   clm45_1dto2dPNETCDF_CLM45_OASIS    interp_dustparam               regcmMPIPNETCDF_CLM45_OASIS
-   clmbcPNETCDF_CLM45_OASIS           interp_emissions               regrid
-   clmsaMPIPNETCDF_CLM45_OASIS        interp_emissions_bioburn.sh    sigma2pPNETCDF_CLM45_OASIS
-   emcre_gridPNETCDF_CLM45_OASIS      interpinicPNETCDF_CLM45_OASIS  sigma2zPNETCDF_CLM45_OASIS
-   GrADSNcPlotPNETCDF_CLM45_OASIS     interp_pollen                  sstPNETCDF_CLM45_OASIS
-   GrADSNcPreparePNETCDF_CLM45_OASIS  mksurfdataPNETCDF_CLM45_OASIS  terrainPNETCDF_CLM45_OASIS
+   average                    icbcCLM45_OASIS              pgwbcCLM45_OASIS
+   chem_icbcCLM45_OASIS       interp_bionox                pgw_icbcCLM45_OASIS
+   clm45_1dto2dCLM45_OASIS    interp_dustparam             regcmMPICLM45_OASIS
+   clmbcCLM45_OASIS           interp_emissions             regrid
+   clmsaMPICLM45_OASIS        interp_emissions_bioburn.sh  sigma2pCLM45_OASIS
+   emcre_gridCLM45_OASIS      interpinicCLM45_OASIS        sigma2zCLM45_OASIS
+   GrADSNcPlotCLM45_OASIS     interp_pollen                sstCLM45_OASIS
+   GrADSNcPrepareCLM45_OASIS  mksurfdataCLM45_OASIS        terrainCLM45_OASIS
 
 
 Some are for preprocessing, some are postprocessing tools, while the ``regcmMPI*``
@@ -119,5 +119,5 @@ follow the parts of this training focusing on the standalone components, we thus
 to install an OASIS-disabled executable as well**. To do so, make a ``distclean`` to
 prepare the change of configuration, then go back to the configuration stage, follow the
 OASIS-disabled tab, and continue with the same installation steps. You should finally
-get new executables with a suffix in ``PNETCDF_CLM45`` (i.e., without the additional
+get new executables with a suffix in ``CLM45`` (i.e., without the additional
 ``_OASIS`` like for the first version).

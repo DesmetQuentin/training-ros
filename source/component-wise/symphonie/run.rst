@@ -16,12 +16,6 @@ First, change/check the values of the following **notebook parameters**:
      - ``run_option = 0``
      - Disables the initialization mode
    * - ``notebook_grid.f``
-     - ``kmax = 30``
-     - Back to a reasonable number of vertical layers
-   * - ``notebook_vertcoord.f``
-     - ``flag_merged_levels = 1``
-     - Revert
-   * - ``notebook_grid.f``
      - ``nbdom_imax = 6`` and ``nbdom_jmax = 10``
      - Keep the initial grid dimensions
    * - ``notebook_grid.f``
@@ -127,9 +121,5 @@ containing one timestep, with the fields requested in the ``notebook_graph`` and
    cells, while other meshes only display ``NaN``. This can be problematic for
    conducting preprocessing with other tools like Python for instance. This is why
    we saved the ``grid.nc`` file produced during :doc:`initialization <initialize>`.
-   Yet, since initialization was done with one only vertical level, the resulting
-   ``grid.nc`` is not relevant for the vertical axis. In this respect, keep in mind the
-   following:
-   
-   * Initialization's ``grid.nc`` contains **unmasked 2D coordinates**.
-   * Production run's ``grid.nc`` contains the **full vertical axis** but masked data in the horizontal.
+   Initialization's ``grid.nc`` is thus *the* file you will need for interpreting and
+   postprocessing your simulation outputs.

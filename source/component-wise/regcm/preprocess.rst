@@ -16,7 +16,7 @@ Run the ``terrain`` program:
 
 .. code:: bash
 
-   ./bin/terrainPNETCDF_CLM45 namelist.f
+   ./bin/terrainCLM45 namelist.f
 
 
 This should create three files relating to time-independent domain-related data:
@@ -30,7 +30,7 @@ Then, run the ``sst`` program:
 
 .. code:: bash
 
-   ./bin/sstPNETCDF_CLM45 namelist.f
+   ./bin/sstCLM45 namelist.f
 
 
 This should generate a single new file containing initial and boundary conditions of sea
@@ -45,7 +45,7 @@ Next, run the ``mksurfdata`` program:
 
 .. code:: bash
 
-   ./bin/mksurfdataPNETCDF_CLM45 namelist.f
+   ./bin/mksurfdataCLM45 namelist.f
 
 
 This program preprocesses every data needed by the Community Land Model version 4.5
@@ -56,7 +56,7 @@ Finally, run the ``icbc`` program:
 
 .. code:: bash
 
-   ./bin/icbcPNETCDF_CLM45 namelist.f
+   ./bin/icbcCLM45 namelist.f
 
 
 You should now see a new Initial Condition and Boundary Condition (ICBC) file,
@@ -67,7 +67,7 @@ containing all ICBC data interpolated on the simulation's period and domain.
    $ ls -1rt input  # TODO
 
 
-Once these preprocessing programs have ran, RegCM's main run will rely on their only
+Once these preprocessing programs have run, RegCM's main run will rely on their only
 results stored in the ``input`` directory, already taylored to the period and domain
 indicated in ``namelist.f``, rather than interpolating heavier files online during the
 simulation.

@@ -30,12 +30,6 @@ First, change/check the values of the following **notebook parameters**:
      - ``run_option = -1``
      - Enables the initialization mode.
    * - ``notebook_grid.f``
-     - ``kmax = 1``
-     - One only vertical layer makes it quicker.
-   * - ``notebook_vertcoord.f``
-     - ``flag_merged_levels = 0``
-     - Goes with ``kmax = 1``.
-   * - ``notebook_grid.f``
      - ``nbdom_imax = 6`` and ``nbdom_jmax = 10``
      - The initial grid dimensions.
    * - ``notebook_grid.f``

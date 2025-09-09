@@ -11,7 +11,7 @@ For this uncoupled run of regcm, we care about the following parameters:
 * The ``--nodes`` batch parameter set to 1;
 * The ``NPROC`` variable set to 36 (there are 36 cores per node);
 * The ``DIR`` variable set to the current run directory;
-* The ``EXE`` variable set to ``./bin/regcmMPIPNETCDF_CLM45``.
+* The ``EXE`` variable set to ``./bin/regcmMPICLM45``.
 
 
 .. dropdown:: ``job.sh``

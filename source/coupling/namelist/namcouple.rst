@@ -1,5 +1,5 @@
-OASIS ``namcouple`` basics
-==========================
+OASIS' ``namcouple``
+===================
 
 ``namcouple`` is a text file separated in sections, each with a specific format.
 Any line beginning with "#" is ignored and blank lines are not allowed.
@@ -98,7 +98,7 @@ The first line of each entry looks like this:
 
       
 * ``1`` is always ``1``.
-* ``3600`` represents the coupling period, i.e., one hour (in the same unit as the run time, i.e., in seconds).
+* ``3600`` represents the coupling period, here one hour (in the same unit as the run time, i.e., in seconds).
 * ``0`` indicates the number of transformations to apply to the fields, which we will detail further below.
 * ``restart.nc`` is the name of the NetCDF file used for initialization. It will be overwritten by the last fields' value at the end of the run (thus serving as a restart file for the following simulation).
 * ``EXPORTED`` is the mode of the entry, determining how coupling fields will be treated as well as the format of the following lines.
@@ -106,15 +106,15 @@ The first line of each entry looks like this:
 
 In this training, we focus on two modes: ``EXPORTED`` (or ``EXPOUT``) and ``OUTPUT``.
 ``EXPORTED`` enables an actual transfer of data between the source and destination
-components. ``OUTPUT`` simply writes the source data in a netcdf file for each
+components. ``OUTPUT`` simply writes the source data in a NetCDF file for each
 "coupling" time. TODO
 
 .. note::
    
    With identical formatting as ``EXPORTED``, ``EXPOUT`` enables data transfer, while
-   also writing out this same data in a netcdf file. TODO. This must be enabled
-   mindfully because involving a **huge memory usage** (which impacts the computing time
-   as well).
+   also writing out this same data in a NetCDF file. TODO. This must be enabled
+   mindfully because involving a **huge and increasing memory usage** as the simulation
+   progresses (which impacts the computing time as well).
 
 
 ``EXPORTED`` mode
@@ -129,7 +129,7 @@ Here is an example of ``EXPORTED`` entry:
    R  0  R  0
 
 
-The second line contains:
+After the first line we've already covered, the second line contains:
 
 * the source grid's *x* and *y* dimensions;
 * the destination grid's *x* and *y* dimensions;
@@ -152,6 +152,13 @@ The second line contains:
 
 The third line, ``R 0 R 0``, refers to grid periodicity and overlapping. We won't
 change this line during this training, i.e., choosing no periodicity nor overlapping.
+
+.. note::
+
+   Field and grid names are not defined in the ``namcouple`` but within each component.
+   ``namcouple`` field entries simply use those names to indicate which are the sources
+   and the destinations.
+
 
 
 ``OUTPUT`` mode
@@ -178,7 +185,7 @@ As mentioned earlier, you can configure field transformations for each entry.
 In the following example, two transformations are set up, namely ``LOCTRANS`` and
 ``SCRIPR``:
 
-.. code:: console
+.. code::
 
    SRC_NAME DST_NAME 1 3600 2 restart.nc EXPORTED
    253 205 1197 972 rcim symt LAG=+180
@@ -189,9 +196,9 @@ In the following example, two transformations are set up, namely ``LOCTRANS`` an
 
 
 * ``2`` (the number of transformations) is indicated right after the coupling period in the first line.
-* Lines 2 and 3 relate to the ``EXPORTED`` mode and are thus unchanged.
+* Lines 2 and 3 relate to the ``EXPORTED`` mode and are thus identical, with or without transformation.
 * Line 4 presents the keyword of each transformation, here ``LOCTRANS`` and ``SCRIPR``.
-* Following lines contain parameters for each transformation: line 5 for the first one (``LOCTRANS``), line 6 for the second, line 7 for the third if existing, so on, so forth.
+* Following lines contain parameters for each transformation, in order: line 5 for the first one (``LOCTRANS``), line 6 for the second, line 7 for the third if existing, so on, so forth.
 
 
 ``LOCTRANS`` is about **time transformations**. At a coupling time, the data sent is
@@ -206,7 +213,7 @@ interpolation methods such as ``BICUBIC``, ``GAUSWGT`` and so on.
 
 .. tip::
 
-   The ``SCRIPR`` transformation implies generating the interpolation weights at runtime
+   The ``SCRIPR`` transformation implies generating the interpolation weights at run time
    during the initialization. Depending on the grids, this can be quite a
    **resource-consuming step**. Luckily, once computed, the weights are saved in a NetCDF
    file which can be reused for the next simulations instead of recomputed. To do this,
@@ -239,10 +246,10 @@ but positive downward for the receiver:
    rmp_rcin_to_symt_BILINEAR.nc src opt
 
 
-.. tip
+.. tip::
 
-   ``BLASOLD`` can also serve to add a constant to the field. In this case, the second
-   index must be set to 1, and a new line must define the added constant (which must be
+   ``BLASOLD`` can also serve to **add a constant** to the field. In this case, the second
+   index must be set to 1, and a new line must define the added constant (and this must be
    a real).
    In the following example,
    sea surface temperature is converted from degree Celsius for the sender, to Kelvin
@@ -267,7 +274,7 @@ this page.
 
 .. dropdown:: ``namcouple``
 
-   .. code:: console
+   .. code::
 
       # This is a typical input file for OASIS3-MCT.
       # Keywords used in previous versions of OASIS3 

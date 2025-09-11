@@ -1,2 +1,0 @@
-Ensuring framework consistency
-==============================

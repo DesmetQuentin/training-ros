@@ -49,19 +49,18 @@ Moreover, it should be supervised by a so-called training master who prepared:
 Materials and setup
 -------------------
 
-1. ``training_ros`` is a folder containing all the resources you will need for the training. Locate it.
+1. ``training_ROS`` is a folder containing all the resources you will need for the training. Locate it.
 2. Configure your environment for the training using the ``config.sh`` script:
 
 .. code:: bash
 
-   source /path/to/training_ros/config.sh
+   source /path/to/training_ROS/config.sh
 
 
-3. Create and record a run directory for conducting the training's tasks:
+3. Create your run directory for conducting the training's tasks:
 
 .. code:: bash
 
-   export RUN=/tmpdir/$USER/training_playground
    mkdir $RUN
 
 

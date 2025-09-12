@@ -6,14 +6,21 @@ from the training materials:
 
 .. code:: bash
 
-   bash $TRAINING/make_run-regcm.sh regcm
+   bash $TRAINING/scripts/make_run-regcm.sh regcm
 
 
 There should now be a new ``$RUN/regcm`` directory, with the following structure:
 
 .. code:: console
 
-   TODO
+   regcm/
+   ├── bin -> /tmpdir/desmet/training_ROS/models/RegCM/bin
+   ├── input
+   ├── job.sh
+   ├── namelist.f
+   └── output
+
+   3 directories, 2 files
 
 
 * The ``bin`` folder is a link towards RegCM's executable directory.

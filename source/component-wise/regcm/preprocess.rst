@@ -23,7 +23,10 @@ This should create three files relating to time-independent domain-related data:
 
 .. code:: console
 
-   $ ls -1rt input  # TODO
+   $ ls -1rt input
+   QUYNHON_TEXTURE
+   QUYNHON_LANDUSE
+   QUYNHON_DOMAIN000.nc
 
 
 Then, run the ``sst`` program:
@@ -38,7 +41,11 @@ surface temperature throughout the simulation period:
 
 .. code:: console
 
-   $ ls -1rt input  # TODO
+   $ ls -1rt input
+   QUYNHON_TEXTURE
+   QUYNHON_LANDUSE
+   QUYNHON_DOMAIN000.nc
+   QUYNHON_SST.nc
 
 
 Next, run the ``mksurfdata`` program:
@@ -64,7 +71,13 @@ containing all ICBC data interpolated on the simulation's period and domain.
 
 .. code:: console
 
-   $ ls -1rt input  # TODO
+   $ ls -1rt input
+   QUYNHON_TEXTURE
+   QUYNHON_LANDUSE
+   QUYNHON_DOMAIN000.nc
+   QUYNHON_SST.nc
+   QUYNHON_CLM45_surface.nc
+   QUYNHON_ICBC.2018070300.nc
 
 
 Once these preprocessing programs have run, RegCM's main run will rely on their only

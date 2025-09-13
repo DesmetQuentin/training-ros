@@ -26,7 +26,7 @@ There should now be a new ``$RUN/regcm`` directory, with the following structure
 * The ``bin`` folder is a link towards RegCM's executable directory.
 * ``input`` and ``output`` are folders to contain our simulation's input and output, respectively.
 * ``namelist.f`` is the input file containing all the parameters of the simulation.
-* ``job.sh`` is a batch script for running the main executable on CALMIP's computing nodes.
+* ``job.sh`` is a batch script for running the main executable on the computing nodes.
 
 
 The ``tmpdir`` storage of CALMIP will never have backup saving. For this reason, it is

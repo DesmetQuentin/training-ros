@@ -48,7 +48,7 @@ Now, the same ``$RUN`` directory should look like:
 
 * The ``oasis``, ``regcm`` and ``symphonie`` are independent folders relating to each specific component.
 * ``namcouple`` is the namelist read by OASIS at run time (this is actually formatted in ASCII, not Fortran).
-* ``job.sh`` is a batch script for running the executables on CALMIP's computing nodes.
+* ``job.sh`` is a batch script for running the executables on the computing nodes.
 
 .. attention::
 

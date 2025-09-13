@@ -1,8 +1,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Training: RegCM-OASIS-SYMPHONIE on CALMIP"
-html_title = "Training: RegCM-OASIS-SYMPHONIE on CALMIP"
+project = "Training: RegCM-OASIS-SYMPHONIE"
+html_title = "Training: RegCM-OASIS-SYMPHONIE"
 copyright = "2025, Quentin Desmet"
 author = "Quentin Desmet"
 

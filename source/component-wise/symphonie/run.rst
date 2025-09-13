@@ -16,7 +16,7 @@ First, change/check the values of the following **notebook parameters**:
      - ``run_option = 0``
      - Disables the initialization mode
    * - ``notebook_grid.f``
-     - ``nbdom_imax = 6`` and ``nbdom_jmax = 10``
+     - ``nbdom_imax = 7`` and ``nbdom_jmax = 6`` on CALMIP/``nbdom_imax = 8`` and ``nbdom_jmax = 6`` on HILO
      - Keep the initial grid dimensions
    * - ``notebook_grid.f``
      - ``mpi_map_file_name = 'description_domaine.next'`` and ``mpi_hole_plugging = 'description_trous.txt'``
@@ -26,47 +26,53 @@ First, change/check the values of the following **notebook parameters**:
 Then, **edit the** ``job.sh`` **batch script**:
 
 * Set the ``--job-name`` batch parameter to ``'symphonie'``.
-* Set ``NPROC`` to 36, as indicated in the header of ``description_domaine.next``.
+* Set ``NPROC`` as indicated in the header of ``description_domaine.next``.
 * Accordingly, set the ``--nodes`` batch parameter back to 1.
-* Check that ``DIR`` is the current run directory.
 * Check that ``EXE`` is ``./bin/ORIGIN/symphonie.exe``.
    
 
 .. dropdown:: ``job.sh``
 
-   .. code:: bash
+   .. tab-set::
 
-      #!/bin/bash
+      .. tab-item:: CALMIP
 
-      #SBATCH --job-name=symphonie
-      #SBATCH --nodes=1
-      #SBATCH --ntasks-per-node=36
-      #SBATCH --ntasks-per-core=1
-      #SBATCH --time=1:00:00
-      #SBATCH --output=slurm_%x-id_%j.out
-      #SBATCH --error=slurm_%x-id_%j.err
+         .. code:: bash
 
-      DIR=/tmpdir/desmet/TRAINING_CPL/symphonie # <-- make sure to modify here!
-      EXE=./bin/ORIGIN/symphonie.exe # from DIR
-      NPROC=36
-      INPUT=notebook_list.f
+            #!/bin/bash
 
-      module purge
-      source /tmpdir/desmet/2025-05-21-WORKSHOP/config.sh
+            #SBATCH --job-name=symphonie
+            #SBATCH --nodes=1
+            #SBATCH --ntasks-per-node=36
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=15:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
 
-      export OMPI_FC=ifort
-      export OMPI_CC=icc
-      export OMP_CXX=icpc
-      ulimit -s unlimited
+            EXE=bin/ORIGIN/symphonie.exe
+            NPROC=36
+            INPUT=notebook_list.f
 
-      cd $DIR
+            ulimit -s unlimited
 
-      rm fort*
-      rm core
+            module purge
+            module load intel/18.2
+            module load intelmpi/18.2
+            module load hdf5/1.10.2-intelmpi
+            module load netcdf/4.7.4-intelmpi
+            module load pnetcdf/1.9.0-intelmpi
+            module list 2>./run_modules
 
-      module list 2>./run_modules
+            echo -e "Launching...\n"
 
-      mpiexec.hydra -np $NPROC $EXE $INPUT
+            mpiexec.hydra -np $NPROC $EXE $INPUT
+
+
+      .. tab-item:: HILO
+
+         .. code:: bash
+
+            TODO
 
 
 Next, **empty the** ``tmp`` **folder**:

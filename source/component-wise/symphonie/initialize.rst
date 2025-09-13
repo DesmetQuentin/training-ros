@@ -18,7 +18,8 @@ run to compute which parts of the grid are land-only and can thus be ignored. Th
 results will be in the form of two files, the one informing of the land-only meshes to
 be ignored, and the other for the rest of the grid.
 
-First, change/check the values of the following **notebook parameters**:
+First, after changing directory to ``$RUN/symphonie``, change/check the values of the
+following **notebook parameters**:
 
 .. list-table::
    :header-rows: 1
@@ -30,7 +31,7 @@ First, change/check the values of the following **notebook parameters**:
      - ``run_option = -1``
      - Enables the initialization mode.
    * - ``notebook_grid.f``
-     - ``nbdom_imax = 6`` and ``nbdom_jmax = 10``
+     - ``nbdom_imax = 7`` and ``nbdom_jmax = 6`` on CALMIP/``nbdom_imax = 8`` and ``nbdom_jmax = 6`` on HILO
      - The initial grid dimensions.
    * - ``notebook_grid.f``
      - ``mpi_map_file_name = 'default'`` and ``mpi_hole_plugging = 'none'``
@@ -42,49 +43,54 @@ And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editi
 
 Then, **edit the** ``job.sh`` **batch script**:
 
-* Set ``--job-name`` to ``'init'``.
-* Set ``NPROC`` to 60: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
-* Set the ``--nodes`` batch parameter to 2, so it can contains the 60 needed CPUs.
-* Set ``DIR`` to the current run directory.
-* Set ``EXE`` to ``./bin/ORIGIN/symphonie.exe``.
+* Set ``--job-name`` to ``init``.
+* Set ``NPROC`` to 42 on CALMIP (48 on HILO): this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
+* Set the ``--nodes`` batch parameter to 2, so it can contains all needed CPUs.
+* Set ``EXE`` to ``bin/ORIGIN/symphonie.exe``.
 
 
 .. dropdown:: ``job.sh``
 
-   .. code:: bash
+   .. tab-set::
 
-      #!/bin/bash
+      .. tab-list:: CALMIP
 
-      #SBATCH --job-name=init
-      #SBATCH --nodes=2
-      #SBATCH --ntasks-per-node=36
-      #SBATCH --ntasks-per-core=1
-      #SBATCH --time=1:00:00
-      #SBATCH --output=slurm_%x-id_%j.out
-      #SBATCH --error=slurm_%x-id_%j.err
+         .. code:: bash
 
-      DIR=/tmpdir/desmet/TRAINING_CPL/symphonie # <-- make sure to modify here!
-      EXE=./bin/ORIGIN/symphonie.exe # from DIR
-      NPROC=60
-      INPUT=notebook_list.f
+            #!/bin/bash
 
-      module purge
-      source /tmpdir/desmet/2025-05-21-WORKSHOP/config.sh
+            #SBATCH --job-name=init
+            #SBATCH --nodes=2
+            #SBATCH --ntasks-per-node=36
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=15:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
 
-      export OMPI_FC=ifort
-      export OMPI_CC=icc
-      export OMP_CXX=icpc
-      ulimit -s unlimited
+            EXE=bin/ORIGIN/symphonie.exe
+            NPROC=42
+            INPUT=notebook_list.f
 
-      cd $DIR
+            ulimit -s unlimited
 
-      rm fort*
-      rm core
+            module purge
+            module load intel/18.2
+            module load intelmpi/18.2
+            module load hdf5/1.10.2-intelmpi
+            module load netcdf/4.7.4-intelmpi
+            module load pnetcdf/1.9.0-intelmpi
+            module list 2>./run_modules
 
-      module list 2>./run_modules
+            echo -e "Launching...\n"
 
-      mpiexec.hydra -np $NPROC $EXE $INPUT
+            mpiexec.hydra -np $NPROC $EXE $INPUT
 
+
+      .. tab-list:: HILO
+
+         .. code:: bash
+
+            TODO
 
 
 Next, **submit the job** as follows
@@ -109,42 +115,53 @@ directory:
 
 .. code:: console
 
-   $ ls -1rt .
-   TIDES
-   restart_output
-   restart_outbis
-   restart_input
-   bin
-   notebook_list.f
-   title_for_netcdf_files
-   job.sh
-   NOTEBOOKS
-   run_modules
-   slurm_init-id_1693377.err
-   description_trous.txt
-   description_domaine.next
-   OFFLINE
-   currently_loaded_modulefiles
+   $ ls -1 .
    authors_of_the_simulation
-   tmp
-   slurm_init-id_1693377.out
-   output_file_extension
+   bin
+   currently_loaded_modulefiles
+   description_domaine.next
+   description_trous.txt
    GRAPHICS
+   job.sh
+   notebook_list.f
+   NOTEBOOKS
+   OFFLINE
+   output_file_extension
+   restart_input
+   restart_outbis
+   restart_output
+   run_modules
+   slurm_init-id_1746588.err
+   slurm_init-id_1746588.out
+   TIDES
+   title_for_netcdf_files
+   tmp
 
 
 They are the two files we intended to generate. **Head** ``description_domaine.next``:
 
-.. code:: console
+.. tab-set::
 
-   $ head -n3 description_domaine.txt
-        6    10    36           ! Number of sub-domains in each direction & nbdom
-            245         420  ! iglb jglb
-   ------------------------
+   .. tab-item:: CALMIP
+
+      .. code:: console
+
+         $ head -n3 description_domaine.next
+         7     6    36           ! Number of sub-domains in each direction & nbdom
+               300         300  ! iglb jglb
+         ------------------------
+   
+
+   .. tab-item:: HILO
+
+      .. code:: console
+
+         TODO
 
 
 Three numbers are displayed on the first line: the two first are the initial grid
 dimensions, and the last is the number of meshes in this grid which contain ocean cells.
-This indicates us the **number of CPUs to use for our future runs: 36**. Lucky us! This
+This indicates us the **number of CPUs to use for our future runs**. Lucky us! This
 is exactly the amount of CPUs in one node!
 
 We are now ready to run SYMPHONIE in normal mode. Before that, however, quickly

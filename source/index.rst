@@ -1,13 +1,14 @@
-Training: install, setup & run the RegCM-OASIS-SYMPHONIE air-sea coupled model on CALMIP
-========================================================================================
+Training: install, setup & run the RegCM-OASIS-SYMPHONIE air-sea coupled model
+==============================================================================
 
-This home page presents a self-contained training that covers installing, setting up and
-running the RegCM-OASIS-SYMPHONIE air-sea coupled model on the supercomputer named
-CALMIP. Please start by reading through this page, which precises the training's scope,
-requirements, materials and outline. The left-hand side panel provides a search bar,
-and indicates your location on this website at any time in the training. Code blocks
-include a copy button in the top-right corner for easy reuse. We hope you find this
-training clear and helpful, and that it provides the answers you're looking for.
+This home page presents a training that covers installing, setting up and
+running the RegCM-OASIS-SYMPHONIE air-sea coupled model on a supercomputer
+(either CALMIP or HILO). Please start by reading through this page, which precises the
+training's scope, requirements, materials and outline. The left-hand side panel provides
+a search bar, and indicates your location on this website at any time in the training.
+Code blocks include a copy button in the top-right corner for easy reuse. We hope you
+find this training clear and helpful, and that it provides the answers you're looking
+for.
 
 
 Scope
@@ -16,10 +17,11 @@ Scope
 The training on this website does not focus on each component of the coupled system
 we are setting up, but rather on a way to make them work together. Moreover, the
 proposed flow is, precisely, a proposition, meaning that there surely are other methods
-to couple the components. This way, we will only spend a minimal time on how RegCM and
+to couple those two models. This way, we will only spend a minimal time on how RegCM and
 SYMPHONIE work on their own, and, in particular, omit a lot of the things that make them
-complex and versatile tools, focusing instead on their interaction. To go further,
-please find hereafter links towards the existing documentations for each tool.
+complex and versatile tools, focusing instead on OASIS and their interaction through it.
+To go further, please find hereafter links towards the existing documentations for each
+tool.
 
 .. seealso::
 
@@ -36,20 +38,20 @@ The training relies on the following requirements:
 
 * basic Unix system understanding;
 * familiarity with command-line text editors such as ``nano``, ``vim``, or ``emacs``, including basic operations like editing, saving, and performing search-and-replace;
-* and an account on the CALMIP supercomputer, implying a username and project.
+* and an account on the CALMIP/HILO supercomputer.
 
 
-Moreover, it should be supervised by a so-called training master who prepared:
+Moreover, it should be supervised by a so-called training master, who prepared:
 
-* model executable (installation is not the primary focus of this training and is only detailed in the last section of this document for completeness);
-* data and regional configuration files necessary to run the simulations (this is out of this training's scope);
-* and a ``training_ros`` folder containing the materials explained below.
+* model executable (installation is covered at last to prioritize configuring and running the system);
+* data and regional configuration files necessary to run the simulations (this is out of this training's scope, and is already described in the models' own documentation);
+* and a ``training_ROS`` folder containing the materials explained below.
 
 
 Materials and setup
 -------------------
 
-1. ``training_ROS`` is a folder containing all the resources you will need for the training. Locate it.
+1. ``training_ROS`` is a folder containing all the resources you will need for the training. Locate it with the help of your training master.
 2. Configure your environment for the training using the ``config.sh`` script:
 
 .. code:: bash
@@ -57,7 +59,7 @@ Materials and setup
    source /path/to/training_ROS/config.sh
 
 
-3. Create your run directory for conducting the training's tasks:
+3. Create your run directory for conducting the training tasks:
 
 .. code:: bash
 

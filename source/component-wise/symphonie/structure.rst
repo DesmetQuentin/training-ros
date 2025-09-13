@@ -35,7 +35,7 @@ There should now be a new ``$RUN/symphonie`` directory, with the following struc
 * ``restart_*`` are only useful to the restart procedure, which we will address later in this training.
 * ``NOTEBOOKS`` contains all the simulation parameters, split into various Fortran namelists and ASCII files.
 * ``notebook_list.f`` is the input file for SYMPHONIE, the "master" namelist, pointing to the various files stored in ``NOTEBOOKS``.
-* ``job.sh`` is a batch script for running the executable on CALMIP's computing nodes.
+* ``job.sh`` is a batch script for running the executable on the computing nodes.
 
 
 As for :doc:`RegCM <../regcm/structure>`, we will now **store the simulation's

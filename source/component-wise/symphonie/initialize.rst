@@ -53,7 +53,7 @@ Then, **edit the** ``job.sh`` **batch script**:
 
    .. tab-set::
 
-      .. tab-list:: CALMIP
+      .. tab-item:: CALMIP
 
          .. code:: bash
 
@@ -86,7 +86,7 @@ Then, **edit the** ``job.sh`` **batch script**:
             mpiexec.hydra -np $NPROC $EXE $INPUT
 
 
-      .. tab-list:: HILO
+      .. tab-item:: HILO
 
          .. code:: bash
 

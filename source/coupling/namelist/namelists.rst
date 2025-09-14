@@ -10,14 +10,117 @@ with SYMPHONIE. You can find examples for each component below:
 
       .. code:: fortran
 
-         TODO ! Yolo
+         !
+         ! OASIS parameters
+         !
+         &oasisparam
+          write_restart_option = 2, ! 0 => no restart file writing
+                                    ! 1 => write restart files at the first time
+                                    ! 2 => write restart files at the last time
+                                    ! 3 => both 1 & 2
+          l_write_grids = .false.,  ! For writing grids.nc, areas.nc, masks.nc.
+          oasis_sync_lag = 0,       ! Synchronisation lag with other components (sec)
+                                    ! > 0 => Regcm starts late
+                                    ! < 0 => Regcm starts in advance
+                                    ! Should be a multipe of the coupling period
+                                    !   in the namcouple.
+                                    ! In the namcouple, RUNTIME must have
+                                    !   the run duration + oasis_sync_lag.
+                                    !------ NAMCOUPLE FIELD ENTRIES ------
+                                    ! field    | grid
+                                    !-------------------------------------
+          l_cpl_im_sst  = .true.,   ! RCM_SST  | rcim     
+          l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim     
+          l_cpl_im_wust = .false.,  ! RCM_WUST | rcim     
+          l_cpl_ex_u10m = .false.,  ! RCM_U10M | rcin/rcim
+          l_cpl_ex_v10m = .false.,  ! RCM_V10M | rcin/rcim
+          l_cpl_ex_wspd = .false.,  ! RCM_WSPD | rcin/rcim
+          l_cpl_ex_wdir = .false.,  ! RCM_WDIR | rcin/rcim
+          l_cpl_ex_t2m  = .false.,  ! RCM_T2M  | rcin/rcim
+          l_cpl_ex_q2m  = .false.,  ! RCM_Q2M  | rcin/rcim
+          l_cpl_ex_slp  = .true.,   ! RCM_SLP  | rcen/rcem
+          l_cpl_ex_taux = .true.,   ! RCM_TAUX | rcin/rcim
+          l_cpl_ex_tauy = .true.,   ! RCM_TAUY | rcin/rcim
+          l_cpl_ex_z0   = .false.,  ! RCM_Z0   | rcin/rcim
+          l_cpl_ex_ustr = .false.,  ! RCM_USTR | rcin/rcim
+          l_cpl_ex_evap = .false.,  ! RCM_EVAP | rcin/rcim
+          l_cpl_ex_prec = .true.,   ! RCM_PREC | rcin/rcim
+          l_cpl_ex_nuwa = .false.,  ! RCM_NUWA | rcin/rcim
+          l_cpl_ex_ulhf = .true.,   ! RCM_ULHF | rcin/rcim
+          l_cpl_ex_ushf = .true.,   ! RCM_USHF | rcin/rcim
+          l_cpl_ex_uwlw = .false.,  ! RCM_UWLW | rcin/rcim
+          l_cpl_ex_dwlw = .false.,  ! RCM_DWLW | rcin/rcim
+          l_cpl_ex_nulw = .true.,   ! RCM_NULW | rcin/rcim
+          l_cpl_ex_uwsw = .false.,  ! RCM_UWSW | rcin/rcim
+          l_cpl_ex_dwsw = .false.,  ! RCM_DWSW | rcin/rcim
+          l_cpl_ex_ndsw = .true.,   ! RCM_NDSW | rcin/rcim
+          l_cpl_ex_rhoa = .false.,  ! RCM_RHOA | rcin/rcim
+                                    !------ NAMCOUPLE FIELD ENTRIES ------
+         /
 
 
    .. tab-item:: SYMPHONIE
 
       .. code:: fortran
 
-         TODO ! Yolo
+         &notebook_oasis_generic
+         ! https://docs.google.com/document/d/1stIu_SuZY7l729gXjDB-LS37fAPGyDexNmeieQ07-eA/edit#
+         
+          ioasis_generic = 1         ! enables OASIS coupling
+          write_restart_option = 2   ! 0 => not writing any restart files
+                                     ! 1 => writing restart files at the first oasis_put processes
+                                     ! 2 => writing restart files at the last oasis_put processes
+                                     ! 3 => both 1 & 2
+          l_write_grids = .false.    ! for writing grids.nc, areas.nc, masks.nc (by OASIS)
+                                     ! --> put .false. if these already exist.
+                                     ! --> if .true., then indicate the SYMPHONIE grid below.
+         
+          ! The grid.nc describing the global grid when no land proc has been removed.
+          default_grid_file_name = './symphoniedir/DRY_RUN/0540cpus/grid.nc'
+          !default_grid_file_name = 'default' ! indicates the grid.nc that will be produced
+                                             ! in the tmp directory.
+         
+          oasis_sync_lag = 0         ! synchronisation lag with other components (sec)
+                                     ! > 0 => SYMPHONIE starts late
+                                     ! < 0 => SYMPHONIE starts in advance
+                                     ! should be equal to the coupling period in the
+                                     !   namcouple
+                                     ! in the namcouple, RUNTIME must have the run
+                                     !   duration + |oasis_sync_lag|
+          oasis_dummy_dt = 180       ! model time step to use during the dummy loops
+                                     !   for filling the lag
+                                     ! should be equal to the LAG parameter in the
+                                     !   namcouple
+         
+                                     !------ NAMCOUPLE FIELD ENTRIES ------
+                                     ! field    | grid
+                                     !-------------------------------------
+          l_cpl_im_wndu = .false.    ! SYM_WNDU | symt
+          l_cpl_im_wndv = .false.    ! SYM_WNDV | symt
+          l_cpl_im_t2m  = .false.    ! SYM_T2M  | symt
+          l_cpl_im_t10m = .false.    ! SYM_T10M | symt
+          l_cpl_im_q2m  = .false.    ! SYM_Q2M  | symt
+          l_cpl_im_q10m = .false.    ! SYM_Q10M | symt
+          l_cpl_im_slp  = .true.     ! SYM_SLP  | symt
+          l_cpl_im_taux = .true.     ! SYM_TAUX | symt
+          l_cpl_im_tauy = .true.     ! SYM_TAUY | symt
+          l_cpl_im_evap = .false.    ! SYM_EVAP | symt
+          l_cpl_im_prec = .true.     ! SYM_PREC | symt
+          l_cpl_im_watf = .false.    ! SYM_WATF | symt
+          l_cpl_im_slhf = .true.     ! SYM_SLHF | symt
+          l_cpl_im_sshf = .true.     ! SYM_SSHF | symt
+          l_cpl_im_snsf = .true.     ! SYM_SNSF | symt
+          l_cpl_im_dnsf = .false.    ! SYM_DNSF | symt
+          l_cpl_im_ssrf = .true.     ! SYM_SSRF | symt
+          l_cpl_im_dsrf = .false.    ! SYM_DSRF | symt
+          l_cpl_ex_sst  = .true.     ! SYM_SST  | symt
+          l_cpl_ex_ssh  = .false.    ! SYM_SSH  | symt
+          l_cpl_ex_ocnu = .false.    ! SYM_OCNU | symt
+          l_cpl_ex_ocnv = .false.    ! SYM_OCNV | symt
+                                     !------ NAMCOUPLE FIELD ENTRIES ------
+         /
+
+
 
       
 They are structured in a very similar way because coded by the same person:

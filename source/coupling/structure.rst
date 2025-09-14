@@ -20,7 +20,7 @@ structure** with the following lines:
 
    cd $RUN
    mkdir oasis
-   cp $TRAINING/namelists/namcouple .
+   cp $TRAINING/namcouples/namcouple .
    cp $TRAINING/jobs/job-coupled_model.sh job.sh
 
 
@@ -90,7 +90,25 @@ To be more specific, what the coupled system sees is now:
 .. code:: console
 
    $ tree -d 1 $RUN
-   TODO
+   $RUN
+   ├── oasis
+   ├── regcm
+   │   ├── bin -> /tmpdir/desmet/training_ROS/models/RegCM/bin
+   │   ├── input
+   │   └── output
+   └── symphonie
+       ├── bin -> /tmpdir/desmet/training_ROS/models/SYMPHONIE/RDIR
+       ├── GRAPHICS
+       ├── NOTEBOOKS
+       ├── NOTEBOOKS-cpl_init
+       ├── OFFLINE
+       ├── restart_input
+       ├── restart_outbis
+       ├── restart_output
+       ├── TIDES
+       └── tmp
+
+   16 directories
 
 
 The several directories used by our components are thus slightly different: RegCM's
@@ -117,6 +135,8 @@ In the newly copied namelists, modify the following variables:
       * The directory for ``GRAPHICS`` in ``notebook_graph``
       * ``directory_offline`` and ``offlinefile`` in ``notebook_offline.f``
       * (If tides are enabled: the directory for ``TIDES`` in ``notebook_tide``)
+      * ``default_grid_file_name`` in ``notebook_oasis_generic.f``
+      * ``directory`` in ``notebook_list.f``
 
 
-And that's it! We can proceed the next part.
+And that's it! We can proceed the next part. 

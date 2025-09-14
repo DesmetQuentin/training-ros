@@ -5,6 +5,18 @@ We have gone through the three namelist frameworks of the system relating to con
 field exchange through OASIS. Let us now practice setting up specific field exchanges
 consistently between OASIS and the two components.
 
+Create a new directory for this page:
+
+.. code:: console
+
+   $ bash $TRAINING/scripts/make_practice_directory.sh $PRACTICE
+   $ cd $PRACTICE
+   $ ls -1
+   namcouple
+   namelist.f
+   notebook_oasis_generic.f
+
+
 For each practice, propose a solution for RegCM's ``oasisparam``, SYMPHONIE's
 ``notebook_oasis_generic.f`` and (a) field entry(ies) for OASIS' ``namcouple``.
 Then, open the dropdown section to see the solution.

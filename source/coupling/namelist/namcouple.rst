@@ -83,7 +83,12 @@ The first line of each entry looks like this:
    SRC_NAME DST_NAME 1 3600 0 restart.nc EXPORTED
 
 
-* ``SRC_NAME`` and ``DST_NAME`` are the names of the coupling field as defined in its source and destination components, respectively.
+* ``SRC_NAME`` and ``DST_NAME`` are the names of the coupling field as defined in its source and destination components, respectively.      
+* ``1`` is always ``1``.
+* ``3600`` represents the coupling period, here one hour (in the same unit as the run time, i.e., in seconds).
+* ``0`` indicates the number of transformations to apply to the fields, which we will detail further below.
+* ``restart.nc`` is the name of the NetCDF file used for initialization. It will be overwritten by the last fields' value at the end of the run (thus serving as a restart file for the following simulation).
+* ``EXPORTED`` is the mode of the entry, determining how coupling fields will be treated as well as the format of the following lines.
 
 .. tip::
 
@@ -96,23 +101,15 @@ The first line of each entry looks like this:
 
       SRC_NAME1:SRC_NAME2 DST_NAME1:DST_NAME2 1 3600 0 restart.nc EXPORTED
 
-      
-* ``1`` is always ``1``.
-* ``3600`` represents the coupling period, here one hour (in the same unit as the run time, i.e., in seconds).
-* ``0`` indicates the number of transformations to apply to the fields, which we will detail further below.
-* ``restart.nc`` is the name of the NetCDF file used for initialization. It will be overwritten by the last fields' value at the end of the run (thus serving as a restart file for the following simulation).
-* ``EXPORTED`` is the mode of the entry, determining how coupling fields will be treated as well as the format of the following lines.
-
 
 In this training, we focus on two modes: ``EXPORTED`` (or ``EXPOUT``) and ``OUTPUT``.
 ``EXPORTED`` enables an actual transfer of data between the source and destination
-components. ``OUTPUT`` simply writes the source data in a NetCDF file for each
-"coupling" time. TODO
+components. ``OUTPUT`` simply writes the source data in a NetCDF file.
 
 .. note::
    
    With identical formatting as ``EXPORTED``, ``EXPOUT`` enables data transfer, while
-   also writing out this same data in a NetCDF file. TODO. This must be enabled
+   also writing out this same data in a NetCDF file. This must be enabled
    mindfully because involving a **huge and increasing memory usage** as the simulation
    progresses (which impacts the computing time as well).
 
@@ -269,7 +266,7 @@ but positive downward for the receiver:
 Full file example
 -----------------
 
-Below is a complete ``namcouple`` file, implementing nearly everything we've seen on
+Below is an example ``namcouple`` file, implementing nearly everything we've seen on
 this page.
 
 .. dropdown:: ``namcouple``

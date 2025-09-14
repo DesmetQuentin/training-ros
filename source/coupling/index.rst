@@ -8,8 +8,8 @@ This part of the training is structured following the stages below:
 .. toctree::
    :maxdepth: 1
 
-   structure
    namelist/index
+   structure
    initialize
    spinup
    production

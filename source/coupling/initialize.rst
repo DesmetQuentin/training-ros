@@ -22,10 +22,9 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
 
    The simulation period must be set from one day before the intended coupled
    simulation, and for a duration of one day. Let us say that the intended coupled
-   simulation will run for the same period as the uncoupled runs we conducted in the
-   :doc:`first part of this training <../component-wise/index>`
-   (i.e., from 2023-01-10 to 2023-01-12).
-   Then **relevant start and end dates are 2023-01-09 and 2023-01-10**, respectively.
+   simulation will run two weeks starting 2018-07-03 (consistently as in the
+   :doc:`first part of this training <../component-wise/index>`).
+   Then **relevant start and end dates are 2018-07-02 and 2018-07-03**, respectively.
    
    Let us apply this to the different compartments:
 
@@ -49,8 +48,8 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
       * ``l_cpl_ex_prec``
       * ``l_cpl_ex_ulhf``
       * ``l_cpl_ex_ushf``
-      * ``l_cpl_ex_uwlw``
-      * ``l_cpl_ex_dwsw``
+      * ``l_cpl_ex_nulw``
+      * ``l_cpl_ex_ndsw``
    * **SYMPHONIE** (in ``notebook_oasis_generic.f``):
       * ``l_cpl_ex_sst``
 
@@ -63,7 +62,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
       * ``ioasis_generic = 1`` in ``notebook_oasis_generic.f`` for SYMPHONIE,
 
 
-      as well as grid writing with the ``l_write_grids`` logical, indicating the full
+      as well as grid writing with the ``l_write_grids`` logicals, indicating the full
       grid for SYMPHONIE with ``default_grid_file_name = "./symphonie/grid.nc"``.
 
 
@@ -129,19 +128,50 @@ in your home directory:
 
 Then, **edit** ``job.sh`` and modify/check the following points:
 
-* Set ``--job-name`` to ``'init'``.
+* Set ``--job-name`` to ``init``.
 * Set ``NPROC1`` and ``NPROC2`` to 36, refering to the allocation for RegCM and SYMPHONIE, respectively.
 * Set the ``--nodes`` batch parameter to 2.
-* Set ``DIR`` to the current run directory.
-* Set ``EXE1`` and ``EXE2`` to ``./regcm/bin/regcmMPICLM45_OASIS`` and ``./symphonie/bin/OASIS/symphonie.exe``.
+* Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
 
 .. dropdown:: ``job.sh``
 
    .. code:: bash
 
-      TODO
+      #!/bin/bash
+
+      #SBATCH --job-name=init
+      #SBATCH --nodes=2
+      #SBATCH --ntasks-per-node=36
+      #SBATCH --ntasks-per-core=1
+      #SBATCH --time=15:00
+      #SBATCH --output=slurm_%x-id_%j.out
+      #SBATCH --error=slurm_%x-id_%j.err
+
+      EXE1=regcm/bin/regcmMPICLM45_OASIS
+      NPROC1=36
+      INPUT1=regcm/namelist-cpl_init.f
+      #
+      EXE2=symphonie/bin/OASIS/symphonie.exe
+      NPROC2=36
+      INPUT2=symphonie/notebook_list.f
+
+      ulimit -s unlimited
+
+      module purge
+      module load intel/18.2
+      module load intelmpi/18.2
+      module load hdf5/1.10.2-intelmpi
+      module load netcdf/4.7.4-intelmpi
+      module load pnetcdf/1.9.0-intelmpi
+      module list 2>./run_modules
+
+      echo -e "Launching...\n"
+
+      mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
+Make also sure that ``symphonie/notebook_list.f`` points to the right notebook folder
+with the ``cpl_init`` suffix!
 Delete the content of the ``tmp`` folder of SYMPHONIE:
 
 .. code:: bash
@@ -149,7 +179,26 @@ Delete the content of the ``tmp`` folder of SYMPHONIE:
    rm symphonie/tmp/*
 
 
-And proceed: **submit the job** and follow is progress:
+And proceed: submit the job! Erm... **Wait.**
+
+.. dropdown:: Aren't we forgetting something?
+
+   .. dropdown:: It's on RegCM's side...
+
+      .. dropdown:: We changed the dates...
+
+         We must run the preprocessing programs with the new simulation period!
+
+         .. code:: bash
+
+            cd $RUN
+            ./regcm/bin/terrainCLM45 regcm/namelist-cpl_init.f
+            ./regcm/bin/sstCLM45 regcm/namelist-cpl_init.f
+            ./regcm/bin/mksurfdataCLM45 regcm/namelist-cpl_init.f
+            ./regcm/bin/icbcCLM45 regcm/namelist-cpl_init.f
+
+
+Now we can **submit the job** and follow is progress:
 
 .. code:: bash
 
@@ -163,14 +212,23 @@ computing speed. RegCM should print the following:
 
 .. code::
 
-   TODO
+    RegCM V5 simulation successfully reached end
 
 
 and SYMPHONIE:
 
 .. code::
 
-   TODO
+       ____  __ __  ____        ___   __  _
+      |    \|  |  ||    \      /   \ |  |/ ]
+      |  D  )  |  ||  _  |    |     ||  | /
+      |    /|  |  ||  |  |    |  Oo ||    \
+      |    \|  :  ||  |  |    |     ||     |
+      |  .  \     ||  |  |    |     ||  .  |
+      |__|\_|\__,_||__|__|     \___/ |__|\_|
+
+               for component id           2
+                           with name SYMPHO
 
 
 Moreover, there should now **exist grid files and the restart files** we aim to produce:
@@ -178,7 +236,23 @@ Moreover, there should now **exist grid files and the restart files** we aim to 
 .. code:: console
 
    $ ls -1 *.nc
-   TODO
+   areas.nc
+   grids.nc
+   masks.nc
+   RCM_NDSW_REGCM5_01.nc
+   RCM_NULW_REGCM5_03.nc
+   RCM_PREC_REGCM5_02.nc
+   RCM_SLP_REGCM5_04.nc
+   RCM_TAUX_REGCM5_01.nc
+   RCM_TAUY_REGCM5_01.nc
+   RCM_ULHF_REGCM5_03.nc
+   RCM_USHF_REGCM5_03.nc
+   restart_lat-sens-lw.nc
+   restart_PREC.nc
+   restart_SLP.nc
+   restart_SST.nc
+   restart_tau-sw.nc
+   SYM_SST_SYMPHO_05.nc
 
 
 **Save the grid files** in the ``oasis`` directory:
@@ -193,19 +267,30 @@ Now however, if you **check the restart files' content**, for example using ``nc
 .. code:: console
 
    $ ncdump -h restart_SST.nc
-   TODO
+   netcdf restart_SST {
+   dimensions:
+      loc000005_cnt_ncnt = 1 ;
+      loc000005_SYM_SST_nx = 90000 ;
+      loc000005_SYM_SST_ny = 1 ;
+      SYM_SST_nx = 90000 ;
+      SYM_SST_ny = 1 ;
+   variables:
+      int loc000005_cnt(loc000005_cnt_ncnt) ;
+      double loc000005_SYM_SST(loc000005_SYM_SST_ny, loc000005_SYM_SST_nx) ;
+      double SYM_SST(SYM_SST_ny, SYM_SST_nx) ;
+   }
 
 
 you should notice that **the fields only have one dimension**.
 In other words, they are *flattened*:
 this is one flaw of the ``OUTPUT`` mode in OASIS...
 No worries, though, simple Python can make it up!
-Simply ``source`` the following script of the ``$TRAINING`` directory.
+Simply run the following script of the ``$TRAINING`` directory.
 
 .. code:: bash
 
    cd $RUN
-   source $TRAINING/postprocess_restart_files.sh
+   bash $TRAINING/scripts/postprocess_restart_files.sh
 
 
 You may check their content; things should be right now.
@@ -213,8 +298,8 @@ You may check their content; things should be right now.
 
 .. code:: bash
 
-   mkdir oasis/restart_20230201
-   mv restart_*.nc oasis/restart_20230201
+   mkdir oasis/restart_20180703
+   mv restart_*.nc oasis/restart_20180703
 
 
 We now have our grids, ``namcouple`` and restart files in ``oasis``:
@@ -222,7 +307,16 @@ We now have our grids, ``namcouple`` and restart files in ``oasis``:
 .. code:: console
 
    $ ls -1 oasis
-   TODO
+   areas.nc
+   grids.nc
+   masks.nc
+   namcouple-cpl_init
+   restart_20180703
 
 
 We are ready to run our first coupled simulation!
+
+.. tip::
+
+   You may now delete the actual output files of this simulation, i.e.,
+   ``RCM_*.nc`` and ``SYM_*.nc``.

@@ -10,7 +10,7 @@ With our initialization files ready, let us prepare and run a spinup simulation.
    turbulent kinetic energy. It should be about within the 6 months to 1 year interval.
 
 
-First, **copy the namelists**, notebooks and job files, using the ``cpl_spinup`` suffix:
+First, **copy the namelist, notebook and job files**, using the ``cpl_spinup`` suffix:
 
 .. code:: bash
 
@@ -24,8 +24,8 @@ First, **copy the namelists**, notebooks and job files, using the ``cpl_spinup``
 And continue **renaming** key parameters to point to the newly copied files:
 
 * Set the job file's ``--job-name`` to ``spinup``.
-* Rename the input of RegCM in the job file to ``regcm/namelist-cpl_spinup``.
-* For SYMPHONIE however, let us keep ``notebook_list.f`` in ``job-cpl_spinup.sh``, but instead change the ``notebook_list.f``'s ``directory`` to ``symphonie/NOTEBOOKS-cpl_spinup``.
+* Rename the input of RegCM in the job file to ``regcm/namelist-cpl_spinup.f``.
+* For SYMPHONIE however, let us keep ``notebook_list.f`` in ``job-spinup.sh``, but instead change the ``notebook_list.f``'s ``directory`` to ``symphonie/NOTEBOOKS-cpl_spinup``.
 
 
 Then, let us configure our spinup simulation by following the dropdown sections below.
@@ -192,7 +192,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
 
 Before submitting the job, ``job-spinup.sh`` should now look like this:
 
-.. dropdown:: job-spinup.sh
+.. dropdown:: ``job-spinup.sh``
 
    .. code:: bash
 

@@ -74,7 +74,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
    of this training, the ``$STRINGS`` section of the ``namcouple`` file should look like
    this: 
 
-   .. code:: console
+   .. code::
 
       $STRINGS
       # The above variables are the general parameters for the experiment.

@@ -64,7 +64,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
    ``namcouple`` (with one week in seconds, i.e., 604800).
 
    Lastly, make sure the right restart files are accounted for by adding these lines to
-   ``job-cpl_spinup.sh``, just before launching:
+   ``job-spinup.sh``, just before launching:
 
    .. code:: bash
 

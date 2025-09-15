@@ -75,7 +75,7 @@ below.
          
          SYMPHONIE will know where the previous run stopped thanks to the files of the
          ``symphonie/restart_input`` folder. For now however, this folder is empty, and
-         the files of interest were writen out at the end of the spinup run in one of the
+         the files of interest were written out at the end of the spinup run in one of the
          ``symphonie/restart_out*`` folders. To know which one contains the last data,
          open the last slurm output (something like ``slurm_spinup*.out``) and look
          around the end for a line of this type:
@@ -205,6 +205,49 @@ below.
    .. code:: bash
 
       cp namcouple oasis/namcouple-production
+
+
+Your job file should now look like the following:
+
+.. dropdown:: ``job-production.sh``
+
+   .. code:: bash
+
+      #!/bin/bash
+
+      #SBATCH --job-name=production
+      #SBATCH --nodes=2
+      #SBATCH --ntasks-per-node=36
+      #SBATCH --ntasks-per-core=1
+      #SBATCH --time=20:00
+      #SBATCH --output=slurm_%x-id_%j.out
+      #SBATCH --error=slurm_%x-id_%j.err
+
+      EXE1=regcm/bin/regcmMPICLM45_OASIS
+      NPROC1=36
+      INPUT1=regcm/namelist-cpl_production.f
+      #
+      EXE2=symphonie/bin/OASIS/symphonie.exe
+      NPROC2=36
+      INPUT2=symphonie/notebook_list.f
+
+      ulimit -s unlimited
+
+      module purge
+      module load intel/18.2
+      module load intelmpi/18.2
+      module load hdf5/1.10.2-intelmpi
+      module load netcdf/4.7.4-intelmpi
+      module load pnetcdf/1.9.0-intelmpi
+      module list 2>./run_modules
+
+      cp -p oasis/{areas,grids,masks}.nc .
+      cp -p oasis/restart_20180710/*.nc .
+      cp -p oasis/rmp*.nc .
+
+      echo -e "Launching...\n"
+
+      mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
 For the rest, the setup should be the same as for the spinup simulation, so,

@@ -89,7 +89,7 @@ To be more specific, what the coupled system sees is now:
 
 .. code:: console
 
-   $ tree -d 1 $RUN
+   $ tree -d 2 $RUN
    $RUN
    ├── oasis
    ├── regcm

@@ -1,5 +1,5 @@
-Three namelist frameworks
-=========================
+Configuration and practice
+==========================
 
 RegCM and SYMPHONIE will communicate through OASIS based on the parameters set up in
 their own namelist framework as well as in the ``namcouple`` file which will be

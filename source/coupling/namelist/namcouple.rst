@@ -1,8 +1,8 @@
-OASIS' ``namcouple``
-===================
+For OASIS: ``namcouple``
+========================
 
 ``namcouple`` is a text file separated in sections, each with a specific format.
-Any line beginning with "#" is ignored and blank lines are not allowed.
+Any line beginning with ``#`` is ignored and blank lines are not allowed.
 
 
 Head settings
@@ -27,7 +27,7 @@ Then, there is ``$NFIELDS``:
    # = total number of field entries
    #
      7
-   
+
 
 which refers to the entries of the last section we will detail below.
 
@@ -83,7 +83,7 @@ The first line of each entry looks like this:
    SRC_NAME DST_NAME 1 3600 0 restart.nc EXPORTED
 
 
-* ``SRC_NAME`` and ``DST_NAME`` are the names of the coupling field as defined in its source and destination components, respectively.      
+* ``SRC_NAME`` and ``DST_NAME`` are the names of the coupling field as defined in its source and destination components, respectively.
 * ``1`` is always ``1``.
 * ``3600`` represents the coupling period, here one hour (in the same unit as the run time, i.e., in seconds).
 * ``0`` indicates the number of transformations to apply to the fields, which we will detail further below.
@@ -107,7 +107,7 @@ In this training, we focus on two modes: ``EXPORTED`` (or ``EXPOUT``) and ``OUTP
 components. ``OUTPUT`` simply writes the source data in a NetCDF file.
 
 .. note::
-   
+
    With identical formatting as ``EXPORTED``, ``EXPOUT`` enables data transfer, while
    also writing out this same data in a NetCDF file. This must be enabled
    mindfully because involving a **huge and increasing memory usage** as the simulation
@@ -138,13 +138,14 @@ After the first line we've already covered, the second line contains:
 .. admonition:: The ``LAG`` concept
 
    A positive lag indicates that the source data will be sent ahead of the coupling time
-   by the provided value (still in the same unit as the coupling period, i.e., in seconds).
-   If *T* is a coupling time (i.e., a multiplier of the coupling period), and *t* is the
-   time of a given model loop, then the lagged field is sent by the source at *t = T - LAG* and
-   received at the destination at *t = T*. The general rule is to **set the lag equal to the
-   sending model's timestep**: the field will be sent by the source model at the end of the
-   last model loop before a coupling time, such that it can be received at the beginning of
-   the receiving model's loop corresponding to a coupling time.
+   by the provided value (still in the same unit as the coupling period, i.e., in
+   seconds). If *T* is a coupling time (i.e., a multiplier of the coupling period), and
+   *t* is the time of a given model loop, then the lagged field is sent by the source at
+   *t = T - LAG* and received at the destination at *t = T*. The general rule is to
+   **set the lag equal to the sending model's timestep**: the field will be sent by the
+   source model at the end of the last model loop before a coupling time, such that it
+   can be received at the beginning of the receiving model's loop corresponding to a
+   coupling time.
 
 
 The third line, ``R 0 R 0``, refers to grid periodicity and overlapping. We won't
@@ -210,12 +211,12 @@ interpolation methods such as ``BICUBIC``, ``GAUSWGT`` and so on.
 
 .. tip::
 
-   The ``SCRIPR`` transformation implies generating the interpolation weights at run time
-   during the initialization. Depending on the grids, this can be quite a
-   **resource-consuming step**. Luckily, once computed, the weights are saved in a NetCDF
-   file which can be reused for the next simulations instead of recomputed. To do this,
-   once you have your interpolation weights saved in a file, change your interpolation
-   transformation to ``MAPPING``, like this (simply adapt the file name):
+   The ``SCRIPR`` transformation implies generating the interpolation weights at run
+   time during the initialization. Depending on the grids, this can be quite a
+   **resource-consuming step**. Luckily, once computed, the weights are saved in a
+   NetCDF    file which can be reused for the next simulations instead of recomputed. To
+   do this, once you have your interpolation weights saved in a file, change your
+   interpolation transformation to ``MAPPING``, like this (simply adapt the file name):
 
    .. code:: console
 
@@ -274,9 +275,9 @@ this page.
    .. code::
 
       # This is a typical input file for OASIS3-MCT.
-      # Keywords used in previous versions of OASIS3 
+      # Keywords used in previous versions of OASIS3
       # but now obsolete are marked "Not used"
-      # Don't hesitate to ask precisions or make suggestions (oasishelp@cerfacs.fr). 
+      # Don't hesitate to ask precisions or make suggestions (oasishelp@cerfacs.fr).
       #
       # Any line beginning with # is ignored. Blank lines are not allowed.
       #

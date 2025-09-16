@@ -18,7 +18,7 @@ expandable below.
    .. code:: make
 
       #
-      # Include file for OASIS3 Makefile for a Linux system using 
+      # Include file for OASIS3 Makefile for a Linux system using
       # Portland Group Fortran Compiler and MPICH
       #
       ###############################################################################
@@ -38,7 +38,7 @@ expandable below.
       #
       MPIDIR      = /usr/local/intel/2018.2.046/impi/2018.2.199/intel64
       MPIBIN      = $(MPIDIR)/bin
-      MPI_INCLUDE = -I$(MPIDIR)/include 
+      MPI_INCLUDE = -I$(MPIDIR)/include
       MPILIB      = -L$(MPIDIR)/lib
       #
       # NETCDF library of the system
@@ -59,13 +59,13 @@ expandable below.
       ARFLAGS     = -ruv
       #
       # CPP keys and compiler options
-      #  
+      #
       CPPDEF    = -Duse_comm_$(CHAN) -D__VERBOSE -DTREAT_OVERLAY
-      F90FLAGS_1  = -g -traceback -O2 -xAVX -I. -assume byterecl -mt_mpi 
+      F90FLAGS_1  = -g -traceback -O2 -xAVX -I. -assume byterecl -mt_mpi
       f90FLAGS_1  = $(F90FLAGS_1)
       FFLAGS_1    = $(F90FLAGS_1)
       fFLAGS_1    = $(F90FLAGS_1)
-      CCFLAGS_1   = 
+      CCFLAGS_1   =
       LDFLAGS     = $(F90FLAGS_1)
       #
       #
@@ -79,7 +79,7 @@ expandable below.
       # LIBBUILD      : contains a directory for each library
       LIBBUILD        = $(ARCHDIR)/build/lib
       # INCPSMILE     : includes all *o and *mod for each library
-      INCPSMILE       = -I$(LIBBUILD)/psmile.$(CHAN) -I$(LIBBUILD)/scrip -I$(LIBBUILD)/mct 
+      INCPSMILE       = -I$(LIBBUILD)/psmile.$(CHAN) -I$(LIBBUILD)/scrip -I$(LIBBUILD)/mct
 
       F90FLAGS  = $(F90FLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
       f90FLAGS  = $(f90FLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)

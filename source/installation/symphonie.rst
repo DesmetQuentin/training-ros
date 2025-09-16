@@ -72,9 +72,9 @@ two following:
       #__________________________________________________________
       # Liste des etiquettes de compilation: parametrer KEY1
       #__________________________________________________________
-      # Les etiquettes de compilation sont des lignes du type 
+      # Les etiquettes de compilation sont des lignes du type
       # #ifdef name, #endif, introduites dans le code, servant �
-      # d�limiter des portions de routines qui seront prises en compte 
+      # d�limiter des portions de routines qui seront prises en compte
       # ou au contraire ignorees par la comilation
       #
       # KEY1 = -Dstokes -Dsimple_precision
@@ -109,8 +109,8 @@ two following:
       SOURCESDIR=../../SOURCES
       VPATHTMP=$(USERDIR):$(UPDATEDIR):$(MYSPACEDIR):$(SOURCESDIR)
       VPATH=$(VPATHTMP):$(OBJDIR):.
-      INC = -I$(USERDIR) $(NETINC)  -I$(UPDATEDIR) -I$(MYSPACEDIR) -I$(SOURCESDIR) 
-      OPTIONM= $(INC) $(F77FLAGS) $(COMPMOD) $(OBJDIR) -g  
+      INC = -I$(USERDIR) $(NETINC)  -I$(UPDATEDIR) -I$(MYSPACEDIR) -I$(SOURCESDIR)
+      OPTIONM= $(INC) $(F77FLAGS) $(COMPMOD) $(OBJDIR) -g
 
 
 
@@ -120,7 +120,7 @@ two following:
       # KEY2 = -Dparallele -Dcheckmpi
       KEY2 = -Dparallele
       #
-      SED = 
+      SED =
       #
       #
       #
@@ -130,7 +130,7 @@ two following:
       .F90.o:
       #	$(CPP)  $(KEY1)  $< $(SED) > $(OBJDIR)/$*.f90
       #	cd $(OBJDIR); $(F90) $(OPTIONM) -c   $(OBJDIR)/$*.f90
-         echo $(VPATH); 
+         echo $(VPATH);
          $(CPP)  $(KEY1) $(KEY2)  $< $(SED) > $(OBJDIR)/$*.f90
          $(F90) $(OPTIONM) -c   $(OBJDIR)/$*.f90
          @mv  $*.o $(OBJDIR)/.
@@ -302,7 +302,7 @@ two following:
       #/usr/bin/ogg123 /home/marp/sounds/KDE_Beep_Connect.ogg
 
 
-      clean : 
+      clean :
          rm *mod ; cd $(OBJDIR) ; rm *.f90 *.o *.mod ../../RDIR/$(CONF)/symphonie.exe
       #
       module_parameter.o: module_parameter.F90 module_principal.F90 module_drifter.F90
@@ -624,13 +624,13 @@ two following:
             # 5. pnetcdf/1.9.0-intelmpi
             ############################################################
 
-            # Compilateur 
+            # Compilateur
             F90=mpiifort
 
             #  option specifies where to put .mod files
             CONF=ORIGIN
             COMP=IFORT
-            COMPMOD=-module  
+            COMPMOD=-module
 
             # Optimisations, debug, ... flags
             # DO NOT USE -O3  optimization
@@ -744,24 +744,24 @@ Then, **create a** ``makefile.inc`` **including the OASIS library**:
             # 5. pnetcdf/1.9.0-intelmpi
             ############################################################
 
-            # Compilateur 
+            # Compilateur
             F90=mpiifort
 
             #  option specifies where to put .mod files
             CONF=OASIS
             COMP=IFORT
-            COMPMOD=-module  
+            COMPMOD=-module
 
             # Optimisations, debug, ... flags
             # DO NOT USE -O3  optimization
             #F77FLAGS= -g -traceback -O0 -ftrapuv -fpe0 -check bounds
             #F77FLAGS= -traceback -fp-model precise -check bounds
-            #F77FLAGS= -O2 -g -traceback -fp-model precise -check bounds 
+            #F77FLAGS= -O2 -g -traceback -fp-model precise -check bounds
             F77FLAGS= -O2 -traceback -fp-model precise
 
             # OASIS
             CHAN = MPI1
-            OASISDIR=/users/p20055/desmet/oasis3-mct/intel18_calmip_off
+            OASISDIR=/tmpdir/desmet/training_ros/models/oasis3-mct/intel18_calmip_off
             INCPSMILE= -I$(OASISDIR)/build/lib/psmile.$(CHAN) -I$(OASISDIR)/build/lib/mct -I$(OASISDIR)/build/lib/scrip
             OASISLIB = -L$(OASISDIR)/lib -lpsmile.$(CHAN) -lmct -lmpeu -lscrip
 

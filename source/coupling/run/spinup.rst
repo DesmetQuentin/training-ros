@@ -4,7 +4,7 @@ Spinup
 With our initialization files ready, let us prepare and run a spinup simulation.
 
 .. note::
-   
+
    In a realistic setup, the duration of a spinup run depends on each model and is often
    dimensioned by the time required by the ocean to stabilize its domain-integrated
    turbulent kinetic energy. It should be about within the 6 months to 1 year interval.
@@ -44,7 +44,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
       gdate1 = 2018070300,        ! Start date for ICBC data generation
       gdate2 = 2018071700,        ! End data for ICBC data generation
 
-   
+
    and the ``restartparam`` namelist as follows:
 
    .. code:: fortran
@@ -59,9 +59,9 @@ Then, let us configure our spinup simulation by following the dropdown sections 
        mdate2  = 2018071000, ! End date for this run
       /
 
-   
-   Also adapt SYMPHONIE's ``datesim`` in ``notebook_time.f``, and OASIS' ``$RUNTIME`` in
-   ``namcouple`` (with one week in seconds, i.e., 604800).
+
+   Also adapt SYMPHONIE's ``datesim`` in ``notebook_time.f``, and OASIS's ``$RUNTIME``
+   in ``namcouple`` (with one week in seconds, i.e., 604800).
 
    Lastly, make sure the right restart files are accounted for by adding these lines to
    ``job-spinup.sh``, just before launching:
@@ -87,7 +87,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
 
       cp -p oasis/{areas,grids,masks}.nc .
 
-   
+
 .. dropdown:: 3. Configuring air-sea flux coupling for the models
 
    In comparison with the :doc:`initialization <initialize>` when only exporting fields
@@ -112,9 +112,9 @@ Then, let us configure our spinup simulation by following the dropdown sections 
    .. code::
 
       # This is a typical input file for OASIS3-MCT.
-      # Keywords used in previous versions of OASIS3 
+      # Keywords used in previous versions of OASIS3
       # but now obsolete are marked "Not used"
-      # Don't hesitate to ask precisions or make suggestions (oasishelp@cerfacs.fr). 
+      # Don't hesitate to ask precisions or make suggestions (oasishelp@cerfacs.fr).
       #
       # Any line beginning with # is ignored. Blank lines are not allowed.
       #
@@ -123,63 +123,63 @@ Then, let us configure our spinup simulation by following the dropdown sections 
       # T (true) or F (false): make the restart file facultative, i.e. if absent
       # fields are initialized with zero values
       #
-       F
+        F
       #--------------------------------------------------------------------------
       $NFIELDS
       # >= total number of field entries
       #
-       5
+        5
       #--------------------------------------------------------------------------
       $RUNTIME
       # The total simulated time for this run in seconds
       #
-       604800 
+        604800
       #--------------------------------------------------------------------------
       $NLOGPRT
       # Amount of information written to OASIS3-MCT log files (see User Guide)
       #
-       0  0  0
+        0  0  0
       ################### -= SECOND SECTION =- ##################################
       $STRINGS
       # The above variables are the general parameters for the experiment.
       # Everything below has to do with the fields being exchanged.
       #
-      RCM_TAUX:RCM_TAUY:RCM_NDSW SYM_TAUX:SYM_TAUY:SYM_SSRF 1 3600 2 restart_tau-sw.nc EXPORTED
-      58 58 300 300 rcim symt LAG=+180
-      R  0  R  0
-      LOCTRANS SCRIPR
-      AVERAGE
-      BILINEAR LR SCALAR LATLON 1
+        RCM_TAUX:RCM_TAUY:RCM_NDSW SYM_TAUX:SYM_TAUY:SYM_SSRF 1 3600 2 restart_tau-sw.nc EXPORTED
+        58 58 300 300 rcim symt LAG=+180
+        R  0  R  0
+        LOCTRANS SCRIPR
+        AVERAGE
+        BILINEAR LR SCALAR LATLON 1
       #
-      RCM_PREC SYM_PREC 1 3600 3 restart_PREC.nc EXPORTED
-      58 58 300 300 rcim symt LAG=+180
-      R  0  R  0
-      LOCTRANS BLASOLD SCRIPR
-      AVERAGE
-      0.001 0
-      BILINEAR LR SCALAR LATLON 1
+        RCM_PREC SYM_PREC 1 3600 3 restart_PREC.nc EXPORTED
+        58 58 300 300 rcim symt LAG=+180
+        R  0  R  0
+        LOCTRANS BLASOLD SCRIPR
+        AVERAGE
+        0.001 0
+        BILINEAR LR SCALAR LATLON 1
       #
-      RCM_ULHF:RCM_USHF:RCM_NULW SYM_SLHF:SYM_SSHF:SYM_SNSF 1 3600 3 restart_lat-sens-lw.nc EXPORTED
-      58 58 300 300 rcim symt LAG=+180
-      R  0  R  0
-      LOCTRANS BLASOLD SCRIPR
-      AVERAGE
-      -1 0
-      BILINEAR LR SCALAR LATLON 1
+        RCM_ULHF:RCM_USHF:RCM_NULW SYM_SLHF:SYM_SSHF:SYM_SNSF 1 3600 3 restart_lat-sens-lw.nc EXPORTED
+        58 58 300 300 rcim symt LAG=+180
+        R  0  R  0
+        LOCTRANS BLASOLD SCRIPR
+        AVERAGE
+        -1 0
+        BILINEAR LR SCALAR LATLON 1
       #
-      RCM_SLP SYM_SLP 1 3600 2 restart_SLP.nc EXPOUT
-      60 60 300 300 rcem symt LAG=+180
-      R  0  R  0
-      LOCTRANS SCRIPR
-      AVERAGE
-      BILINEAR LR SCALAR LATLON 1
+        RCM_SLP SYM_SLP 1 3600 2 restart_SLP.nc EXPOUT
+        60 60 300 300 rcem symt LAG=+180
+        R  0  R  0
+        LOCTRANS SCRIPR
+        AVERAGE
+        BILINEAR LR SCALAR LATLON 1
       #
-      SYM_SST RCM_SST 1 3600 2 restart_SST.nc EXPORTED
-      300 300 58 58 symt rcim LAG=+180
-      R  0  R  0
-      LOCTRANS SCRIPR
-      AVERAGE
-      BILINEAR LR SCALAR LATLON 1
+        SYM_SST RCM_SST 1 3600 2 restart_SST.nc EXPORTED
+        300 300 58 58 symt rcim LAG=+180
+        R  0  R  0
+        LOCTRANS SCRIPR
+        AVERAGE
+        BILINEAR LR SCALAR LATLON 1
       ###########################################################################
 
 

@@ -20,7 +20,7 @@ proposed flow is, precisely, a proposition, meaning that there surely are other 
 to couple those two models. This way, we will only spend a minimal time on how RegCM and
 SYMPHONIE work on their own, and, in particular, omit a lot of the things that make them
 complex and versatile tools, focusing instead on OASIS and their interaction through it.
-To go further, please find hereafter links towards the existing documentations for each
+To go further, please find hereafter links toward the existing documentations for each
 tool.
 
 .. seealso::
@@ -73,18 +73,11 @@ Then, we can proceed further.
 Outline
 -------
 
-The training is decomposed in **two major parts**:
+After installation, the training is decomposed in **two major parts**:
 
-#. :doc:`Component-wise frameworks <component-wise/index>`
-#. :doc:`Coupling both components <coupling/index>`
-
-
-In addition (mostly if time allows it), you can follow the following sections to
-**extend your understanding** of the framework, **from installation to implementing
-advanced setups**:
-
-* :doc:`Installation guide <installation/index>`
-* :doc:`To go further <further/index>`
+0. :doc:`Installation guide <installation/index>`
+1. :doc:`Component-wise frameworks <component-wise/index>`
+2. :doc:`Coupling both components <coupling/index>`
 
 
 .. toctree::
@@ -93,8 +86,7 @@ advanced setups**:
    :hidden:
 
    Home <self>
+   installation/index
    component-wise/index
    coupling/index
-   installation/index
    further/index
-

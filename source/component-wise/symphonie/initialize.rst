@@ -150,7 +150,7 @@ They are the two files we intended to generate. **Head** ``description_domaine.n
          7     6    36           ! Number of sub-domains in each direction & nbdom
                300         300  ! iglb jglb
          ------------------------
-   
+
 
    .. tab-item:: HILO
 

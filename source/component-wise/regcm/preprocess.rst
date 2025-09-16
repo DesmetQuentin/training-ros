@@ -80,7 +80,7 @@ containing all ICBC data interpolated on the simulation's period and domain.
    QUYNHON_ICBC.2018070300.nc
 
 
-Once these preprocessing programs have run, RegCM's main run will rely on their only
-results stored in the ``input`` directory, already taylored to the period and domain
-indicated in ``namelist.f``, rather than interpolating heavier files online during the
-simulation.
+Once these preprocessing programs have run, RegCM's main simulation will rely on their
+only results stored in the ``input`` directory, already taylored to the period and
+domain indicated in ``namelist.f``, rather than interpolating heavier files online
+during the simulation.

@@ -1,8 +1,10 @@
-Components' OASIS-related namelists
-===================================
+With RegCM and SYMPHONIE
+========================
 
-Those namelists are ``oasisparam`` with RegCM and the ``notebook_oasis_generic.f`` file
-with SYMPHONIE. You can find examples for each component below:
+Apart from ``namcouple`` for OASIS, each components has specific namelists to control
+its own interaction with the coupler. These namelists are ``oasisparam`` with RegCM and
+the ``notebook_oasis_generic.f`` file with SYMPHONIE. You can find examples for each
+component below:
 
 .. tab-set::
 
@@ -29,9 +31,9 @@ with SYMPHONIE. You can find examples for each component below:
                                     !------ NAMCOUPLE FIELD ENTRIES ------
                                     ! field    | grid
                                     !-------------------------------------
-          l_cpl_im_sst  = .true.,   ! RCM_SST  | rcim     
-          l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim     
-          l_cpl_im_wust = .false.,  ! RCM_WUST | rcim     
+          l_cpl_im_sst  = .true.,   ! RCM_SST  | rcim
+          l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim
+          l_cpl_im_wust = .false.,  ! RCM_WUST | rcim
           l_cpl_ex_u10m = .false.,  ! RCM_U10M | rcin/rcim
           l_cpl_ex_v10m = .false.,  ! RCM_V10M | rcin/rcim
           l_cpl_ex_wspd = .false.,  ! RCM_WSPD | rcin/rcim
@@ -65,7 +67,7 @@ with SYMPHONIE. You can find examples for each component below:
 
          &notebook_oasis_generic
          ! https://docs.google.com/document/d/1stIu_SuZY7l729gXjDB-LS37fAPGyDexNmeieQ07-eA/edit#
-         
+
           ioasis_generic = 1         ! enables OASIS coupling
           write_restart_option = 2   ! 0 => not writing any restart files
                                      ! 1 => writing restart files at the first oasis_put processes
@@ -74,12 +76,12 @@ with SYMPHONIE. You can find examples for each component below:
           l_write_grids = .false.    ! for writing grids.nc, areas.nc, masks.nc (by OASIS)
                                      ! --> put .false. if these already exist.
                                      ! --> if .true., then indicate the SYMPHONIE grid below.
-         
+
           ! The grid.nc describing the global grid when no land proc has been removed.
           default_grid_file_name = './symphoniedir/DRY_RUN/0540cpus/grid.nc'
           !default_grid_file_name = 'default' ! indicates the grid.nc that will be produced
                                              ! in the tmp directory.
-         
+
           oasis_sync_lag = 0         ! synchronisation lag with other components (sec)
                                      ! > 0 => SYMPHONIE starts late
                                      ! < 0 => SYMPHONIE starts in advance
@@ -91,7 +93,7 @@ with SYMPHONIE. You can find examples for each component below:
                                      !   for filling the lag
                                      ! should be equal to the LAG parameter in the
                                      !   namcouple
-         
+
                                      !------ NAMCOUPLE FIELD ENTRIES ------
                                      ! field    | grid
                                      !-------------------------------------
@@ -121,18 +123,16 @@ with SYMPHONIE. You can find examples for each component below:
          /
 
 
-
-      
-They are structured in a very similar way because coded by the same person:
+They are structured in a very similar way (because coded by the same person):
 
 * ``write_restart_option`` enables writing out the fields at specific timesteps (note that a restart file will be written anyways at the end of the simulation).
-* ``l_write_grids`` enables grid writing during initialization. ``grids.nc``, ``areas.nc`` and ``masks.nc`` are necessary files for the simulation, and must contain information about the grids of all involved components. They can be reused from a previous simulation where the same components were coupled, hence setting this logical to ``.false.``. On the contrary, if the components or their grid change, or if this is the first coupled simulation, then the files must be generated, implying ``l_write_grids`` to be set to ``.true.``.
+* ``l_write_grids`` enables grid writing during initialization. ``grids.nc``, ``areas.nc`` and ``masks.nc`` are necessary files for the simulation, and must contain information about the grids of all involved components. They can be reused from a previous simulation where the same components were coupled, hence setting this logical to ``.false.``. On the contrary, if the components or their grid change, or if this is the first coupled simulation, then the files must be generated, implying ``l_write_grids`` set to ``.true.``.
 
-.. note::
+.. important::
 
    For the case of SYMPHONIE, where a production run likely does not have resources
-   allocated over land-only areas of the domain, a complete unholed ``grid.nc`` must be
-   provided with ``default_grid_file_name`` for ``l_write_grids = .true.`` to work.
+   allocated over land-only areas of the domain, a complete *unholed* ``grid.nc`` must
+   be provided with ``default_grid_file_name`` for ``l_write_grids = .true.`` to work.
 
 
 * ``oasis_sync_lag`` serves to configure advanced coupling algorithms where some components are not synced with the main OASIS timeline. Such coupling configurations are not covered in this training (SYMPHONIE's ``oasis_dummy_dt`` also refers to this framework).
@@ -171,10 +171,18 @@ field and grid names are already indicated in the namelists' comments.
 
 
       where ``rcim`` and ``rcem`` correspond to the "cross" grid of RegCM (using an
-      Arakawa-B grid framework, whether you use MOLOCH or not), in their "internal" and
-      "external" variations, respectively. ``rcem`` has the size ``jx - 1`` x
-      ``iy - 1``, and ``rcim`` excludes the borders, hence having the size ``jx - 3`` x
-      ``iy - 3`` (``dimparam``).
+      Arakawa-B grid framework, whether you use MOLOCH or not), in their "internal"
+      (i.e. excluding the borders) and "external" variations, respectively. With ``jx``
+      and ``iy`` the dimensions of the grid as configured in ``dimparam``:
+
+      +-----------+-------------------------+
+      | Grid name | Grid dimensions         |
+      +===========+=========================+
+      | ``rcem``  | ``jx - 1`` x ``iy - 1`` |
+      +-----------+-------------------------+
+      | ``rcim``  | ``jx - 3`` x ``iy - 3`` |
+      +-----------+-------------------------+
+
 
       .. note::
 
@@ -209,7 +217,7 @@ field and grid names are already indicated in the namelists' comments.
 
 
       where ``symt`` refers to the "tracer" grid in an Arakawa-C setup, with exactly
-      the (``iglb``, ``jglb``) dimensions (``notebook_grid.f``).
+      the (``iglb``, ``jglb``) dimensions indicated in ``notebook_grid.f``.
 
 
 Last but not least, OASIS-related parts of the code must be enabled in both components.

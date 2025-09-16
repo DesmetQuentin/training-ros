@@ -25,7 +25,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
    simulation will run two weeks starting 2018-07-03 (consistently as in the
    :doc:`first part of this training <../component-wise/index>`).
    Then **relevant start and end dates are 2018-07-02 and 2018-07-03**, respectively.
-   
+
    Let us apply this to the different compartments:
 
    * **RegCM:** Adapt ``gdata1``, ``gdate2`` and ``&restartparam``.
@@ -72,7 +72,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
    use the OASIS interface as an output stream. The entry mode for this case
    is ``OUTPUT``. Following the directions of a previous :doc:`page <namelist/namcouple>`
    of this training, the ``$STRINGS`` section of the ``namcouple`` file should look like
-   this: 
+   this:
 
    .. code::
 
@@ -80,30 +80,30 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
       # The above variables are the general parameters for the experiment.
       # Everything below has to do with the fields being exchanged.
       #
-      RCM_TAUX:RCM_TAUY:RCM_NDSW RCM_TAUX:RCM_TAUY:RCM_NDSW 1 3600 1 restart_tau-sw.nc OUTPUT
-      rcim rcim LAG=+180
-      LOCTRANS
-      AVERAGE
+        RCM_TAUX:RCM_TAUY:RCM_NDSW RCM_TAUX:RCM_TAUY:RCM_NDSW 1 3600 1 restart_tau-sw.nc OUTPUT
+        rcim rcim LAG=+180
+        LOCTRANS
+        AVERAGE
       #
-      RCM_PREC RCM_PREC 1 3600 1 restart_RCM_PREC.nc OUTPUT
-      rcim rcim LAG=+180
-      LOCTRANS
-      AVERAGE
+        RCM_PREC RCM_PREC 1 3600 1 restart_RCM_PREC.nc OUTPUT
+        rcim rcim LAG=+180
+        LOCTRANS
+        AVERAGE
       #
-      RCM_ULHF:RCM_USHF:RCM_NULW RCM_ULHF:RCM_USHF:RCM_NULW 1 3600 1 restart_lat-sens-lw.nc OUTPUT
-      rcim rcim LAG=+180
-      LOCTRANS
-      AVERAGE
+        RCM_ULHF:RCM_USHF:RCM_NULW RCM_ULHF:RCM_USHF:RCM_NULW 1 3600 1 restart_lat-sens-lw.nc OUTPUT
+        rcim rcim LAG=+180
+        LOCTRANS
+        AVERAGE
       #
-      RCM_SLP RCM_SLP 1 3600 1 restart_RCM_SLP.nc OUTPUT
-      rcem rcem LAG=+180
-      LOCTRANS
-      AVERAGE
+        RCM_SLP RCM_SLP 1 3600 1 restart_RCM_SLP.nc OUTPUT
+        rcem rcem LAG=+180
+        LOCTRANS
+        AVERAGE
       #
-      SYM_SST SYM_SST 1 3600 1 restart_SYM_SST.nc OUTPUT
-      symt symt LAG=+180
-      LOCTRANS
-      AVERAGE
+        SYM_SST SYM_SST 1 3600 1 restart_SYM_SST.nc OUTPUT
+        symt symt LAG=+180
+        LOCTRANS
+        AVERAGE
 
 
    Accordingly, make sure the ``$NFIELDS`` section indicates 5 entries.
@@ -115,15 +115,13 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
       want to generate distinct restart files: fields are grouped from now on,
       based on the transformations they will need later.
 
-   
-When you have configured everything as guided above, **save the** ``namcouple`` **file**
-in your home directory:
+
+When you have configured everything as guided above, **save the** ``namcouple``
+**file**:
 
 .. code:: shell
 
-   mkdir ~/oasis_namcouples
-   cp $RUN/namcouple ~/oasis_namcouples/namcouple-training_cpl_init
-   ln -sf ~/oasis_namcouples/namcouple-training_cpl_init oasis/namcouple-cpl_init
+   cp namcouple oasis/namcouple-init
 
 
 Then, **edit** ``job.sh`` and modify/check the following points:

@@ -56,28 +56,13 @@ Now, the same ``$RUN`` directory should look like:
    directory where the models are executed from.
 
 
-We then need to **prepare the namelists of our coupled system.** We proceed as for
-the :doc:`component-wise frameworks <../component-wise/index>`, with our files stored
-in our home directory, then using links to access them from our run folder. We simply
-add a suffix to the new files so we can then easily compare uncoupled and coupled
-configurations. The suffix we opt for is ``training_cpl_init``.
+We then need to **prepare the namelists of our coupled system.** Let us simply copy
+those from our uncoupled runs for each component, using the ``cpl_init`` suffix:
 
-.. tab-set::
+.. code:: bash
 
-   .. tab-item:: RegCM
-
-      .. code:: bash
-         
-         cp ~/regcm_namelists/namelist-training_uncoupled.f ~/regcm_namelists/namelist-training_cpl_init.f
-         ln -sf ~/regcm_namelists/namelist-training_cpl_init.f $RUN/regcm/namelist-cpl_init.f
-
-
-   .. tab-item:: SYMPHONIE
-
-      .. code:: bash
-
-         cp -r ~/symphonie_notebooks/NOTEBOOKS-training_uncoupled ~/symphonie_notebooks/NOTEBOOKS-training_cpl_init
-         ln -sf ~/symphonie_notebooks/NOTEBOOKS-training_cpl_init $RUN/symphonie/NOTEBOOKS-cpl_init
+   cp regcm/namelist.f regcm/namelist-cpl_init.f
+   cp -r symphonie/NOTEBOOKS symphonie/NOTEBOOKS-cpl_init
 
 
 As a last step, let us **adapt those dedicated namelists to the coupled run folder
@@ -93,11 +78,11 @@ To be more specific, what the coupled system sees is now:
    $RUN
    ├── oasis
    ├── regcm
-   │   ├── bin -> /tmpdir/desmet/training_ROS/models/RegCM/bin
+   │   ├── bin -> $TRAINING/models/RegCM/bin
    │   ├── input
    │   └── output
    └── symphonie
-       ├── bin -> /tmpdir/desmet/training_ROS/models/SYMPHONIE/RDIR
+       ├── bin -> $TRAINING/models/SYMPHONIE/RDIR
        ├── GRAPHICS
        ├── NOTEBOOKS
        ├── NOTEBOOKS-cpl_init
@@ -139,4 +124,4 @@ In the newly copied namelists, modify the following variables:
       * ``directory`` in ``notebook_list.f``
 
 
-And that's it! We can proceed the next part. 
+And that's it! We can proceed the next part.

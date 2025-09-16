@@ -35,9 +35,10 @@ below.
 
       cp -p oasis/restart_20180710/*.nc .
 
-   
+
    In terms of simulation duration, this production run will last one week just as the
-   spinup simulation, i.e. ending 2018-07-17: we do not need to adapt OASIS ``$RUNTIME``.
+   spinup simulation, i.e. ending 2018-07-17: we do not need to adapt OASIS's
+   ``$RUNTIME``.
 
    Next, the **restart procedure** differs between RegCM and SYMPHONIE:
 
@@ -60,7 +61,7 @@ below.
              mdate2  = 2018071700, ! End date for this run
             /
 
-      
+
       .. tab-item:: SYMPHONIE
 
          In ``notebook_time.f``, change ``initial`` to 1 and change the end date to
@@ -72,30 +73,30 @@ below.
             datesim(1:6,1)= 2018 , 07 , 03 , 00  , 00  , 00  ! Start time (yyyy mm dd hh mm ss)
             datesim(1:6,2)= 2018 , 07 , 17 , 00  , 00  , 00  ! End   time (yyyy mm dd hh mm ss)
 
-         
+
          SYMPHONIE will know where the previous run stopped thanks to the files of the
          ``symphonie/restart_input`` folder. For now however, this folder is empty, and
          the files of interest were written out at the end of the spinup run in one of the
          ``symphonie/restart_out*`` folders. To know which one contains the last data,
          open the last slurm output (something like ``slurm_spinup*.out``) and look
          around the end for a line of this type:
-      
+
          .. code::
-            
+
             ecriture de ./symphonie/restart_outbis/chanel9_0
-         
+
 
          with either ``restart_output`` or ``restart_outbis`` indicated (here
          ``restart_outbis``).
 
 
          Move the content of the right folder into ``symphonie/restart_input``, e.g.:
-         
+
          .. code:: bash
 
             mv symphonie/restart_outbis/* symphonie/restart_input/
 
-      
+
          .. tip::
 
             You may want to save this ``restart_input`` folder in case you want to rerun
@@ -105,7 +106,7 @@ below.
 
                cd $RUN/symphonie
                tar -czvf restart_input_20180710.tar.gz restart_input
-         
+
 
    Now all modules, OASIS, RegCM and SYMPHONIE are set up to restart from the spinup
    simulation ending 2018-07-10.
@@ -121,7 +122,7 @@ below.
 
       cp -p oasis/rmp*.nc .
 
-   
+
    Then, we need to **use the** ``MAPPING`` **transformation** in place of ``SCRIPR``,
    pointing to the appropriate files (there is one for each grid dipole and direction).
    You should end up with the following ``namcouple`` file::
@@ -129,9 +130,9 @@ below.
    .. code::
 
       # This is a typical input file for OASIS3-MCT.
-      # Keywords used in previous versions of OASIS3 
+      # Keywords used in previous versions of OASIS3
       # but now obsolete are marked "Not used"
-      # Don't hesitate to ask precisions or make suggestions (oasishelp@cerfacs.fr). 
+      # Don't hesitate to ask precisions or make suggestions (oasishelp@cerfacs.fr).
       #
       # Any line beginning with # is ignored. Blank lines are not allowed.
       #
@@ -150,7 +151,7 @@ below.
       $RUNTIME
       # The total simulated time for this run in seconds
       #
-        604800 
+        604800
       #--------------------------------------------------------------------------
       $NLOGPRT
       # Amount of information written to OASIS3-MCT log files (see User Guide)

@@ -6,7 +6,7 @@ Let us now **edit the** ``job.sh`` **batch script**. In the header, lines starti
 then consists of ``bash`` language commands to prepare and launch RegCM, once on the
 computing nodes' session.
 
-For this uncoupled run of regcm, we especially care about the following parameters:
+For this uncoupled run of RegCM, we especially care about the following parameters:
 
 * The ``--nodes`` batch parameter set to 1;
 * ``--ntasks-per-node`` and ``NPROC`` must be identical and adapted to the supercomputer architecture (36 on CALMIP; 40 on HILO);
@@ -51,7 +51,7 @@ For this uncoupled run of regcm, we especially care about the following paramete
 
 
       .. tab-item:: HILO
-         
+
          .. code:: bash
 
             TODO
@@ -78,14 +78,14 @@ this:
 
    $ tail slurm*.out
                      solar TSI irradiance    =    1361.3264 W/m^2
-   ATM variables written at  2018-07-10 00:00:00 UTC        
-   SRF variables written at  2018-07-10 00:00:00 UTC        
-   SAV variables written at  2018-07-10 00:00:00 UTC        
+   ATM variables written at  2018-07-10 00:00:00 UTC
+   SRF variables written at  2018-07-10 00:00:00 UTC
+   SAV variables written at  2018-07-10 00:00:00 UTC
    Final time  2018-07-10 00:00:00 UTC reached.
-   Elapsed seconds of run for this final timeslice :    178.6434    
+   Elapsed seconds of run for this final timeslice :    178.6434
    : this run stops at  : 2025-09-13 16:03:18+0200
    : Run has been completed using           36  processors.
-   : Total elapsed seconds of run :    178.644547998718     
+   : Total elapsed seconds of run :    178.644547998718
    RegCM V5 simulation successfully reached end
 
 

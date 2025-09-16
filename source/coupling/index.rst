@@ -2,9 +2,10 @@
 ===========================
 
 Now that we understand each component's framework and know how to set up and execute
-simulations of their standalone version, we are ready to couple the two.
+simulations of the standalone model versions, we are ready to couple the two.
+
 This part of the training divided in two.
-First, we will go through all namelists relating to the use of OASIS, understand and
+First, we will go through all namelists relating to the use of OASIS, and understand and
 practice how we can configure the coupling fields we need.
 Second and last, we will actually run coupled simulations.
 

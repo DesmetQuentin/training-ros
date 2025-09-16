@@ -16,10 +16,8 @@ component below:
          ! OASIS parameters
          !
          &oasisparam
-          write_restart_option = 2, ! 0 => no restart file writing
+          write_restart_option = 0, ! 0 => no restart file writing
                                     ! 1 => write restart files at the first time
-                                    ! 2 => write restart files at the last time
-                                    ! 3 => both 1 & 2
           l_write_grids = .false.,  ! For writing grids.nc, areas.nc, masks.nc.
           oasis_sync_lag = 0,       ! Synchronisation lag with other components (sec)
                                     ! > 0 => Regcm starts late

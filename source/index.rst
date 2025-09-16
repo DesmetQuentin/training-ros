@@ -1,5 +1,5 @@
-Training: install, setup & run the RegCM-OASIS-SYMPHONIE air-sea coupled model
-==============================================================================
+Install, setup & run the RegCM-OASIS-SYMPHONIE air-sea coupled model
+====================================================================
 
 This home page presents a training that covers installing, setting up and
 running the RegCM-OASIS-SYMPHONIE air-sea coupled model on a supercomputer

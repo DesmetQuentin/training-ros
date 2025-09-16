@@ -1,5 +1,5 @@
-2. Coupling both components
-===========================
+Coupling both components
+========================
 
 Now that we understand each component's framework and know how to set up and execute
 simulations of the standalone model versions, we are ready to couple the two.

@@ -1,5 +1,5 @@
-1. Component-wise frameworks
-============================
+Component-wise frameworks
+=========================
 
 Running the coupled model basically consists of running both components at the same
 time in their OASIS-enabled version, making it essential to understand first how they

@@ -1,5 +1,5 @@
-0. Installation guide
-=====================
+Installation guide
+==================
 
 This sections guides you through compiling and installing all the necessary code for
 using the coupled model. We assume here that the modules used in your CALMIP session are

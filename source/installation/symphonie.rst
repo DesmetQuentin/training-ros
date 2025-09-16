@@ -761,7 +761,7 @@ Then, **create a** ``makefile.inc`` **including the OASIS library**:
 
             # OASIS
             CHAN = MPI1
-            OASISDIR=/tmpdir/desmet/training_ros/models/oasis3-mct/intel18_calmip_off
+            OASISDIR=/tmpdir/desmet/training_ros/models/oasis3-mct/intel18_calmip
             INCPSMILE= -I$(OASISDIR)/build/lib/psmile.$(CHAN) -I$(OASISDIR)/build/lib/mct -I$(OASISDIR)/build/lib/scrip
             OASISLIB = -L$(OASISDIR)/lib -lpsmile.$(CHAN) -lmct -lmpeu -lscrip
 

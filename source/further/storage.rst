@@ -4,7 +4,7 @@ Storage management
 The ``tmpdir`` storage of CALMIP will never have backup saving. For this reason, it is
 recommended to store important and lightweight files in one's ``$HOME`` directory, so as
 to protect it from potential crashes of CALMIP's ``tmpdir`` (you may have noticed that
-RegCM's executable ``bin`` directory is located at a path starting by ``/users``, i.e., 
+RegCM's executable ``bin`` directory is located at a path starting by ``/users``, i.e.,
 in someone's home directory). In the RegCM framework, while the run directory we have
 just created will certainly become heavy once a simulation is run, the input namelist
 contains all the parameters required to reproduce our simulation later: this is a

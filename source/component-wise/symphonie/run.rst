@@ -129,4 +129,3 @@ containing one timestep, with the fields requested in the ``notebook_graph`` and
    we saved the ``grid.nc`` file produced during :doc:`initialization <initialize>`.
    Initialization's ``grid.nc`` is thus *the* file you will need for interpreting and
    postprocessing your simulation outputs.
-

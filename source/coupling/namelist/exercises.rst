@@ -60,7 +60,7 @@ the two models, with a coupling period of 30 minutes.
               SCRIPR
               BILINEAR LR SCALAR LATLON 1
 
-      
+
          **Key points:**
 
          * The 30 minute coupling period is in seconds.
@@ -72,7 +72,7 @@ the two models, with a coupling period of 30 minutes.
       .. tab-item:: RegCM's ``oasisparam``
 
          .. code:: fortran
-            
+
             !
             ! OASIS parameters
             !
@@ -92,9 +92,9 @@ the two models, with a coupling period of 30 minutes.
                                        !------ NAMCOUPLE FIELD ENTRIES ------
                                        ! field    | grid
                                        !-------------------------------------
-             l_cpl_im_sst  = .true.,   ! RCM_SST  | rcim     
-             l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim     
-             l_cpl_im_wust = .false.,  ! RCM_WUST | rcim     
+             l_cpl_im_sst  = .true.,   ! RCM_SST  | rcim
+             l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim
+             l_cpl_im_wust = .false.,  ! RCM_WUST | rcim
              l_cpl_ex_u10m = .false.,  ! RCM_U10M | rcin/rcim
              l_cpl_ex_v10m = .false.,  ! RCM_V10M | rcin/rcim
              l_cpl_ex_wspd = .false.,  ! RCM_WSPD | rcin/rcim
@@ -121,11 +121,11 @@ the two models, with a coupling period of 30 minutes.
                                       !------ NAMCOUPLE FIELD ENTRIES ------
             /
 
-      
+
       .. tab-item:: SYMPHONIE's ``notebook_oasis_generic.f``
 
          .. code:: fortran
-            
+
             &notebook_oasis_generic
             ! https://docs.google.com/document/d/1stIu_SuZY7l729gXjDB-LS37fAPGyDexNmeieQ07-eA/edit#
 
@@ -154,7 +154,7 @@ the two models, with a coupling period of 30 minutes.
                                         !   for filling the lag
                                         ! should be equal to the LAG parameter in the
                                         !   namcouple
- 
+
                                         !------ NAMCOUPLE FIELD ENTRIES ------
                                         ! field    | grid
                                         !-------------------------------------
@@ -218,7 +218,7 @@ SYMPHONIE, with a coupling period of 1 hour.
             -1 0
             rmp_rcim_to_symt_BILINEAR.nc src opt
 
-      
+
          **Key points:**
 
          * Only one entry is needed, using the colon separator for field names.
@@ -231,7 +231,7 @@ SYMPHONIE, with a coupling period of 1 hour.
       .. tab-item:: RegCM's ``oasisparam``
 
          .. code:: fortran
-            
+
             !
             ! OASIS parameters
             !
@@ -251,9 +251,9 @@ SYMPHONIE, with a coupling period of 1 hour.
                                        !------ NAMCOUPLE FIELD ENTRIES ------
                                        ! field    | grid
                                        !-------------------------------------
-             l_cpl_im_sst  = .false.,  ! RCM_SST  | rcim     
-             l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim     
-             l_cpl_im_wust = .false.,  ! RCM_WUST | rcim     
+             l_cpl_im_sst  = .false.,  ! RCM_SST  | rcim
+             l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim
+             l_cpl_im_wust = .false.,  ! RCM_WUST | rcim
              l_cpl_ex_u10m = .false.,  ! RCM_U10M | rcin/rcim
              l_cpl_ex_v10m = .false.,  ! RCM_V10M | rcin/rcim
              l_cpl_ex_wspd = .false.,  ! RCM_WSPD | rcin/rcim
@@ -280,11 +280,11 @@ SYMPHONIE, with a coupling period of 1 hour.
                                       !------ NAMCOUPLE FIELD ENTRIES ------
             /
 
-      
+
       .. tab-item:: SYMPHONIE's ``notebook_oasis_generic.f``
 
          .. code:: fortran
-            
+
             &notebook_oasis_generic
             ! https://docs.google.com/document/d/1stIu_SuZY7l729gXjDB-LS37fAPGyDexNmeieQ07-eA/edit#
 
@@ -313,7 +313,7 @@ SYMPHONIE, with a coupling period of 1 hour.
                                         !   for filling the lag
                                         ! should be equal to the LAG parameter in the
                                         !   namcouple
- 
+
                                         !------ NAMCOUPLE FIELD ENTRIES ------
                                         ! field    | grid
                                         !-------------------------------------
@@ -385,7 +385,7 @@ SYMPHONIE, with coupling occurring every 8 timesteps in the atmosphere.
               rmp_rcim_to_symt_BILINEAR.nc src opt
 
 
-      
+
          **Key points:**
 
          * 8 times 90 seconds is 12 minutes, i.e., 720 seconds for the coupling period.
@@ -396,7 +396,7 @@ SYMPHONIE, with coupling occurring every 8 timesteps in the atmosphere.
       .. tab-item:: RegCM's ``oasisparam``
 
          .. code:: fortran
-            
+
             !
             ! OASIS parameters
             !
@@ -416,9 +416,9 @@ SYMPHONIE, with coupling occurring every 8 timesteps in the atmosphere.
                                        !------ NAMCOUPLE FIELD ENTRIES ------
                                        ! field    | grid
                                        !-------------------------------------
-             l_cpl_im_sst  = .false.,  ! RCM_SST  | rcim     
-             l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim     
-             l_cpl_im_wust = .false.,  ! RCM_WUST | rcim     
+             l_cpl_im_sst  = .false.,  ! RCM_SST  | rcim
+             l_cpl_im_wz0  = .false.,  ! RCM_WZ0  | rcim
+             l_cpl_im_wust = .false.,  ! RCM_WUST | rcim
              l_cpl_ex_u10m = .false.,  ! RCM_U10M | rcin/rcim
              l_cpl_ex_v10m = .false.,  ! RCM_V10M | rcin/rcim
              l_cpl_ex_wspd = .false.,  ! RCM_WSPD | rcin/rcim
@@ -445,11 +445,11 @@ SYMPHONIE, with coupling occurring every 8 timesteps in the atmosphere.
                                       !------ NAMCOUPLE FIELD ENTRIES ------
             /
 
-      
+
       .. tab-item:: SYMPHONIE's ``notebook_oasis_generic.f``
 
          .. code:: fortran
-            
+
             &notebook_oasis_generic
             ! https://docs.google.com/document/d/1stIu_SuZY7l729gXjDB-LS37fAPGyDexNmeieQ07-eA/edit#
 
@@ -478,7 +478,7 @@ SYMPHONIE, with coupling occurring every 8 timesteps in the atmosphere.
                                         !   for filling the lag
                                         ! should be equal to the LAG parameter in the
                                         !   namcouple
- 
+
                                         !------ NAMCOUPLE FIELD ENTRIES ------
                                         ! field    | grid
                                         !-------------------------------------

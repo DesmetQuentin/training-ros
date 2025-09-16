@@ -1,7 +1,7 @@
 With RegCM and SYMPHONIE
 ========================
 
-Apart from ``namcouple`` for OASIS, each components has specific namelists to control
+Apart from ``namcouple`` for OASIS, each component has specific namelists to control
 its own interaction with the coupler. These namelists are ``oasisparam`` with RegCM and
 the ``notebook_oasis_generic.f`` file with SYMPHONIE. You can find examples for each
 component below:

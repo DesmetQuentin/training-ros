@@ -78,7 +78,7 @@ component below:
                                      ! --> if .true., then indicate the SYMPHONIE grid below.
 
           ! The grid.nc describing the global grid when no land proc has been removed.
-          default_grid_file_name = './symphoniedir/DRY_RUN/0540cpus/grid.nc'
+          default_grid_file_name = 'grid.nc'
           !default_grid_file_name = 'default' ! indicates the grid.nc that will be produced
                                              ! in the tmp directory.
 

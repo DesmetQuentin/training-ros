@@ -63,7 +63,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
 
 
       as well as grid writing with the ``l_write_grids`` logicals, indicating the full
-      grid for SYMPHONIE with ``default_grid_file_name = "./symphonie/grid.nc"``.
+      grid for SYMPHONIE with ``default_grid_file_name = "symphonie/grid.nc"``.
 
 
 .. dropdown:: 3. Configuring the ``namcouple`` in ``OUTPUT`` mode

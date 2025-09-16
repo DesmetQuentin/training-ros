@@ -236,10 +236,8 @@ SYMPHONIE, with a coupling period of 1 hour.
             ! OASIS parameters
             !
             &oasisparam
-             write_restart_option = 2, ! 0 => no restart file writing TODO
+             write_restart_option = 0, ! 0 => no restart file writing
                                        ! 1 => write restart files at the first time
-                                       ! 2 => write restart files at the last time
-                                       ! 3 => both 1 & 2
              l_write_grids = .true.,   ! For writing grids.nc, areas.nc, masks.nc.
              oasis_sync_lag = 0,       ! Synchronisation lag with other components (sec)
                                        ! > 0 => Regcm starts late
@@ -298,7 +296,7 @@ SYMPHONIE, with a coupling period of 1 hour.
                                         ! --> if .true., then indicate the SYMPHONIE grid below.
 
             ! The grid.nc describing the global grid when no land proc has been removed.
-             default_grid_file_name = 'grid.nc' TODO
+             default_grid_file_name = 'grid.nc'
             !default_grid_file_name = 'default' ! indicates the grid.nc that will be produced
                                                 ! in the tmp directory.
 
@@ -401,10 +399,8 @@ SYMPHONIE, with coupling occurring every 8 timesteps in the atmosphere.
             ! OASIS parameters
             !
             &oasisparam
-             write_restart_option = 2, ! 0 => no restart file writing TODO
+             write_restart_option = 0, ! 0 => no restart file writing
                                        ! 1 => write restart files at the first time
-                                       ! 2 => write restart files at the last time
-                                       ! 3 => both 1 & 2
              l_write_grids = .true.,   ! For writing grids.nc, areas.nc, masks.nc.
              oasis_sync_lag = 0,       ! Synchronisation lag with other components (sec)
                                        ! > 0 => Regcm starts late
@@ -463,7 +459,7 @@ SYMPHONIE, with coupling occurring every 8 timesteps in the atmosphere.
                                         ! --> if .true., then indicate the SYMPHONIE grid below.
 
             ! The grid.nc describing the global grid when no land proc has been removed.
-             default_grid_file_name = 'grid.nc' TODO
+             default_grid_file_name = 'grid.nc'
             !default_grid_file_name = 'default' ! indicates the grid.nc that will be produced
                                                 ! in the tmp directory.
 

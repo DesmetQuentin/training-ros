@@ -191,7 +191,7 @@ below.
 
    Then, we need to **use the** ``MAPPING`` **transformation** in place of ``SCRIPR``,
    pointing to the appropriate files (there is one for each grid dipole and direction).
-   You should end up with the following ``namcouple`` file::
+   You should end up with the following ``namcouple`` file:
 
    .. code::
 

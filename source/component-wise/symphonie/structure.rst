@@ -6,6 +6,7 @@ from the training materials:
 
 .. code:: bash
 
+   cd $RUN
    bash $TRAINING/make_run-symphonie.sh symphonie
 
 

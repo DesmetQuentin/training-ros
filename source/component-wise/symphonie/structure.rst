@@ -7,7 +7,7 @@ from the training materials:
 .. code:: bash
 
    cd $RUN
-   bash $TRAINING/make_run-symphonie.sh symphonie
+   bash $TRAINING/scripts/make_run-symphonie.sh symphonie
 
 
 There should now be a new ``$RUN/symphonie`` directory, with the following structure:

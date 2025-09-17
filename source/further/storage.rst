@@ -64,4 +64,4 @@ remains as convenient as it was:
 
    mkdir ~/oasis_namcouples
    cp $RUN/namcouple ~/oasis_namcouples/namcouple-training_cpl_init
-   ln -sf ~/oasis_namcouples/namcouple-training_cpl_init oasis/namcouple-cpl_init
+   ln -sf ~/oasis_namcouples/namcouple-training_cpl_init oasis/namcouple-init

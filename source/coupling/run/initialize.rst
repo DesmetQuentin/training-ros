@@ -28,7 +28,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
 
    Let us apply this to the different compartments:
 
-   * **RegCM:** Adapt ``gdata1``, ``gdate2`` and ``&restartparam``.
+   * **RegCM:** Adapt ``gdate1``, ``gdate2`` and ``&restartparam``.
    * **SYMPHONIE:** Adapt ``datesim`` in ``notebook_time.f``.
    * **OASIS:** Set the ``namcouple`` ``$RUNTIME`` to 86400 (i.e., the number of seconds in one day).
 
@@ -129,6 +129,7 @@ Then, **edit** ``job.sh`` and modify/check the following points:
 * Set ``--job-name`` to ``init``.
 * Set ``NPROC1`` and ``NPROC2`` to 36, refering to the allocation for RegCM and SYMPHONIE, respectively.
 * Set the ``--nodes`` batch parameter to 2.
+* Point to the right ``namelist-cpl_init.f`` for ``INPUT1``.
 * Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
 
 .. dropdown:: ``job.sh``
@@ -308,7 +309,7 @@ We now have our grids, ``namcouple`` and restart files in ``oasis``:
    areas.nc
    grids.nc
    masks.nc
-   namcouple-cpl_init
+   namcouple-init
    restart_20180703
 
 

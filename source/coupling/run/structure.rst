@@ -121,7 +121,7 @@ In the newly copied namelists, modify the following variables:
       * ``directory_offline`` and ``offlinefile`` in ``notebook_offline.f``
       * (If tides are enabled: the directory for ``TIDES`` in ``notebook_tide``)
       * ``default_grid_file_name`` in ``notebook_oasis_generic.f``
-      * ``directory`` in ``notebook_list.f``
+      * ``directory`` in ``notebook_list.f`` (this is the "master" namelist, directly in the ``symphonie`` folder)
 
 
 And that's it! We can proceed the next part.

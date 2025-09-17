@@ -19,6 +19,8 @@ The first section is ``$NNOREST``:
      F
 
 
+This means TODO
+
 Then, there is ``$NFIELDS``:
 
 .. code:: console
@@ -269,6 +271,8 @@ Full file example
 
 Below is an example ``namcouple`` file, implementing nearly everything we've seen on
 this page.
+
+TODO: Explain that it's just an MWE
 
 .. dropdown:: ``namcouple``
 

@@ -263,8 +263,8 @@ You ``oasis`` folder should now look like this:
    areas.nc
    grids.nc
    masks.nc
-   namcouple-cpl_init
-   namcouple-cpl_spinup
+   namcouple-init
+   namcouple-spinup
    restart_20180703
    restart_20180710
    rmp_rcem_to_symt_BILINEAR.nc

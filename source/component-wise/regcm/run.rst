@@ -2,7 +2,7 @@ Running and outputs
 ===================
 
 Let us now **edit the** ``job.sh`` **batch script**. In the header, lines starting by
-``#BATCH`` contain the workload keywords to book computing nodes. The file
+``#SBATCH`` contain the workload keywords to book computing nodes. The file
 then consists of ``bash`` language commands to prepare and launch RegCM, once on the
 computing nodes' session.
 

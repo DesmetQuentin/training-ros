@@ -51,12 +51,34 @@ Moreover, it should be supervised by a so-called training master, who prepared:
 Materials and setup
 -------------------
 
-1. ``training_ROS`` is a folder containing all the resources you will need for the training. Locate it with the help of your training master.
+1. ``training_ROS`` is a folder containing all the resources you will need for the training. You can locate it with the help of your training master.
 2. Configure your environment for the training using the ``config.sh`` script:
+
+.. tab-set::
+
+   .. tab-item:: CALMIP
+
+      .. code:: bash
+
+         source /desmet/training_ROS/config.sh
+   
+
+   .. tab-item:: HILO
+
+      .. code:: bash
+
+         TODO
+
+
+Make sure both variables ``$TRAINING`` and ``$RUN`` exist and are correct.
+They are the directories we will be using throughout the training.
+``$TRAINING`` contains the training materials; ``$RUN`` is your playground directory
+for running the models.
 
 .. code:: bash
 
-   source /path/to/training_ROS/config.sh
+   echo $TRAINING
+   echo $RUN
 
 
 3. Create your run directory for conducting the training tasks:
@@ -64,10 +86,6 @@ Materials and setup
 .. code:: bash
 
    mkdir $RUN
-
-
-Make sure both variables ``$TRAINING`` and ``$RUN`` exist and are correct.
-Then, we can proceed further.
 
 
 Outline

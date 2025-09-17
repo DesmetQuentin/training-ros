@@ -6,6 +6,7 @@ from the training materials:
 
 .. code:: bash
 
+   cd $RUN
    bash $TRAINING/scripts/make_run-regcm.sh regcm
 
 

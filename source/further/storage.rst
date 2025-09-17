@@ -1,6 +1,8 @@
 Storage management
 ==================
 
+**THIS PAGE IS A DRAFT: DO NOT FOLLOW**
+
 The ``tmpdir`` storage of CALMIP will never have backup saving. For this reason, it is
 recommended to store important and lightweight files in one's ``$HOME`` directory, so as
 to protect it from potential crashes of CALMIP's ``tmpdir`` (you may have noticed that

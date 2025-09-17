@@ -112,7 +112,73 @@ below.
    simulation ending 2018-07-10.
 
 
-.. dropdown:: 2. Re-employing interpolation files
+.. dropdown:: 2. Re-enabling outputs
+
+   This is the time to output all the data you need!
+
+   .. tab-set::
+
+      .. tab-item:: RegCM
+
+         Open ``namelist-cpl_production.f`` and go to the ``outparam`` namelist.
+         Do not (never) disable ``SAV`` outputs; they are still required for restarting.
+         Decrease the output period for ``SRF`` to 3 hours. Then, enable ``ATM`` and
+         ``RAD``.
+
+         .. code:: fortran
+
+            prestr  =     '',   ! string to prepend to output file names
+            ifcordex = .false., ! Restrict to possible CORDEX variables
+            outnwf  =     0.,   ! Day interval to open new files (0 = monthly)
+            ifsave  = .true.,   ! Create SAV files for restart
+            savfrq  =     0.,   ! Frequency in days to create them (0 = monthly)
+            ifatm   = .true.,   ! Output ATM ?
+            atmfrq  =     6.,   ! Frequency in hours to write to ATM
+            ifrad   = .true.,   ! Output RAD ?
+            radfrq  =     6.,   ! Frequency in hours to write to RAD
+            ifsrf   = .true.,   ! Output SRF ?
+            srffrq  =     3.,   ! Frequency in hours to write to SRF
+            ifsts   = .false.,  ! Output STS (frequence is daily) ?
+            ifshf   = .false.,  ! Output SHF (frequence is hourly) ?
+            ifsub   = .false.,  ! Output SUB ?
+            subfrq  =     6.,   ! Frequency in hours to write to SUB
+            iflak   = .false.,  ! Output LAK ?
+            lakfrq  =     6.,   ! Frequency in hours to write to LAK
+            ifchem  = .false.,  ! Output CHE ?
+            ifopt   = .false.,  ! Output OPT ?
+            chemfrq =     6.,   ! Frequency in hours to write to CHE
+
+
+      .. tab-item:: SYMPHONIE's ``GRAPHICS``
+
+         In ``NOTEBOOKS-cpl_production``'s ``notebook_graph``, start by resetting
+         the output frequency to hourly, i.e., 0.041666666 days. Then, enable (set
+         switches to 1) about 5 variables you'd like to produce: this is up to you!
+
+
+      .. tab-item:: SYMPHONIE's ``OFFLINE``
+
+         At the end of the ``notebook_offline.f`` file in ``NOTEBOOKS-cpl_production``,
+         let us add a new line indicating a smaller periodicity, e.g., 3 hours, until
+         after the end of the simulation:
+
+         .. code::
+
+            Note: 1- no outputs if periodicity <=0
+                  2- When the lastest date is passed, we continue with the latest periodicity
+            DO NOT MODIFY THE NEXT LINE AS IT IS THE SIGNAL EXPECTED BY S TO START THE TIME LIST!!!!
+            Periodicity (hours) ! until yyyy / mm / dd / hh / mm / ss ! Don't touch this line
+            24.                         2018   07   10   00   00   00
+            3.                          2018   07   17   00   00   00
+
+
+         .. note::
+
+            You could have written all lines from the spinup run, planning ahead which
+            periodicity will apply for which period.
+
+
+.. dropdown:: 3. Re-employing interpolation files
 
    To re-employ the interpolation files produced by ``SCRIPR`` during the spinup run,
    let us first make sure to **retrieve** ``rmp*.nc`` **files before running**, adding
@@ -201,11 +267,11 @@ below.
       ###########################################################################
 
 
-   Once this is set up, **save the** ``namcouple`` **file** with:
+Once everythin is is set up, **save the** ``namcouple`` **file** with:
 
-   .. code:: bash
+.. code:: bash
 
-      cp namcouple oasis/namcouple-production
+   cp namcouple oasis/namcouple-production
 
 
 Your job file should now look like the following:

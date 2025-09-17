@@ -21,7 +21,7 @@ The first section is ``$NNOREST``:
 
 This means that when set to true, restart files are optional, thereby allowing
 initializing fields with zeros if they are missing. When set to false, a missing
-restart file will make OASIS fail. 
+restart file will make OASIS fail.
 
 Then, there is ``$NFIELDS``:
 

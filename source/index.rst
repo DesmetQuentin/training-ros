@@ -61,7 +61,7 @@ Materials and setup
       .. code:: bash
 
          source /tmpdir/desmet/training_ROS/config.sh
-   
+
 
    .. tab-item:: HILO
 

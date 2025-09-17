@@ -103,7 +103,93 @@ Then, let us configure our spinup simulation by following the dropdown sections 
                                        !                          [oasisflux oasisbulk])
 
 
-.. dropdown:: 4. Configuring the ``namcouple`` in ``EXPORTED`` mode
+.. dropdown:: 4. Minimizing outputs
+
+   A spinup run is not typically a simulation we need very detailed outputs from. The
+   models will stabilize, and **what we want to do is simply be able to check whether
+   the simulation is going well, rather than to get terabytes of data for conducting
+   complex analyses**. This way, we will configure a minimum number of outputs for this
+   spinup run, planning enabling more/increasing their frequency for the production run.
+
+   .. tab-set::
+
+      .. tab-item:: RegCM
+
+         Open ``namelist-cpl_spinup.f`` and go to the ``outparam`` namelist. Let us
+         only keep ``SAV`` (needed for restarting) and ``SRF`` outputs, and degrade
+         the ``SRF`` output period to 12 hours:
+
+         .. code:: fortran
+
+            prestr  =     '',   ! string to prepend to output file names
+            ifcordex = .false., ! Restrict to possible CORDEX variables
+            outnwf  =     0.,   ! Day interval to open new files (0 = monthly)
+            ifsave  = .true.,   ! Create SAV files for restart
+            savfrq  =     0.,   ! Frequency in days to create them (0 = monthly)
+            ifatm   = .false.,  ! Output ATM ?
+            atmfrq  =     6.,   ! Frequency in hours to write to ATM
+            ifrad   = .false.,  ! Output RAD ?
+            radfrq  =     6.,   ! Frequency in hours to write to RAD
+            ifsrf   = .true.,   ! Output SRF ?
+            srffrq  =    12.,   ! Frequency in hours to write to SRF
+            ifsts   = .false.,  ! Output STS (frequence is daily) ?
+            ifshf   = .false.,  ! Output SHF (frequence is hourly) ?
+            ifsub   = .false.,  ! Output SUB ?
+            subfrq  =     6.,   ! Frequency in hours to write to SUB
+            iflak   = .false.,  ! Output LAK ?
+            lakfrq  =     6.,   ! Frequency in hours to write to LAK
+            ifchem  = .false.,  ! Output CHE ?
+            ifopt   = .false.,  ! Output OPT ?
+            chemfrq =     6.,   ! Frequency in hours to write to CHE
+
+
+      .. tab-item:: SYMPHONIE's ``GRAPHICS``
+
+         ``GRAPHICS`` outputs are for instanteneous variables.
+         Let us completely disable it.
+
+         In ``NOTEBOOKS-cpl_spinup``, open ``notebook_graph``. Change the output period
+         to a number of days that exceeds our simulation period, e.g. 30. Also, set to
+         0 all variable switches below. The top of the file should look like this:
+
+         .. code:: fortran
+
+            ********************************************************************************
+            Output fields for graphics:
+            ./symphonie/GRAPHICS/                                             DIRGRAPH
+            100 ! dim_varid
+            1   ! 1> regular in time  2> dates defined in notebook_dateoutput    IDATE_OUTPUT
+            30  ! 0.0416666666666666  ! gives the periodicity (in days) if the previous line = 1
+            Note: the related subroutines are graph_out.F90 and netcdf.F90
+            ********************************************************************************
+            30 2D horizontal scalar variables                        GRH_NB
+            0  Longwave, shortwave, heat fluxes                   1               GRH_OUT_VAR
+            0  ssh tide amplitude harmonics                       2
+            0  ssh tide phase harmonics                           3
+            0  tide potential amplitude harmonics                 4
+            ...
+
+
+      .. tab-item:: SYMPHONIE's ``OFFLINE``
+
+         ``OFFLINE`` outputs are for averaged fields. Let us set up a daily frequency
+         for the spinup run, planning to refine this frequency for the production.
+
+         In ``NOTEBOOKS-cpl_spinup``,
+         open ``notebook_offline.f``: you should see plain text lines at the very end
+         of it, defining a period and a date. Set this part to one single line, stating
+         a periodicity of 24 hours until 2018-07-10:
+
+         .. code::
+
+            Note: 1- no outputs if periodicity <=0
+                  2- When the lastest date is passed, we continue with the latest periodicity
+            DO NOT MODIFY THE NEXT LINE AS IT IS THE SIGNAL EXPECTED BY S TO START THE TIME LIST!!!!
+            Periodicity (hours) ! until yyyy / mm / dd / hh / mm / ss ! Don't touch this line
+            24.                         2018   07   10   00   00   00
+
+
+.. dropdown:: 5. Configuring the ``namcouple`` in ``EXPORTED`` mode
 
    After linking every enabled coupling field between RegCM and SYMPHONIE, taking care
    of grid dimensions, signs, units and interpolations, the ``namcouple`` for this
@@ -183,11 +269,11 @@ Then, let us configure our spinup simulation by following the dropdown sections 
       ###########################################################################
 
 
-   Once this is set up, **save it** with:
+Once all of this is set up, **save the** ``namcouple`` **file** with:
 
-   .. code:: bash
+.. code:: bash
 
-      cp namcouple oasis/namcouple-spinup
+   cp namcouple oasis/namcouple-spinup
 
 
 Before submitting the job, ``job-spinup.sh`` should now look like this:

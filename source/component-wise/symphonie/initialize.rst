@@ -14,9 +14,7 @@ need to book computing resources for land-only areas of the domain**. This way, 
 of simply dividing the domain into a grid then assigning each CPU with one mesh in this
 grid, we want, in addition, to filter out the land-only meshes, ultimately resulting in
 a reduced need of computing resources. In this context, let us set up an initialization
-run to compute which parts of the grid are land-only and can thus be ignored. The
-results will be in the form of two files, the one informing of the land-only meshes to
-be ignored, and the other for the rest of the grid.
+run to compute which parts of the grid are land-only and can thus be ignored.
 
 First, after changing directory to ``$RUN/symphonie``, change/check the values of the
 following **notebook parameters**:
@@ -35,7 +33,7 @@ following **notebook parameters**:
      - The initial grid dimensions.
    * - ``notebook_grid.f``
      - ``mpi_map_file_name = 'default'`` and ``mpi_hole_plugging = 'none'``
-     - These variables should point to the very two files we want to generate with the initialization run. Setting them to their defaults triggers their computation.
+     - These variables should point to the files that contain information on which part of the grid decomposition are land-only. Setting them to their defaults triggers their computation.
 
 
 And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editing**

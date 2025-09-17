@@ -124,7 +124,7 @@ component below:
 They are structured in a very similar way (because coded by the same person):
 
 * ``write_restart_option`` enables writing out the fields at specific timesteps (note that a restart file will be written anyways at the end of the simulation).
-* ``l_write_grids`` enables grid writing during initialization (TODO). ``grids.nc``, ``areas.nc`` and ``masks.nc`` are necessary files for the simulation, and must contain information about the grids of all involved components. They can be reused from a previous simulation where the same components were coupled, hence setting this logical to ``.false.``. On the contrary, if the components or their grid change, or if this is the first coupled simulation, then the files must be generated, implying ``l_write_grids`` set to ``.true.``.
+* ``l_write_grids`` enables grid writing during initialization. ``grids.nc``, ``areas.nc`` and ``masks.nc`` are necessary files for the simulation for OASIS to function (this ``grids.nc`` has nothing to with SYMPHONIE's ``grid.nc``), and must contain information about the grids of all involved components. They can be reused from a previous simulation where the same components were coupled, hence setting this logical to ``.false.``. On the contrary, if the components or their grid change, or if this is the first coupled simulation, then the files must be generated, implying ``l_write_grids`` set to ``.true.``.
 
 .. important::
 

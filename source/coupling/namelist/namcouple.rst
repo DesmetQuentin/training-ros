@@ -19,7 +19,9 @@ The first section is ``$NNOREST``:
      F
 
 
-This means TODO
+This means that when set to true, restart files are optional, thereby allowing
+initializing fields with zeros if they are missing. When set to false, a missing
+restart file will make OASIS fail. 
 
 Then, there is ``$NFIELDS``:
 
@@ -269,10 +271,9 @@ but positive downward for the receiver:
 Full file example
 -----------------
 
-Below is an example ``namcouple`` file, implementing nearly everything we've seen on
-this page.
-
-TODO: Explain that it's just an MWE
+Below is an example ``namcouple`` file, implementing nearly everything we will see on
+this page. This is only a **minimal working example**. This is not exactly the file we
+will use for the coupled model.
 
 .. dropdown:: ``namcouple``
 

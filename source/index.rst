@@ -4,9 +4,14 @@ Install, setup & run the RegCM-OASIS-SYMPHONIE air-sea coupled model
 This home page presents a training that covers installing, setting up and
 running the RegCM-OASIS-SYMPHONIE air-sea coupled model on a supercomputer
 (either CALMIP or HILO). Please start by reading through this page, which precises the
-training's scope, requirements, materials and outline. The left-hand side panel provides
-a search bar, and indicates your location on this website at any time in the training.
-Code blocks include a copy button in the top-right corner for easy reuse. We hope you
+training's scope, requirements, materials and outline.
+
+The left-hand side panel indicates your location on this website at any time in the
+training.
+Code blocks include a copy button in the top-right corner for easy reuse
+(although it's not always relevant to copy the whole block).
+
+We hope you
 find this training clear and helpful, and that it provides the answers you're looking
 for.
 
@@ -86,6 +91,11 @@ for running the models.
 .. code:: bash
 
    mkdir $RUN
+
+
+.. important::
+
+   You will need to ``source`` the ``config.sh`` file **each time you reconnect**.
 
 
 Outline

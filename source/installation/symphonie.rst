@@ -1,16 +1,16 @@
 Install SYMPHONIE
 =================
 
-Let us get to the right directory:
+**Retrieve the SYMPHONIE's source code** and get to its directory:
 
 .. code:: bash
 
+   bash $TRAINING/scripts/prepare_symphonie.sh
    cd $SYMPHONIE
 
 
 Here, we drag our attention on three folders, each relating to the installation of a
 specific configuration in some way:
-
 
 .. list-table::
    :header-rows: 1
@@ -31,8 +31,9 @@ specific configuration in some way:
 
 .. note::
 
-   The suffix put after ``CDIR_`` refers to the employed compiler. In our case, we will
-   be using ``ifort``, hence focusing on ``CDIR_IFORT``.
+   The suffix put after ``CDIR_`` refers to the employed compiler. We will
+   be using ``ifort`` on CALMIP (hence focusing on ``CDIR_IFORT``) and ``TODO`` on
+   HILO (hence focusing on ``CDIR_TODO``).
 
 
 When designing a configuration, each of these three folders will have one subdirectory
@@ -42,7 +43,7 @@ OASIS-disabled version of SYMPHONIE: we call it ``ORIGIN``. The first step is to
 
 .. code:: bash
 
-   mkdir -p {CDIR_IFORT,RDIR,UDIR}/ORIGIN
+   mkdir -p {CDIR_*,RDIR,UDIR}/ORIGIN
 
 
 Then, everything happens **in the user directory**:
@@ -55,8 +56,11 @@ Then, everything happens **in the user directory**:
 From here, we need to **create two Makefiles**: ``makefile`` which contains all the
 compilation instructions to the ``make`` program, and ``makefile.inc`` which stores all
 the dependencies of your configuration. You can find many examples of these files in
-``$SYMPHONIE/configbox``. For this training on CALMIP and using ``intel18``, use the
-two following:
+``$SYMPHONIE/configbox``.
+
+``makefile`` should not change from one machine to the other. For users, this is only
+the place to act on the compilation keys, stored in the ``KEY1`` and ``KEY2`` variables.
+For an OASIS-disabled configuration, use the following:
 
 .. dropdown:: ``makefile``
 
@@ -604,6 +608,8 @@ two following:
       z_thickness.o: z_thickness.F90 module_principal.F90 module_parallele.F90
 
 
+Then, configure the right ``makefile.inc``:
+
 .. dropdown:: ``makefile.inc``
 
    .. tab-set::
@@ -649,7 +655,7 @@ two following:
             TODO
 
 
-.. tip::
+.. admonition:: Use user-custom code
 
    Beside ``makefile`` and ``makefile.inc``, you can also add some source code in the
    user directory. Concretely, ``make`` will see a list of file names in your
@@ -670,6 +676,14 @@ two following:
    Then only may you modify it.
 
 
+In our case, the training requires some simple modifications of the sources, which was
+placed for simplicity in the ``EXAMPLE`` folder, **move them to the current folder**:
+
+.. code:: bash
+
+   cp -p ../EXAMPLE/*.F90 .
+
+
 The ``make`` command then **proceeds to both compilation and installation**
 (potentially taking several minutes):
 
@@ -678,7 +692,7 @@ The ``make`` command then **proceeds to both compilation and installation**
    make
 
 
-Compilation results are stored in ``$SYMPHONIE/CDIR_IFORT/ORIGIN``, and the executable
+Compilation results are stored in ``$SYMPHONIE/CDIR_*/ORIGIN``, and the executable
 goes to ``$SYMPHONIE/RDIR/ORIGIN``:
 
 .. code:: console
@@ -704,7 +718,7 @@ Let us simply call it ``OASIS``:
 .. code:: bash
 
    cd $SYMPHONIE
-   mkdir -p {CDIR_IFORT,RDIR,UDIR}/OASIS
+   mkdir -p {CDIR_*,RDIR,UDIR}/OASIS
    cd UDIR/OASIS
 
 
@@ -761,7 +775,7 @@ Then, **create a** ``makefile.inc`` **including the OASIS library**:
 
             # OASIS
             CHAN = MPI1
-            OASISDIR=/tmpdir/desmet/training_ros/models/oasis3-mct/intel18_calmip
+            OASISDIR=$(OASIS)/intel18_calmip
             INCPSMILE= -I$(OASISDIR)/build/lib/psmile.$(CHAN) -I$(OASISDIR)/build/lib/mct -I$(OASISDIR)/build/lib/scrip
             OASISLIB = -L$(OASISDIR)/lib -lpsmile.$(CHAN) -lmct -lmpeu -lscrip
 
@@ -776,5 +790,12 @@ Then, **create a** ``makefile.inc`` **including the OASIS library**:
             TODO
 
 
-You can now **use** ``make`` in the same way as before, and check that this creates the
+**Retrieve the modified source code**:
+
+.. code:: bash
+
+   cp -p ../EXAMPLE/*.F90 .
+
+
+And **use** ``make`` in the same way as before, checking afterward that this creates the
 ``symphonie.exe`` executable in ``$SYMPHONIE/RDIR/OASIS``.

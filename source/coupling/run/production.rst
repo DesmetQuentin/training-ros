@@ -28,7 +28,7 @@ below.
 .. dropdown:: 1. Simulation period and restart procedure
 
    For the OASIS part of the setup, let us **copy the correct restart files** in
-   ``job-production.sh`` , i.e. with the 2018-07-10 date, by modifying the date on this
+   ``job-production.sh`` , i.e., with the 2018-07-10 date, by modifying the date on this
    line:
 
    .. code:: bash
@@ -37,7 +37,7 @@ below.
 
 
    In terms of simulation duration, this production run will last one week just as the
-   spinup simulation, i.e. ending 2018-07-17: we do not need to adapt OASIS's
+   spinup simulation, i.e., ending 2018-07-17: we do not need to adapt OASIS's
    ``$RUNTIME``.
 
    Next, the **restart procedure** differs between RegCM and SYMPHONIE:
@@ -182,7 +182,7 @@ below.
 
    To re-employ the interpolation files produced by ``SCRIPR`` during the spinup run,
    let us first make sure to **retrieve** ``rmp*.nc`` **files before running**, adding
-   this lines to ``job-production.sh``:
+   this line to ``job-production.sh``:
 
    .. code:: bash
 

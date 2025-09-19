@@ -1,5 +1,5 @@
-With RegCM and SYMPHONIE
-========================
+For RegCM and SYMPHONIE
+=======================
 
 Apart from ``namcouple`` for OASIS, each component has specific namelists to control
 its own interaction with the coupler. These namelists are ``oasisparam`` with RegCM and
@@ -170,7 +170,7 @@ field and grid names are already indicated in the namelists' comments.
 
       where ``rcim`` and ``rcem`` correspond to the "cross" grid of RegCM (using an
       Arakawa-B grid framework, whether you use MOLOCH or not), in their "internal"
-      (i.e. excluding the borders) and "external" variations, respectively. With ``jx``
+      (i.e., excluding the borders) and "external" variations, respectively. With ``jx``
       and ``iy`` the dimensions of the grid as configured in ``dimparam``:
 
       +-----------+-------------------------+

@@ -169,8 +169,8 @@ Then, **edit** ``job.sh`` and modify/check the following points:
       mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
-Make also sure that ``symphonie/notebook_list.f`` points to the right notebook folder
-with the ``cpl_init`` suffix!
+Make also sure that ``symphonie/notebook_list.f`` **points to the right notebook
+folder** with the ``cpl_init`` suffix!
 Delete the content of the ``tmp`` folder of SYMPHONIE:
 
 .. code:: bash

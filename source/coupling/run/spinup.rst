@@ -25,7 +25,7 @@ And continue **renaming** key parameters to point to the newly copied files:
 
 * Set the job file's ``--job-name`` to ``spinup``.
 * Rename the input of RegCM in the job file to ``regcm/namelist-cpl_spinup.f``.
-* For SYMPHONIE however, let us keep ``notebook_list.f`` in ``job-spinup.sh``, but instead change the ``notebook_list.f``'s ``directory`` to ``symphonie/NOTEBOOKS-cpl_spinup``.
+* For SYMPHONIE, keep ``notebook_list.f`` in ``job-spinup.sh``, but instead change the ``notebook_list.f``'s ``directory`` to ``symphonie/NOTEBOOKS-cpl_spinup``.
 
 
 Then, let us configure our spinup simulation by following the dropdown sections below.
@@ -63,7 +63,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
    Also adapt SYMPHONIE's ``datesim`` in ``notebook_time.f``, and OASIS's ``$RUNTIME``
    in ``namcouple`` (with one week in seconds, i.e., 604800).
 
-   Lastly, make sure the right restart files are accounted for by adding these lines to
+   Lastly, make sure the right restart files are accounted for by adding this line to
    ``job-spinup.sh``, just before launching:
 
    .. code:: bash
@@ -81,7 +81,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
    overwriting them with each simulation.
 
    Disable the ``l_write_grids`` logicals for RegCM and SYMPHONIE, then add the
-   following lines to the job file, besides those about restart files:
+   following line to the job file, besides those about restart files:
 
    .. code:: bash
 
@@ -109,7 +109,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
    models will stabilize, and **what we want to do is simply be able to check whether
    the simulation is going well, rather than to get terabytes of data for conducting
    complex analyses**. This way, we will configure a minimum number of outputs for this
-   spinup run, planning enabling more/increasing their frequency for the production run.
+   spinup run, planning to enable more/increase their frequency for the production run.
 
    .. tab-set::
 
@@ -149,7 +149,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
          Let us completely disable it.
 
          In ``NOTEBOOKS-cpl_spinup``, open ``notebook_graph``. Change the output period
-         to a number of days that exceeds our simulation period, e.g. 30. Also, set to
+         to a number of days that exceeds our simulation period, e.g., 30. Also, set to
          0 all variable switches below. The top of the file should look like this:
 
          .. code:: fortran
@@ -173,7 +173,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
       .. tab-item:: SYMPHONIE's ``OFFLINE``
 
          ``OFFLINE`` outputs are for averaged fields. Let us set up a daily frequency
-         for the spinup run, planning to refine this frequency for the production.
+         for the spinup run, planning to refine this frequency for production.
 
          In ``NOTEBOOKS-cpl_spinup``,
          open ``notebook_offline.f``: you should see plain text lines at the very end
@@ -187,6 +187,15 @@ Then, let us configure our spinup simulation by following the dropdown sections 
             DO NOT MODIFY THE NEXT LINE AS IT IS THE SIGNAL EXPECTED BY S TO START THE TIME LIST!!!!
             Periodicity (hours) ! until yyyy / mm / dd / hh / mm / ss ! Don't touch this line
             24.                         2018   07   10   00   00   00
+
+
+   .. tip::
+
+      This strategy of disabling most outputs for the spinup can be very helpful in
+      cases when writting out data takes time and/or space. For instance, if you run
+      aerosols and atmospheric chemistry in RegCM, you should know how
+      resource-consuming are chemistry and optics outputs. Disabling outputting these
+      during such a run's spinup is thus a game changer.
 
 
 .. dropdown:: 5. Configuring the ``namcouple`` in ``EXPORTED`` mode

@@ -4,10 +4,11 @@ Install RegCM
 To install RegCM, we will follow these four steps:
 **bootstrap**, **configure**, **compile**, and **install**.
 
-First, get to RegCM root:
+First, **retrieve the model's source code** and get to its directory:
 
 .. code:: bash
 
+   bash $TRAINING/scripts/prepare_regcm.sh
    cd $REGCM
 
 
@@ -26,18 +27,40 @@ configurations below, but for now, only run the OASIS-enabled version.
 
 .. tab-set::
 
-   .. tab-item:: OASIS-enabled
+   .. tab-item:: CALMIP
 
-      .. code:: bash
+      .. tab-set::
 
-         ./configure FC=ifort --enable-pnetcdf --enable-clm45 --enable-oasis --with-oasis-comm=MPI1 --with-oasis-path=$OASIS/intel18_calmip
+         .. tab-item:: OASIS-enabled
+
+            .. code:: bash
+
+               ./configure FC=ifort --enable-pnetcdf --enable-clm45 --enable-oasis --with-oasis-comm=MPI1 --with-oasis-path=$OASIS/intel18_calmip
 
 
-   .. tab-item:: OASIS-disabled
+         .. tab-item:: OASIS-disabled
 
-      .. code:: bash
+            .. code:: bash
 
-         ./configure FC=ifort --enable-pnetcdf --enable-clm45
+               ./configure FC=ifort --enable-pnetcdf --enable-clm45
+
+
+   .. tab-item:: HILO
+
+      .. tab-set::
+
+         .. tab-item:: OASIS-enabled
+
+            .. code:: bash
+
+               TODO
+
+
+         .. tab-item:: OASIS-disabled
+
+            .. code:: bash
+
+               TODO
 
 
 .. tip::

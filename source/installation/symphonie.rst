@@ -790,6 +790,15 @@ Then, **create a** ``makefile.inc`` **including the OASIS library**:
             TODO
 
 
+.. important::
+
+   Like when we compiled the OASIS library,
+   the use of the ``$(OASIS)`` macro in the files above relies on its existence thanks
+   to you sourcing the ``config.sh`` file after connecting to the cluster. In realistic
+   conditions, make sure to replace ``$(OASIS)`` by the actual path to the location of
+   your ``oasis3-mct``.
+   
+
 **Retrieve the modified source code**:
 
 .. code:: bash

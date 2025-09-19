@@ -1,7 +1,7 @@
 Install SYMPHONIE
 =================
 
-**Retrieve the SYMPHONIE's source code** and get to its directory:
+**Retrieve SYMPHONIE's source code** and get to its directory:
 
 .. code:: bash
 
@@ -36,14 +36,14 @@ specific configuration in some way:
    HILO (hence focusing on ``CDIR_TODO``).
 
 
-When designing a configuration, each of these three folders will have one subdirectory
+When designing a configuration, each of these folders will have one subdirectory
 named after it. We're now going to create our own. Let us start by installing an
 OASIS-disabled version of SYMPHONIE: we call it ``ORIGIN``. The first step is to
 **create the configuration subdirectories**:
 
 .. code:: bash
 
-   mkdir -p {CDIR_*,RDIR,UDIR}/ORIGIN
+   mkdir -p {CDIR_{IFORT,GFORTRAN,F95},RDIR,UDIR}/ORIGIN
 
 
 Then, everything happens **in the user directory**:
@@ -53,14 +53,21 @@ Then, everything happens **in the user directory**:
    cd UDIR/ORIGIN
 
 
-From here, we need to **create two Makefiles**: ``makefile`` which contains all the
+From here, we need to create two "makefiles": ``makefile`` which contains all the
 compilation instructions to the ``make`` program, and ``makefile.inc`` which stores all
 the dependencies of your configuration. You can find many examples of these files in
 ``$SYMPHONIE/configbox``.
 
 ``makefile`` should not change from one machine to the other. For users, this is only
 the place to act on the compilation keys, stored in the ``KEY1`` and ``KEY2`` variables.
-For an OASIS-disabled configuration, use the following:
+**Copy the default** ``makefile`` from ``$SYMPHONIE/configbox``:
+
+.. code:: bash
+
+   cp $SYMPHONIE/configbox/makefile .
+
+
+In case, find the file below:
 
 .. dropdown:: ``makefile``
 
@@ -608,13 +615,19 @@ For an OASIS-disabled configuration, use the following:
       z_thickness.o: z_thickness.F90 module_principal.F90 module_parallele.F90
 
 
-Then, configure the right ``makefile.inc``:
+Then, **retrieve the** ``makefile.inc`` **corresponding to your machine** (or take
+one as an example and adapt it to your case):
 
-.. dropdown:: ``makefile.inc``
+.. tab-set::
 
-   .. tab-set::
+   .. tab-item:: CALMIP
 
-      .. tab-item:: CALMIP
+      .. code:: bash
+
+         cp $SYMPHONIE/configbox/makefile_intel18_calmip.inc makefile.inc
+
+
+      .. dropdown:: ``makefile.inc``
 
          .. code:: make
 
@@ -648,7 +661,14 @@ Then, configure the right ``makefile.inc``:
             LIB=-L/usr/local/netcdf/4.7.4-intelmpi/lib -lnetcdff -Wl,-rpath,/usr/local/intel/2018.2.046/compilers_and_libraries/linux/lib/intel64 -Wl,-rpath,/usr/local/hdf5/1.10.2/intel_mpi/lib -lnetcdf -lnetcdf /usr/local/pnetcdf/1.9.0/lib/libpnetcdf.a
 
 
-      .. tab-item:: HILO
+   .. tab-item:: HILO
+
+      .. code:: bash
+
+         cp $SYMPHONIE/configbox/makefile_intel19_hilo.inc makefile.inc
+
+
+      .. dropdown:: ``makefile.inc``
 
          .. code:: make
 
@@ -677,11 +697,12 @@ Then, configure the right ``makefile.inc``:
 
 
 In our case, the training requires some simple modifications of the sources, which was
-placed for simplicity in the ``EXAMPLE`` folder, **move them to the current folder**:
+placed for simplicity in the ``modified_code`` folder, **move them to the current
+folder**:
 
 .. code:: bash
 
-   cp -p ../EXAMPLE/*.F90 .
+   cp -p ../modified_code/*.F90 .
 
 
 The ``make`` command then **proceeds to both compilation and installation**
@@ -718,7 +739,7 @@ Let us simply call it ``OASIS``:
 .. code:: bash
 
    cd $SYMPHONIE
-   mkdir -p {CDIR_*,RDIR,UDIR}/OASIS
+   mkdir -p {CDIR_{IFORT,GFORTRAN,F95},RDIR,UDIR}/OASIS
    cd UDIR/OASIS
 
 
@@ -736,13 +757,18 @@ Open it, and **edit the** ``KEY1`` variable to enable OASIS-related compilation 
    KEY1 = -Dstokes -Dkey_oasis_generic
 
 
-Then, **create a** ``makefile.inc`` **including the OASIS library**:
+Then, **retrieve the** ``makefile.inc`` **including the OASIS library**:
 
-.. dropdown:: OASIS-enabled ``makefile.inc``
+.. tab-set::
 
-   .. tab-set::
+   .. tab-item:: CALMIP
 
-      .. tab-item:: CALMIP
+      .. code:: bash
+
+         cp $SYMPHONIE/configbox/makefile_intel18_calmip_OASIS.inc makefile.inc
+
+
+      .. dropdown:: ``makefile.inc``
 
          .. code:: make
 
@@ -783,7 +809,14 @@ Then, **create a** ``makefile.inc`` **including the OASIS library**:
             LIB=-L/usr/local/netcdf/4.7.4-intelmpi/lib -lnetcdff -Wl,-rpath,/usr/local/intel/2018.2.046/compilers_and_libraries/linux/lib/intel64 -Wl,-rpath,/usr/local/hdf5/1.10.2/intel_mpi/lib -lnetcdf -lnetcdf /usr/local/pnetcdf/1.9.0/lib/libpnetcdf.a $(OASISLIB)
 
 
-      .. tab-item:: HILO
+   .. tab-item:: HILO
+
+      .. code:: bash
+
+         cp $SYMPHONIE/configbox/makefile_intel19_hilo_OASIS.inc makefile.inc
+
+
+      .. dropdown:: ``makefile.inc``
 
          .. code:: make
 
@@ -797,13 +830,13 @@ Then, **create a** ``makefile.inc`` **including the OASIS library**:
    to you sourcing the ``config.sh`` file after connecting to the cluster. In realistic
    conditions, make sure to replace ``$(OASIS)`` by the actual path to the location of
    your ``oasis3-mct``.
-   
+
 
 **Retrieve the modified source code**:
 
 .. code:: bash
 
-   cp -p ../EXAMPLE/*.F90 .
+   cp -p ../modified_code/*.F90 .
 
 
 And **use** ``make`` in the same way as before, checking afterward that this creates the

@@ -101,9 +101,11 @@ for running the models.
 Outline
 -------
 
-After installation, the training is decomposed in **two major parts**:
+After installation, the training is decomposed in **two major parts**. Those parts
+do not rely on your own model executables, such that the installation guide can be
+addressed independently.
 
-0. :doc:`Installation guide <installation/index>`
+0. :doc:`Installation guide (optional) <installation/index>`
 1. :doc:`Component-wise frameworks <component-wise/index>`
 2. :doc:`Coupling both components <coupling/index>`
 

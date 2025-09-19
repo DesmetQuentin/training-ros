@@ -124,6 +124,36 @@ dependencies adapted to various setups.
             ### End User configurable options ###
 
 
+   .. tab-item:: HILO
+
+      .. dropdown:: ``make.TODO``
+
+         .. code:: make
+
+            TODO
+
+
+      Then, **include** ``make.TODO`` **in** ``make.inc``:
+
+      .. dropdown:: ``make.inc``
+
+         .. code:: make
+
+            #
+            # System dependent settings
+            #
+            ##### User configurable options #####
+            #
+            # Note: The absolute path name must be indicated.
+            #
+            # Note: Choose one of these includes files and modify it according to your
+            #       local settings. Replace the currently active file with your own.
+            #
+            include $(OASIS)/util/make_dir/make.TODO
+            #
+            ### End User configurable options ###
+
+
 .. important::
 
    The use of the ``$(OASIS)`` macro in the files above relies on its existence thanks

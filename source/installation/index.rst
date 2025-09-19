@@ -11,7 +11,7 @@ whether you work on HILO/CALMIP or not, so you should find value here anyways.
 Good luck, now!
 
 First, below are the modules we will use throughout these pages. They should already
-be loaded after you have ``source``d the ``config.sh`` script:
+be loaded after you have ``source`` d the ``config.sh`` script:
 
 .. tab-set::
 

@@ -31,9 +31,8 @@ specific configuration in some way:
 
 .. note::
 
-   The suffix put after ``CDIR_`` refers to the employed compiler. We will
-   be using ``ifort`` on CALMIP (hence focusing on ``CDIR_IFORT``) and ``TODO`` on
-   HILO (hence focusing on ``CDIR_TODO``).
+   The suffix put after ``CDIR_`` refers to the employed compiler. Whether on CALMIP
+   or HILO, we will be using ``ifort``, hence focusing on ``CDIR_IFORT``.
 
 
 When designing a configuration, each of these folders will have one subdirectory
@@ -634,6 +633,7 @@ one as an example and adapt it to your case):
             #----------------------------------------------------------
             # Options de compilations: parametrer F77FLAGS
             #----------------------------------------------------------
+            # INTEL18 version for CALMIP
             ###########################################################
             # Modules to load:
             # 1. intel/18.2
@@ -657,8 +657,8 @@ one as an example and adapt it to your case):
             #F77FLAGS= -traceback -fp-model precise -check bounds
             F77FLAGS= -O2 -traceback -fp-model precise
 
-            NETINC=-I/usr/local/netcdf/4.7.4-intelmpi/include -I/usr/local/pnetcdf/1.9.0/include
-            LIB=-L/usr/local/netcdf/4.7.4-intelmpi/lib -lnetcdff -Wl,-rpath,/usr/local/intel/2018.2.046/compilers_and_libraries/linux/lib/intel64 -Wl,-rpath,/usr/local/hdf5/1.10.2/intel_mpi/lib -lnetcdf -lnetcdf /usr/local/pnetcdf/1.9.0/lib/libpnetcdf.a
+            NETINC = -I/usr/local/netcdf/4.7.4-intelmpi/include -I$(PNETCDF_INC)
+            LIB    = -L/usr/local/netcdf/4.7.4-intelmpi/lib -lnetcdff -lnetcdf $(PNETCDF_LIB)/libpnetcdf.a
 
 
    .. tab-item:: HILO
@@ -672,7 +672,36 @@ one as an example and adapt it to your case):
 
          .. code:: make
 
-            TODO
+            #----------------------------------------------------------
+            # Options de compilations: parametrer F77FLAGS
+            #----------------------------------------------------------
+            # INTEL19 version for HILO
+            ###########################################################
+            # Modules to load:
+            # 1. intel/2019.u5
+            # 2. hdf5/1.8.15p1_intel_64
+            # 3. mvapich2/2.3.6_intel
+            # 4. netcdf/4.6.1_intel_64
+            # 5. PnetCDF/1.9.0_intel_64
+            ############################################################
+
+            # Compilateur
+            F90=mpifort
+
+            #  option specifies where to put .mod files
+            CONF=ORIGIN
+            COMP=IFORT
+            COMPMOD=-module
+
+            # Optimisations, debug, ... flags
+            # DO NOT USE -O3  optimization
+            #F77FLAGS= -g -traceback -O0 -ftrapuv -fpe0 -check bounds
+            #F77FLAGS= -traceback -fp-model precise -check bounds
+            F77FLAGS= -O2 -traceback -fp-model precise
+
+            NETINC = -I/work/apps/intel_2016/netcdf/4.6.1/include -I$(PNETCDF_INC)
+            LIB    = -L/work/apps/intel_2016/netcdf/4.6.1/lib -lnetcdff -lnetcdf $(PNETCDF_LIB)/libpnetcdf.a
+
 
 
 .. admonition:: Use user-custom code
@@ -775,6 +804,7 @@ Then, **retrieve the** ``makefile.inc`` **including the OASIS library**:
             #----------------------------------------------------------
             # Options de compilations: parametrer F77FLAGS
             #----------------------------------------------------------
+            # INTEL18 version for CALMIP, with OASIS
             ###########################################################
             # Modules to load:
             # 1. intel/18.2
@@ -801,12 +831,12 @@ Then, **retrieve the** ``makefile.inc`` **including the OASIS library**:
 
             # OASIS
             CHAN = MPI1
-            OASISDIR=$(OASIS)/intel18_calmip
-            INCPSMILE= -I$(OASISDIR)/build/lib/psmile.$(CHAN) -I$(OASISDIR)/build/lib/mct -I$(OASISDIR)/build/lib/scrip
-            OASISLIB = -L$(OASISDIR)/lib -lpsmile.$(CHAN) -lmct -lmpeu -lscrip
+            OASISDIR = $(OASIS)/intel18_calmip
+            INCPSMILE = -I$(OASISDIR)/build/lib/psmile.$(CHAN) -I$(OASISDIR)/build/lib/mct -I$(OASISDIR)/build/lib/scrip
+            OASISLIB  = -L$(OASISDIR)/lib -lpsmile.$(CHAN) -lmct -lmpeu -lscrip
 
-            NETINC=-I/usr/local/netcdf/4.7.4-intelmpi/include -I/usr/local/pnetcdf/1.9.0/include $(INCPSMILE)
-            LIB=-L/usr/local/netcdf/4.7.4-intelmpi/lib -lnetcdff -Wl,-rpath,/usr/local/intel/2018.2.046/compilers_and_libraries/linux/lib/intel64 -Wl,-rpath,/usr/local/hdf5/1.10.2/intel_mpi/lib -lnetcdf -lnetcdf /usr/local/pnetcdf/1.9.0/lib/libpnetcdf.a $(OASISLIB)
+            NETINC = -I/usr/local/netcdf/4.7.4-intelmpi/include -I$(PNETCDF_INC) $(INCPSMILE)
+            LIB    = -L/usr/local/netcdf/4.7.4-intelmpi/lib -lnetcdff -lnetcdf $(PNETCDF_LIB)/libpnetcdf.a $(OASISLIB)
 
 
    .. tab-item:: HILO
@@ -820,7 +850,41 @@ Then, **retrieve the** ``makefile.inc`` **including the OASIS library**:
 
          .. code:: make
 
-            TODO
+            #----------------------------------------------------------
+            # Options de compilations: parametrer F77FLAGS
+            #----------------------------------------------------------
+            # INTEL19 version for HILO, with OASIS
+            ###########################################################
+            # Modules to load:
+            # 1. intel/2019.u5
+            # 2. hdf5/1.8.15p1_intel_64
+            # 3. mvapich2/2.3.6_intel
+            # 4. netcdf/4.6.1_intel_64
+            # 5. PnetCDF/1.9.0_intel_64
+            ############################################################
+
+            # Compilateur
+            F90=mpifort
+
+            #  option specifies where to put .mod files
+            CONF=OASIS
+            COMP=IFORT
+            COMPMOD=-module
+
+            # Optimisations, debug, ... flags
+            # DO NOT USE -O3  optimization
+            #F77FLAGS= -g -traceback -O0 -ftrapuv -fpe0 -check bounds
+            #F77FLAGS= -traceback -fp-model precise -check bounds
+            F77FLAGS= -O2 -traceback -fp-model precise
+
+            # OASIS
+            CHAN = MPI1
+            OASISDIR  = $(OASIS)/intel19_hilo
+            INCPSMILE = -I$(OASISDIR)/build/lib/psmile.$(CHAN) -I$(OASISDIR)/build/lib/mct -I$(OASISDIR)/build/lib/scrip
+            OASISLIB  = -L$(OASISDIR)/lib -lpsmile.$(CHAN) -lmct -lmpeu -lscrip
+
+            NETINC = -I/work/apps/intel_2016/netcdf/4.6.1/include -I$(PNETCDF_INC) $(INCPSMILE)
+            LIB    = -L/work/apps/intel_2016/netcdf/4.6.1/lib -lnetcdff -lnetcdf $(PNETCDF_LIB)/libpnetcdf.a $(OASISLIB)
 
 
 .. important::

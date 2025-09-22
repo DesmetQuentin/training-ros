@@ -72,7 +72,7 @@ Materials and setup
 
       .. code:: bash
 
-         TODO
+         source /work/users/desmetq/training_ROS/config.sh
 
 
 Make sure both variables ``$TRAINING`` and ``$RUN`` exist and are correct.

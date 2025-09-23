@@ -72,7 +72,34 @@ Then, **edit the** ``job.sh`` **batch script**:
 
          .. code:: bash
 
-            TODO
+            #!/bin/bash
+
+            #SBATCH --job-name=symphonie
+            #SBATCH --partition=scalable
+            #SBATCH --nodes=1
+            #SBATCH --ntasks-per-node=40
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=15:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE=bin/ORIGIN/symphonie.exe
+            NPROC=40
+            INPUT=notebook_list.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load intel/2019.u5
+            module load hdf5/1.8.15p1_intel_64
+            module load mvapich2/2.3.6_intel
+            module load netcdf/4.6.1_intel_64
+            module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC $EXE $INPUT
 
 
 Next, **empty the** ``tmp`` **folder**:

@@ -278,43 +278,89 @@ Your job file should now look like the following:
 
 .. dropdown:: ``job-production.sh``
 
-   .. code:: bash
+   .. tab-set::
 
-      #!/bin/bash
+      .. tab-item:: CALMIP
 
-      #SBATCH --job-name=production
-      #SBATCH --nodes=2
-      #SBATCH --ntasks-per-node=36
-      #SBATCH --ntasks-per-core=1
-      #SBATCH --time=20:00
-      #SBATCH --output=slurm_%x-id_%j.out
-      #SBATCH --error=slurm_%x-id_%j.err
+         .. code:: bash
 
-      EXE1=regcm/bin/regcmMPICLM45_OASIS
-      NPROC1=36
-      INPUT1=regcm/namelist-cpl_production.f
-      #
-      EXE2=symphonie/bin/OASIS/symphonie.exe
-      NPROC2=36
-      INPUT2=symphonie/notebook_list.f
+            #!/bin/bash
 
-      ulimit -s unlimited
+            #SBATCH --job-name=production
+            #SBATCH --nodes=2
+            #SBATCH --ntasks-per-node=36
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=20:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
 
-      module purge
-      module load intel/18.2
-      module load intelmpi/18.2
-      module load hdf5/1.10.2-intelmpi
-      module load netcdf/4.7.4-intelmpi
-      module load pnetcdf/1.9.0-intelmpi
-      module list 2>./run_modules
+            EXE1=regcm/bin/regcmMPICLM45_OASIS
+            NPROC1=36
+            INPUT1=regcm/namelist-cpl_production.f
+            #
+            EXE2=symphonie/bin/OASIS/symphonie.exe
+            NPROC2=36
+            INPUT2=symphonie/notebook_list.f
 
-      cp -p oasis/{areas,grids,masks}.nc .
-      cp -p oasis/restart_20180710/*.nc .
-      cp -p oasis/rmp*.nc .
+            ulimit -s unlimited
 
-      echo -e "Launching...\n"
+            module purge
+            module load intel/18.2
+            module load intelmpi/18.2
+            module load hdf5/1.10.2-intelmpi
+            module load netcdf/4.7.4-intelmpi
+            module load pnetcdf/1.9.0-intelmpi
+            module list 2>./run_modules
 
-      mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
+            cp -p oasis/{areas,grids,masks}.nc .
+            cp -p oasis/restart_20180710/*.nc .
+            cp -p oasis/rmp*.nc .
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
+
+
+      .. tab-item:: HILO
+
+         .. code:: bash
+
+            #!/bin/bash
+
+            #SBATCH --job-name=production
+            #SBATCH --partition=scalable
+            #SBATCH --nodes=2
+            #SBATCH --ntasks-per-node=40
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=20:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE1=regcm/bin/regcmMPICLM45_OASIS
+            NPROC1=40
+            INPUT1=regcm/namelist-cpl_production.f
+            #
+            EXE2=symphonie/bin/OASIS/symphonie.exe
+            NPROC2=40
+            INPUT2=symphonie/notebook_list.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load intel/2019.u5
+            module load hdf5/1.8.15p1_intel_64
+            module load mvapich2/2.3.6_intel
+            module load netcdf/4.6.1_intel_64
+            module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            cp -p oasis/{areas,grids,masks}.nc .
+            cp -p oasis/restart_20180710/*.nc .
+            cp -p oasis/rmp*.nc .
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
 For the rest, the setup should be the same as for the spinup simulation, so,

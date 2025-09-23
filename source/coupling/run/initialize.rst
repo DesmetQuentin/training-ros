@@ -134,39 +134,81 @@ Then, **edit** ``job.sh`` and modify/check the following points:
 
 .. dropdown:: ``job.sh``
 
-   .. code:: bash
+   .. tab-set::
 
-      #!/bin/bash
+      .. tab-item:: CALMIP
 
-      #SBATCH --job-name=init
-      #SBATCH --nodes=2
-      #SBATCH --ntasks-per-node=36
-      #SBATCH --ntasks-per-core=1
-      #SBATCH --time=15:00
-      #SBATCH --output=slurm_%x-id_%j.out
-      #SBATCH --error=slurm_%x-id_%j.err
+         .. code:: bash
 
-      EXE1=regcm/bin/regcmMPICLM45_OASIS
-      NPROC1=36
-      INPUT1=regcm/namelist-cpl_init.f
-      #
-      EXE2=symphonie/bin/OASIS/symphonie.exe
-      NPROC2=36
-      INPUT2=symphonie/notebook_list.f
+            #!/bin/bash
 
-      ulimit -s unlimited
+            #SBATCH --job-name=init
+            #SBATCH --nodes=2
+            #SBATCH --ntasks-per-node=36
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=15:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
 
-      module purge
-      module load intel/18.2
-      module load intelmpi/18.2
-      module load hdf5/1.10.2-intelmpi
-      module load netcdf/4.7.4-intelmpi
-      module load pnetcdf/1.9.0-intelmpi
-      module list 2>./run_modules
+            EXE1=regcm/bin/regcmMPICLM45_OASIS
+            NPROC1=36
+            INPUT1=regcm/namelist-cpl_init.f
+            #
+            EXE2=symphonie/bin/OASIS/symphonie.exe
+            NPROC2=36
+            INPUT2=symphonie/notebook_list.f
 
-      echo -e "Launching...\n"
+            ulimit -s unlimited
 
-      mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
+            module purge
+            module load intel/18.2
+            module load intelmpi/18.2
+            module load hdf5/1.10.2-intelmpi
+            module load netcdf/4.7.4-intelmpi
+            module load pnetcdf/1.9.0-intelmpi
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
+
+
+      .. tab-item:: HILO
+
+         .. code:: bash
+
+            #!/bin/bash
+
+            #SBATCH --job-name=init
+            #SBATCH --partition=scalable
+            #SBATCH --nodes=2
+            #SBATCH --ntasks-per-node=40
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=15:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE1=regcm/bin/regcmMPICLM45_OASIS
+            NPROC1=40
+            INPUT1=regcm/namelist-cpl_init.f
+            #
+            EXE2=symphonie/bin/OASIS/symphonie.exe
+            NPROC2=40
+            INPUT2=symphonie/notebook_list.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load intel/2019.u5
+            module load hdf5/1.8.15p1_intel_64
+            module load mvapich2/2.3.6_intel
+            module load netcdf/4.6.1_intel_64
+            module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
 Make also sure that ``symphonie/notebook_list.f`` **points to the right notebook

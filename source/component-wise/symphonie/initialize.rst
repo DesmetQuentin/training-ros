@@ -88,7 +88,34 @@ Then, **edit the** ``job.sh`` **batch script**:
 
          .. code:: bash
 
-            TODO
+            #!/bin/bash
+
+            #SBATCH --job-name=init
+            #SBATCH --partition=scalable
+            #SBATCH --nodes=2
+            #SBATCH --ntasks-per-node=40
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=15:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE=bin/ORIGIN/symphonie.exe
+            NPROC=48
+            INPUT=notebook_list.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load intel/2019.u5
+            module load hdf5/1.8.15p1_intel_64
+            module load mvapich2/2.3.6_intel
+            module load netcdf/4.6.1_intel_64
+            module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC $EXE $INPUT
 
 
 Next, **submit the job** as follows
@@ -154,7 +181,10 @@ They are the two files we intended to generate. **Head** ``description_domaine.n
 
       .. code:: console
 
-         TODO
+         $ head -n3 description_domaine.next
+         8     6    40           ! Number of sub-domains in each direction & nbdom
+               300         300  ! iglb jglb
+         ------------------------ TODO: check
 
 
 Three numbers are displayed on the first line: the two first are the initial grid

@@ -54,7 +54,34 @@ For this uncoupled run of RegCM, we especially care about the following paramete
 
          .. code:: bash
 
-            TODO
+            #!/bin/bash
+
+            #SBATCH --job-name=regcm
+            #SBATCH --partition=scalable
+            #SBATCH --nodes=1
+            #SBATCH --ntasks-per-node=40
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=10:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE=bin/regcmMPICLM45
+            NPROC=40
+            INPUT=namelist.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load intel/2019.u5
+            module load hdf5/1.8.15p1_intel_64
+            module load mvapich2/2.3.6_intel
+            module load netcdf/4.6.1_intel_64
+            module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC $EXE $INPUT
 
 
 After ``job.sh`` is set up, we can **submit** it as follows:

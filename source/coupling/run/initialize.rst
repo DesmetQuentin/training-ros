@@ -124,19 +124,19 @@ When you have configured everything as guided above, **save the** ``namcouple``
    cp namcouple oasis/namcouple-init
 
 
-Then, **edit** ``job.sh`` and modify/check the following points:
+.. tab-set::
 
-* Set ``--job-name`` to ``init``.
-* Set ``NPROC1`` and ``NPROC2`` to 36, refering to the allocation for RegCM and SYMPHONIE, respectively.
-* Set the ``--nodes`` batch parameter to 2.
-* Point to the right ``namelist-cpl_init.f`` for ``INPUT1``.
-* Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
+   .. tab-item:: CALMIP
 
-.. dropdown:: ``job.sh``
+      Then, **edit** ``job.sh`` and modify/check the following points:
 
-   .. tab-set::
+      * Set ``--job-name`` to ``init``.
+      * Set ``NPROC1`` and ``NPROC2`` to 36, refering to the allocation for RegCM and SYMPHONIE, respectively.
+      * Set the ``--nodes`` batch parameter to 2.
+      * Point to the right ``namelist-cpl_init.f`` for ``INPUT1``.
+      * Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
 
-      .. tab-item:: CALMIP
+      .. dropdown:: ``job.sh``
 
          .. code:: bash
 
@@ -173,7 +173,17 @@ Then, **edit** ``job.sh`` and modify/check the following points:
             mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
-      .. tab-item:: HILO
+   .. tab-item:: HILO
+
+      Then, **edit** ``job.sh`` and modify/check the following points:
+
+      * Set ``--job-name`` to ``init``.
+      * Set ``NPROC1`` and ``NPROC2`` to 40, refering to the allocation for RegCM and SYMPHONIE, respectively.
+      * Set the ``--nodes`` batch parameter to 2.
+      * Point to the right ``namelist-cpl_init.f`` for ``INPUT1``.
+      * Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
+
+      .. dropdown:: ``job.sh``
 
          .. code:: bash
 

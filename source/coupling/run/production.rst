@@ -274,13 +274,13 @@ Once everything is is set up, **save the** ``namcouple`` **file** with:
    cp namcouple oasis/namcouple-production
 
 
-Your job file should now look like the following:
+.. tab-set::
 
-.. dropdown:: ``job-production.sh``
+   .. tab-item:: CALMIP
 
-   .. tab-set::
+      Your job file should now look like the following:
 
-      .. tab-item:: CALMIP
+      .. dropdown:: ``job-production.sh``
 
          .. code:: bash
 
@@ -312,8 +312,8 @@ Your job file should now look like the following:
             module load pnetcdf/1.9.0-intelmpi
             module list 2>./run_modules
 
-            cp -p oasis/{areas,grids,masks}.nc .
             cp -p oasis/restart_20180710/*.nc .
+            cp -p oasis/{areas,grids,masks}.nc .
             cp -p oasis/rmp*.nc .
 
             echo -e "Launching...\n"
@@ -321,7 +321,11 @@ Your job file should now look like the following:
             mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
-      .. tab-item:: HILO
+   .. tab-item:: HILO
+
+      Your job file should now look like the following:
+
+      .. dropdown:: ``job-production.sh``
 
          .. code:: bash
 

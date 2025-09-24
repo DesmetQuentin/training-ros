@@ -6,18 +6,18 @@ Let us now **edit the** ``job.sh`` **batch script**. In the header, lines starti
 then consists of ``bash`` language commands to prepare and launch RegCM, once on the
 computing nodes' session.
 
-For this uncoupled run of RegCM, we especially care about the following parameters:
+.. tab-set::
 
-* The ``--nodes`` batch parameter set to 1;
-* ``--ntasks-per-node`` and ``NPROC`` must be identical and adapted to the supercomputer architecture (36 on CALMIP; 40 on HILO);
-* The ``EXE`` variable set to ``bin/regcmMPICLM45``.
+   .. tab-item:: CALMIP
+
+      For this uncoupled run of RegCM, we especially care about the following parameters:
+
+      * The ``--nodes`` batch parameter set to 1;
+      * ``--ntasks-per-node`` and ``NPROC`` must be identical and adapted to the supercomputer architecture: 36 on CALMIP;
+      * The ``EXE`` variable set to ``bin/regcmMPICLM45``.
 
 
-.. dropdown:: ``job.sh``
-
-   .. tab-set::
-
-      .. tab-item:: CALMIP
+      .. dropdown:: ``job.sh``
 
          .. code:: bash
 
@@ -50,7 +50,16 @@ For this uncoupled run of RegCM, we especially care about the following paramete
             mpiexec.hydra -np $NPROC $EXE $INPUT
 
 
-      .. tab-item:: HILO
+   .. tab-item:: HILO
+
+      For this uncoupled run of RegCM, we especially care about the following parameters:
+
+      * The ``--nodes`` batch parameter set to 1;
+      * ``--ntasks-per-node`` and ``NPROC`` must be identical and adapted to the supercomputer architecture: 40 on HILO;
+      * The ``EXE`` variable set to ``bin/regcmMPICLM45``.
+
+
+      .. dropdown:: ``job.sh``
 
          .. code:: bash
 

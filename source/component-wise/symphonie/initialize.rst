@@ -39,19 +39,19 @@ following **notebook parameters**:
 And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editing**
 ``notebook_list.f``.
 
-Then, **edit the** ``job.sh`` **batch script**:
+.. tab-set::
 
-* Set ``--job-name`` to ``init``.
-* Set ``NPROC`` to 42 on CALMIP (48 on HILO): this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
-* Set the ``--nodes`` batch parameter to 2, so it can contains all needed CPUs.
-* Set ``EXE`` to ``bin/ORIGIN/symphonie.exe``.
+   .. tab-item:: CALMIP
+
+      Then, **edit the** ``job.sh`` **batch script**:
+
+      * Set ``--job-name`` to ``init``.
+      * Set ``NPROC`` to 42 on CALMIP: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
+      * Set the ``--nodes`` batch parameter to 2, so it can contains all needed CPUs.
+      * Set ``EXE`` to ``bin/ORIGIN/symphonie.exe``.
 
 
-.. dropdown:: ``job.sh``
-
-   .. tab-set::
-
-      .. tab-item:: CALMIP
+      .. dropdown:: ``job.sh``
 
          .. code:: bash
 
@@ -84,7 +84,17 @@ Then, **edit the** ``job.sh`` **batch script**:
             mpiexec.hydra -np $NPROC $EXE $INPUT
 
 
-      .. tab-item:: HILO
+   .. tab-item:: HILO
+
+      Then, **edit the** ``job.sh`` **batch script**:
+
+      * Set ``--job-name`` to ``init``.
+      * Set ``NPROC`` to 48 on HILO: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
+      * Set the ``--nodes`` batch parameter to 2, so it can contains all needed CPUs.
+      * Set ``EXE`` to ``bin/ORIGIN/symphonie.exe``.
+
+
+      .. dropdown:: ``job.sh``
 
          .. code:: bash
 

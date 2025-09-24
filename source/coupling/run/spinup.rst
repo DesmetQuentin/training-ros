@@ -286,13 +286,13 @@ Once all of this is set up, **save the** ``namcouple`` **file** with:
    cp namcouple oasis/namcouple-spinup
 
 
-And now, ``job-spinup.sh`` should now look like this:
+.. tab-set::
 
-.. dropdown:: ``job-spinup.sh``
+   .. tab-item:: CALMIP
 
-   .. tab-set::
+      And now, ``job-spinup.sh`` should now look like this:
 
-      .. tab-item:: CALMIP
+      .. dropdown:: ``job-spinup.sh``
 
          .. code:: bash
 
@@ -324,15 +324,19 @@ And now, ``job-spinup.sh`` should now look like this:
             module load pnetcdf/1.9.0-intelmpi
             module list 2>./run_modules
 
-            cp -p oasis/{areas,grids,masks}.nc .
             cp -p oasis/restart_20180703/*.nc .
+            cp -p oasis/{areas,grids,masks}.nc .
 
             echo -e "Launching...\n"
 
             mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
-      .. tab-item:: HILO
+   .. tab-item:: HILO
+
+      And now, ``job-spinup.sh`` should now look like this:
+
+      .. dropdown:: ``job-spinup.sh``
 
          .. code:: bash
 

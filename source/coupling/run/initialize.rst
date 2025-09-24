@@ -180,11 +180,9 @@ Then, **edit** ``job.sh`` and modify/check the following points:
             #!/bin/bash
 
             #SBATCH --job-name=init
-            #SBATCH --partition=scalable
-            #SBATCH --nodes=2
-            #SBATCH --ntasks-per-node=40
-            #SBATCH --ntasks-per-core=1
-            #SBATCH --time=15:00
+            #SBATCH --ntasks=80
+            #SBATCH --cpus-per-task=1
+            #SBATCH --time=25:00
             #SBATCH --output=slurm_%x-id_%j.out
             #SBATCH --error=slurm_%x-id_%j.err
 
@@ -199,6 +197,7 @@ Then, **edit** ``job.sh`` and modify/check the following points:
             ulimit -s unlimited
 
             module purge
+            module load slurm/21.08.5
             module load intel/2019.u5
             module load hdf5/1.8.15p1_intel_64
             module load mvapich2/2.3.6_intel

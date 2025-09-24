@@ -75,11 +75,9 @@ Then, **edit the** ``job.sh`` **batch script**:
             #!/bin/bash
 
             #SBATCH --job-name=symphonie
-            #SBATCH --partition=scalable
-            #SBATCH --nodes=1
-            #SBATCH --ntasks-per-node=40
-            #SBATCH --ntasks-per-core=1
-            #SBATCH --time=15:00
+            #SBATCH --ntasks=40
+            #SBATCH --cpus-per-task=1
+            #SBATCH --time=20:00
             #SBATCH --output=slurm_%x-id_%j.out
             #SBATCH --error=slurm_%x-id_%j.err
 
@@ -90,6 +88,7 @@ Then, **edit the** ``job.sh`` **batch script**:
             ulimit -s unlimited
 
             module purge
+            module load slurm/21.08.5
             module load intel/2019.u5
             module load hdf5/1.8.15p1_intel_64
             module load mvapich2/2.3.6_intel

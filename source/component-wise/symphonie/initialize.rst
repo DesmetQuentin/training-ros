@@ -91,11 +91,9 @@ Then, **edit the** ``job.sh`` **batch script**:
             #!/bin/bash
 
             #SBATCH --job-name=init
-            #SBATCH --partition=scalable
-            #SBATCH --nodes=2
-            #SBATCH --ntasks-per-node=40
-            #SBATCH --ntasks-per-core=1
-            #SBATCH --time=15:00
+            #SBATCH --ntasks=48
+            #SBATCH --cpus-per-task=1
+            #SBATCH --time=20:00
             #SBATCH --output=slurm_%x-id_%j.out
             #SBATCH --error=slurm_%x-id_%j.err
 
@@ -106,6 +104,7 @@ Then, **edit the** ``job.sh`` **batch script**:
             ulimit -s unlimited
 
             module purge
+            module load slurm/21.08.5
             module load intel/2019.u5
             module load hdf5/1.8.15p1_intel_64
             module load mvapich2/2.3.6_intel
@@ -172,8 +171,8 @@ They are the two files we intended to generate. **Head** ``description_domaine.n
       .. code:: console
 
          $ head -n3 description_domaine.next
-         7     6    36           ! Number of sub-domains in each direction & nbdom
-               300         300  ! iglb jglb
+              7     6    36           ! Number of sub-domains in each direction & nbdom
+                  300         300  ! iglb jglb
          ------------------------
 
 
@@ -182,9 +181,9 @@ They are the two files we intended to generate. **Head** ``description_domaine.n
       .. code:: console
 
          $ head -n3 description_domaine.next
-         8     6    40           ! Number of sub-domains in each direction & nbdom
-               300         300  ! iglb jglb
-         ------------------------ TODO: check
+              8     6    40           ! Number of sub-domains in each direction & nbdom
+                  300         300  ! iglb jglb
+         ------------------------
 
 
 Three numbers are displayed on the first line: the two first are the initial grid

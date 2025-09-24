@@ -267,7 +267,7 @@ below.
       ###########################################################################
 
 
-Once everythin is is set up, **save the** ``namcouple`` **file** with:
+Once everything is is set up, **save the** ``namcouple`` **file** with:
 
 .. code:: bash
 
@@ -328,11 +328,9 @@ Your job file should now look like the following:
             #!/bin/bash
 
             #SBATCH --job-name=production
-            #SBATCH --partition=scalable
-            #SBATCH --nodes=2
-            #SBATCH --ntasks-per-node=40
-            #SBATCH --ntasks-per-core=1
-            #SBATCH --time=20:00
+            #SBATCH --ntasks=80
+            #SBATCH --cpus-per-task=1
+            #SBATCH --time=25:00
             #SBATCH --output=slurm_%x-id_%j.out
             #SBATCH --error=slurm_%x-id_%j.err
 
@@ -347,6 +345,7 @@ Your job file should now look like the following:
             ulimit -s unlimited
 
             module purge
+            module load slurm/21.08.5
             module load intel/2019.u5
             module load hdf5/1.8.15p1_intel_64
             module load mvapich2/2.3.6_intel
@@ -354,8 +353,8 @@ Your job file should now look like the following:
             module load PnetCDF/1.9.0_intel_64
             module list 2>./run_modules
 
-            cp -p oasis/{areas,grids,masks}.nc .
             cp -p oasis/restart_20180710/*.nc .
+            cp -p oasis/{areas,grids,masks}.nc .
             cp -p oasis/rmp*.nc .
 
             echo -e "Launching...\n"

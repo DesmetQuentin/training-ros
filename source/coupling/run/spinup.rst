@@ -91,7 +91,8 @@ Then, let us configure our spinup simulation by following the dropdown sections 
 .. dropdown:: 3. Configuring air-sea flux coupling for the models
 
    In comparison with the :doc:`initialization <initialize>` when only exporting fields
-   were enabled, we now **enable exporting and importing fields**.
+   were enabled, we now **enable exporting and importing fields**. Adapt ``oasisparam``
+   for RegCM and ``notebook_oasis_generic.f`` for SYMPHONIE accordingly.
 
    In addition, we need to tell SYMPHONIE that it will retrieve its sea-surface fluxes
    from OASIS, instead of using external data. This is done by modifying
@@ -262,7 +263,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
         -1 0
         BILINEAR LR SCALAR LATLON 1
       #
-        RCM_SLP SYM_SLP 1 3600 2 restart_SLP.nc EXPOUT
+        RCM_SLP SYM_SLP 1 3600 2 restart_SLP.nc EXPORTED
         60 60 300 300 rcem symt LAG=+180
         R  0  R  0
         LOCTRANS SCRIPR
@@ -285,7 +286,7 @@ Once all of this is set up, **save the** ``namcouple`` **file** with:
    cp namcouple oasis/namcouple-spinup
 
 
-Before submitting the job, ``job-spinup.sh`` should now look like this:
+And now, ``job-spinup.sh`` should now look like this:
 
 .. dropdown:: ``job-spinup.sh``
 
@@ -338,11 +339,9 @@ Before submitting the job, ``job-spinup.sh`` should now look like this:
             #!/bin/bash
 
             #SBATCH --job-name=spinup
-            #SBATCH --partition=scalable
-            #SBATCH --nodes=2
-            #SBATCH --ntasks-per-node=40
-            #SBATCH --ntasks-per-core=1
-            #SBATCH --time=20:00
+            #SBATCH --ntasks=80
+            #SBATCH --cpus-per-task=1
+            #SBATCH --time=25:00
             #SBATCH --output=slurm_%x-id_%j.out
             #SBATCH --error=slurm_%x-id_%j.err
 
@@ -357,6 +356,7 @@ Before submitting the job, ``job-spinup.sh`` should now look like this:
             ulimit -s unlimited
 
             module purge
+            module load slurm/21.08.5
             module load intel/2019.u5
             module load hdf5/1.8.15p1_intel_64
             module load mvapich2/2.3.6_intel
@@ -364,8 +364,8 @@ Before submitting the job, ``job-spinup.sh`` should now look like this:
             module load PnetCDF/1.9.0_intel_64
             module list 2>./run_modules
 
-            cp -p oasis/{areas,grids,masks}.nc .
             cp -p oasis/restart_20180703/*.nc .
+            cp -p oasis/{areas,grids,masks}.nc .
 
             echo -e "Launching...\n"
 

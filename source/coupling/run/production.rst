@@ -277,7 +277,7 @@ Once everything is is set up, **save the** ``namcouple`` **file** with:
 Your job file should now look like the following:
 
 .. dropdown:: ``job-production.sh``
-   
+
    .. tab-set::
 
       .. tab-item:: CALMIP
@@ -372,3 +372,17 @@ To end the simulation flow properly, let us simply **save the last restart files
 
    mkdir oasis/restart_20180717
    mv restart*.nc oasis/restart_20180717/
+
+
+And our first coupled simulation is finished! Now, please **be curious about the
+various outputs you enabled** for this run, e.g. :
+
+* the variable you chose for SYMPHONIE's ``GRAPHICS`` outputs;
+* and the 3D radiative transfer variables of RegCM's ``RAD`` file.
+
+
+Also notice in SYMPHONIE's ``OFFLINE`` outputs the signature in surface temperature
+of the **South Vietnam Upwelling**, which is particularly intense at this time of the
+year 2018. Check that this signature is also present in RegCM's ``ts`` variable of the
+``SRF`` file, differing from ``ts`` in the initial ``ICBC`` file we preprocessed from
+ERA5.

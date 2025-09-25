@@ -136,6 +136,7 @@ When you have configured everything as guided above, **save the** ``namcouple``
       * Point to the right ``namelist-cpl_init.f`` for ``INPUT1``.
       * Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
 
+
       .. dropdown:: ``job.sh``
 
          .. code:: bash
@@ -179,11 +180,22 @@ When you have configured everything as guided above, **save the** ``namcouple``
 
       * Set ``--job-name`` to ``init``.
       * Set ``NPROC1`` and ``NPROC2`` to 40, refering to the allocation for RegCM and SYMPHONIE, respectively.
-      * Set the ``--nodes`` batch parameter to 2.
+      * Set ``--ntasks`` to the sum of ``NPROC1`` and ``NPROC2``, here 80.
       * Point to the right ``namelist-cpl_init.f`` for ``INPUT1``.
       * Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
 
-      .. dropdown:: ``job.sh``
+
+      .. tip::
+
+         In case of two much traffic on the computing nodes, you may decrease the CPU
+         allocation for RegCM to, say, 20. For SYMPHONIE, however, keep in mind that
+         you cannot change the CPU allocation as easily because of the optimization with
+         land cells that we performed.
+
+         Also: adapt ``--ntasks`` accordingly!
+
+
+      .. dropdown:: ``job.sh`
 
          .. code:: bash
 

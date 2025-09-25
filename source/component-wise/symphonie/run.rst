@@ -73,8 +73,7 @@ First, change/check the values of the following **notebook parameters**:
       Then, **edit the** ``job.sh`` **batch script**:
 
       * Set the ``--job-name`` batch parameter to ``symphonie``.
-      * Set ``NPROC`` as indicated in the header of ``description_domaine.next``.
-      * Accordingly, set the ``--nodes`` batch parameter back to 1.
+      * Set ``NPROC`` and ``--ntasks`` as indicated in the header of ``description_domaine.next``.
       * Check that ``EXE`` is ``bin/ORIGIN/symphonie.exe``.
 
 

@@ -46,7 +46,7 @@ And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editi
       Then, **edit the** ``job.sh`` **batch script**:
 
       * Set ``--job-name`` to ``init``.
-      * Set ``NPROC`` to 42 on CALMIP: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
+      * Set ``NPROC`` to 42: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
       * Set the ``--nodes`` batch parameter to 2, so it can contains all needed CPUs.
       * Set ``EXE`` to ``bin/ORIGIN/symphonie.exe``.
 
@@ -89,8 +89,7 @@ And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editi
       Then, **edit the** ``job.sh`` **batch script**:
 
       * Set ``--job-name`` to ``init``.
-      * Set ``NPROC`` to 48 on HILO: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
-      * Set the ``--nodes`` batch parameter to 2, so it can contains all needed CPUs.
+      * Set ``NPROC`` and ``--ntasks`` to 48: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
       * Set ``EXE`` to ``bin/ORIGIN/symphonie.exe``.
 
 

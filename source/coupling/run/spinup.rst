@@ -286,13 +286,13 @@ Once all of this is set up, **save the** ``namcouple`` **file** with:
    cp namcouple oasis/namcouple-spinup
 
 
-.. tab-set::
+And now, ``job-spinup.sh`` should now look like this:
 
-   .. tab-item:: CALMIP
+.. dropdown:: ``job-spinup.sh``
 
-      And now, ``job-spinup.sh`` should now look like this:
+   .. tab-set::
 
-      .. dropdown:: ``job-spinup.sh``
+      .. tab-item:: CALMIP
 
          .. code:: bash
 
@@ -332,11 +332,7 @@ Once all of this is set up, **save the** ``namcouple`` **file** with:
             mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
 
 
-   .. tab-item:: HILO
-
-      And now, ``job-spinup.sh`` should now look like this:
-
-      .. dropdown:: ``job-spinup.sh``
+      .. tab-item:: HILO
 
          .. code:: bash
 

@@ -13,7 +13,7 @@ computing nodes' session.
       For this uncoupled run of RegCM, we especially care about the following parameters:
 
       * The ``--nodes`` batch parameter set to 1;
-      * ``--ntasks-per-node`` and ``NPROC`` must be identical and adapted to the supercomputer architecture: 36 on CALMIP;
+      * ``--ntasks-per-node`` and ``NPROC`` must be identical and equal to 36, i.e., the number of CPU per node on CALMIP;
       * The ``EXE`` variable set to ``bin/regcmMPICLM45``.
 
 
@@ -54,8 +54,7 @@ computing nodes' session.
 
       For this uncoupled run of RegCM, we especially care about the following parameters:
 
-      * The ``--nodes`` batch parameter set to 1;
-      * ``--ntasks-per-node`` and ``NPROC`` must be identical and adapted to the supercomputer architecture: 40 on HILO;
+      * ``--ntasks`` and ``NPROC`` must be identical; let us set them to 40, which is common node size on HILO;
       * The ``EXE`` variable set to ``bin/regcmMPICLM45``.
 
 

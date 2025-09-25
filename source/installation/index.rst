@@ -15,16 +15,6 @@ be loaded after you have ``source`` d the ``config.sh`` script:
 
 .. tab-set::
 
-   .. tab-item:: CALMIP
-
-      .. code:: console
-
-         $ module list
-         Currently Loaded Modulefiles:
-           1) intel/18.2               3) hdf5/1.10.2-intelmpi     5) pnetcdf/1.9.0-intelmpi
-           2) intelmpi/18.2            4) netcdf/4.7.4-intelmpi
-
-
    .. tab-item:: HILO
 
       .. code:: console
@@ -33,6 +23,16 @@ be loaded after you have ``source`` d the ``config.sh`` script:
          Currently Loaded Modulefiles:
            1) intel/2019.u5            3) mvapich2/2.3.6_intel     5) PnetCDF/1.9.0_intel_64
            2) hdf5/1.8.15p1_intel_64   4) netcdf/4.6.1_intel_64
+
+
+   .. tab-item:: CALMIP
+
+      .. code:: console
+
+         $ module list
+         Currently Loaded Modulefiles:
+           1) intel/18.2               3) hdf5/1.10.2-intelmpi     5) pnetcdf/1.9.0-intelmpi
+           2) intelmpi/18.2            4) netcdf/4.7.4-intelmpi
 
 
 If they are not loaded yet, you may load each of them manually using

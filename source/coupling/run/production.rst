@@ -280,47 +280,6 @@ Your job file should now look like the following:
 
    .. tab-set::
 
-      .. tab-item:: CALMIP
-
-         .. code:: bash
-
-            #!/bin/bash
-
-            #SBATCH --job-name=production
-            #SBATCH --nodes=2
-            #SBATCH --ntasks-per-node=36
-            #SBATCH --ntasks-per-core=1
-            #SBATCH --time=20:00
-            #SBATCH --output=slurm_%x-id_%j.out
-            #SBATCH --error=slurm_%x-id_%j.err
-
-            EXE1=regcm/bin/regcmMPICLM45_OASIS
-            NPROC1=36
-            INPUT1=regcm/namelist-cpl_production.f
-            #
-            EXE2=symphonie/bin/OASIS/symphonie.exe
-            NPROC2=36
-            INPUT2=symphonie/notebook_list.f
-
-            ulimit -s unlimited
-
-            module purge
-            module load intel/18.2
-            module load intelmpi/18.2
-            module load hdf5/1.10.2-intelmpi
-            module load netcdf/4.7.4-intelmpi
-            module load pnetcdf/1.9.0-intelmpi
-            module list 2>./run_modules
-
-            cp -p oasis/restart_20180710/*.nc .
-            cp -p oasis/{areas,grids,masks}.nc .
-            cp -p oasis/rmp*.nc .
-
-            echo -e "Launching...\n"
-
-            mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
-
-
       .. tab-item:: HILO
 
          .. code:: bash
@@ -351,6 +310,47 @@ Your job file should now look like the following:
             module load mvapich2/2.3.6_intel
             module load netcdf/4.6.1_intel_64
             module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            cp -p oasis/restart_20180710/*.nc .
+            cp -p oasis/{areas,grids,masks}.nc .
+            cp -p oasis/rmp*.nc .
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
+
+
+      .. tab-item:: CALMIP
+
+         .. code:: bash
+
+            #!/bin/bash
+
+            #SBATCH --job-name=production
+            #SBATCH --nodes=2
+            #SBATCH --ntasks-per-node=36
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=20:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE1=regcm/bin/regcmMPICLM45_OASIS
+            NPROC1=36
+            INPUT1=regcm/namelist-cpl_production.f
+            #
+            EXE2=symphonie/bin/OASIS/symphonie.exe
+            NPROC2=36
+            INPUT2=symphonie/notebook_list.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load intel/18.2
+            module load intelmpi/18.2
+            module load hdf5/1.10.2-intelmpi
+            module load netcdf/4.7.4-intelmpi
+            module load pnetcdf/1.9.0-intelmpi
             module list 2>./run_modules
 
             cp -p oasis/restart_20180710/*.nc .

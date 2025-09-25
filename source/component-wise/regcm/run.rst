@@ -8,6 +8,47 @@ computing nodes' session.
 
 .. tab-set::
 
+   .. tab-item:: HILO
+
+      For this uncoupled run of RegCM, we especially care about the following parameters:
+
+      * ``--ntasks`` and ``NPROC`` must be identical; let us set them to 40, which is common node size on HILO;
+      * The ``EXE`` variable set to ``bin/regcmMPICLM45``.
+
+
+      .. dropdown:: ``job.sh``
+
+         .. code:: bash
+
+            #!/bin/bash
+
+            #SBATCH --job-name=regcm
+            #SBATCH --ntasks=40
+            #SBATCH --cpus-per-task=1
+            #SBATCH --time=10:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE=bin/regcmMPICLM45
+            NPROC=40
+            INPUT=namelist.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load slurm/21.08.5
+            module load intel/2019.u5
+            module load hdf5/1.8.15p1_intel_64
+            module load mvapich2/2.3.6_intel
+            module load netcdf/4.6.1_intel_64
+            module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC $EXE $INPUT
+
+
    .. tab-item:: CALMIP
 
       For this uncoupled run of RegCM, we especially care about the following parameters:
@@ -43,47 +84,6 @@ computing nodes' session.
             module load hdf5/1.10.2-intelmpi
             module load netcdf/4.7.4-intelmpi
             module load pnetcdf/1.9.0-intelmpi
-            module list 2>./run_modules
-
-            echo -e "Launching...\n"
-
-            mpiexec.hydra -np $NPROC $EXE $INPUT
-
-
-   .. tab-item:: HILO
-
-      For this uncoupled run of RegCM, we especially care about the following parameters:
-
-      * ``--ntasks`` and ``NPROC`` must be identical; let us set them to 40, which is common node size on HILO;
-      * The ``EXE`` variable set to ``bin/regcmMPICLM45``.
-
-
-      .. dropdown:: ``job.sh``
-
-         .. code:: bash
-
-            #!/bin/bash
-
-            #SBATCH --job-name=regcm
-            #SBATCH --ntasks=40
-            #SBATCH --cpus-per-task=1
-            #SBATCH --time=10:00
-            #SBATCH --output=slurm_%x-id_%j.out
-            #SBATCH --error=slurm_%x-id_%j.err
-
-            EXE=bin/regcmMPICLM45
-            NPROC=40
-            INPUT=namelist.f
-
-            ulimit -s unlimited
-
-            module purge
-            module load slurm/21.08.5
-            module load intel/2019.u5
-            module load hdf5/1.8.15p1_intel_64
-            module load mvapich2/2.3.6_intel
-            module load netcdf/4.6.1_intel_64
-            module load PnetCDF/1.9.0_intel_64
             module list 2>./run_modules
 
             echo -e "Launching...\n"

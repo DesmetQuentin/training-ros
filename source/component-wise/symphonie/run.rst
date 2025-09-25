@@ -25,6 +25,48 @@ First, change/check the values of the following **notebook parameters**:
 
 .. tab-set::
 
+   .. tab-item:: HILO
+
+      Then, **edit the** ``job.sh`` **batch script**:
+
+      * Set the ``--job-name`` batch parameter to ``symphonie``.
+      * Set ``NPROC`` and ``--ntasks`` as indicated in the header of ``description_domaine.next``.
+      * Check that ``EXE`` is ``bin/ORIGIN/symphonie.exe``.
+
+
+      .. dropdown:: ``job.sh``
+
+         .. code:: bash
+
+            #!/bin/bash
+
+            #SBATCH --job-name=symphonie
+            #SBATCH --ntasks=40
+            #SBATCH --cpus-per-task=1
+            #SBATCH --time=20:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE=bin/ORIGIN/symphonie.exe
+            NPROC=40
+            INPUT=notebook_list.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load slurm/21.08.5
+            module load intel/2019.u5
+            module load hdf5/1.8.15p1_intel_64
+            module load mvapich2/2.3.6_intel
+            module load netcdf/4.6.1_intel_64
+            module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC $EXE $INPUT
+
+
    .. tab-item:: CALMIP
 
       Then, **edit the** ``job.sh`` **batch script**:
@@ -61,48 +103,6 @@ First, change/check the values of the following **notebook parameters**:
             module load hdf5/1.10.2-intelmpi
             module load netcdf/4.7.4-intelmpi
             module load pnetcdf/1.9.0-intelmpi
-            module list 2>./run_modules
-
-            echo -e "Launching...\n"
-
-            mpiexec.hydra -np $NPROC $EXE $INPUT
-
-
-   .. tab-item:: HILO
-
-      Then, **edit the** ``job.sh`` **batch script**:
-
-      * Set the ``--job-name`` batch parameter to ``symphonie``.
-      * Set ``NPROC`` and ``--ntasks`` as indicated in the header of ``description_domaine.next``.
-      * Check that ``EXE`` is ``bin/ORIGIN/symphonie.exe``.
-
-
-      .. dropdown:: ``job.sh``
-
-         .. code:: bash
-
-            #!/bin/bash
-
-            #SBATCH --job-name=symphonie
-            #SBATCH --ntasks=40
-            #SBATCH --cpus-per-task=1
-            #SBATCH --time=20:00
-            #SBATCH --output=slurm_%x-id_%j.out
-            #SBATCH --error=slurm_%x-id_%j.err
-
-            EXE=bin/ORIGIN/symphonie.exe
-            NPROC=40
-            INPUT=notebook_list.f
-
-            ulimit -s unlimited
-
-            module purge
-            module load slurm/21.08.5
-            module load intel/2019.u5
-            module load hdf5/1.8.15p1_intel_64
-            module load mvapich2/2.3.6_intel
-            module load netcdf/4.6.1_intel_64
-            module load PnetCDF/1.9.0_intel_64
             module list 2>./run_modules
 
             echo -e "Launching...\n"

@@ -21,6 +21,115 @@ dependencies adapted to various setups.
 
 .. tab-set::
 
+   .. tab-item:: HILO
+
+      .. dropdown:: ``make.intel19_hilo``
+
+         .. code:: make
+
+            #
+            # Include file for OASIS3 Makefile for a Linux system using
+            # Portland Group Fortran Compiler and MPICH
+            #
+            ###############################################################################
+            #
+            # CHAN	: communication technique used in OASIS3 (MPI1/MPI2)
+            CHAN    = MPI1
+            #
+            # Paths for libraries, object files and binaries
+            #
+            # COUPLE	: path for oasis3-mct main directory
+            COUPLE  = $(OASIS)
+            #
+            # ARCHDIR       : directory created when compiling
+            ARCHDIR = $(COUPLE)/intel19_hilo
+            #
+            # MPI library (see the file /etc/modulefiles/mpi/openmpi-x86_64)
+            MPIDIR      = /work/apps/intel/mvapich2/2.3.6/
+            MPIBIN      = $(MPIDIR)/bin
+            MPI_INCLUDE = $(MPIDIR)/include
+            MPILIB      = -L$(MPIDIR)/lib
+            MPIRUN      = $(MPIBIN)/mpirun
+            #
+            # NETCDF library of the system
+            NETCDF_INCLUDE = -I/work/apps/intel_2016/netcdf/4.6.1/include -I$(PNETCDF_INC)
+            NETCDF_LIBRARY = -Wl,-rpath,/work/apps/intel_2016/netcdf/4.6.1/lib -L/work/apps/intel_2016/netcdf/4.6.1/lib -lnetcdff -lnetcdf $(PNETCDF_LIB)/libpnetcdf.a
+            #
+            # Compiling and other commands
+            MAKE        = gmake
+            F90         = $(MPIBIN)/mpifort -I$(MPI_INCLUDE)
+            F           = $(F90)
+            f90         = $(F90)
+            f           = $(F90)
+            CC          = $(MPIBIN)/mpicc -I$(MPI_INCLUDE)
+            LD          = $(MPIBIN)/mpifort $(MPI_LIB)
+            # Static libraries compilation options
+            STATOPT     =
+            # Shared libraries options
+            DYNOPT      = -fPIC
+            LDDYNOPT    = -shared
+            # Static archiver
+            AR          = ar
+            ARFLAGS     = -ruv
+            #
+            # CPP keys and compiler options
+            #
+            CPPDEF    = -Duse_comm_$(CHAN) -D__VERBOSE -DTREAT_OVERLAY
+            #
+            #
+            #F90FLAGS_1  = -g -ffree-line-length-0 -fbounds-check -fopenmp
+            F90FLAGS_1  = -g -traceback -O2 -xAVX -I. -assume byterecl
+            f90FLAGS_1  = $(F90FLAGS_1)
+            FFLAGS_1    = $(F90FLAGS_1)
+            fFLAGS_1    = $(F90FLAGS_1)
+            CCFLAGS_1   =
+            LDFLAGS     = $(F90FLAGS_1)
+            #
+            #
+            ###################
+            #
+            # Additional definitions that should not be changed
+            #
+            FLIBS		= $(NETCDF_LIBRARY)
+            # BINDIR        : directory for executables
+            BINDIR          = $(ARCHDIR)/bin
+            # LIBBUILD      : contains a directory for each library
+            LIBBUILD        = $(ARCHDIR)/build/lib
+            # INCPSMILE     : includes all *o and *mod for each library
+            INCPSMILE       = -I$(LIBBUILD)/psmile.$(CHAN) -I$(LIBBUILD)/scrip -I$(LIBBUILD)/mct
+
+            F90FLAGS  = $(F90FLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
+            f90FLAGS  = $(f90FLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
+            FFLAGS    = $(FFLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
+            fFLAGS    = $(fFLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
+            CCFLAGS   = $(CCFLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
+            LDFLAGS   = $(F90FLAGS_1)
+            #
+            #############################################################################
+
+
+
+      Then, **include** ``make.intel19_hilo`` **in** ``make.inc``:
+
+      .. dropdown:: ``make.inc``
+
+         .. code:: make
+
+            #
+            # System dependent settings
+            #
+            ##### User configurable options #####
+            #
+            # Note: The absolute path name must be indicated.
+            #
+            # Note: Choose one of these includes files and modify it according to your
+            #       local settings. Replace the currently active file with your own.
+            #
+            include $(OASIS)/util/make_dir/make.intel19_hilo
+            #
+            ### End User configurable options ###
+
+
    .. tab-item:: CALMIP
 
       Our setup is based on ``intel18``. We thus named our include file
@@ -128,115 +237,6 @@ dependencies adapted to various setups.
             #       local settings. Replace the currently active file with your own.
             #
             include $(OASIS)/util/make_dir/make.intel18_calmip
-            #
-            ### End User configurable options ###
-
-
-   .. tab-item:: HILO
-
-      .. dropdown:: ``make.intel19_hilo``
-
-         .. code:: make
-
-            #
-            # Include file for OASIS3 Makefile for a Linux system using
-            # Portland Group Fortran Compiler and MPICH
-            #
-            ###############################################################################
-            #
-            # CHAN	: communication technique used in OASIS3 (MPI1/MPI2)
-            CHAN    = MPI1
-            #
-            # Paths for libraries, object files and binaries
-            #
-            # COUPLE	: path for oasis3-mct main directory
-            COUPLE  = $(OASIS)
-            #
-            # ARCHDIR       : directory created when compiling
-            ARCHDIR = $(COUPLE)/intel19_hilo
-            #
-            # MPI library (see the file /etc/modulefiles/mpi/openmpi-x86_64)
-            MPIDIR      = /work/apps/intel/mvapich2/2.3.6/
-            MPIBIN      = $(MPIDIR)/bin
-            MPI_INCLUDE = $(MPIDIR)/include
-            MPILIB      = -L$(MPIDIR)/lib
-            MPIRUN      = $(MPIBIN)/mpirun
-            #
-            # NETCDF library of the system
-            NETCDF_INCLUDE = -I/work/apps/intel_2016/netcdf/4.6.1/include -I$(PNETCDF_INC)
-            NETCDF_LIBRARY = -Wl,-rpath,/work/apps/intel_2016/netcdf/4.6.1/lib -L/work/apps/intel_2016/netcdf/4.6.1/lib -lnetcdff -lnetcdf $(PNETCDF_LIB)/libpnetcdf.a
-            #
-            # Compiling and other commands
-            MAKE        = gmake
-            F90         = $(MPIBIN)/mpifort -I$(MPI_INCLUDE)
-            F           = $(F90)
-            f90         = $(F90)
-            f           = $(F90)
-            CC          = $(MPIBIN)/mpicc -I$(MPI_INCLUDE)
-            LD          = $(MPIBIN)/mpifort $(MPI_LIB)
-            # Static libraries compilation options
-            STATOPT     =
-            # Shared libraries options
-            DYNOPT      = -fPIC
-            LDDYNOPT    = -shared
-            # Static archiver
-            AR          = ar
-            ARFLAGS     = -ruv
-            #
-            # CPP keys and compiler options
-            #
-            CPPDEF    = -Duse_comm_$(CHAN) -D__VERBOSE -DTREAT_OVERLAY
-            #
-            #
-            #F90FLAGS_1  = -g -ffree-line-length-0 -fbounds-check -fopenmp
-            F90FLAGS_1  = -g -traceback -O2 -xAVX -I. -assume byterecl
-            f90FLAGS_1  = $(F90FLAGS_1)
-            FFLAGS_1    = $(F90FLAGS_1)
-            fFLAGS_1    = $(F90FLAGS_1)
-            CCFLAGS_1   =
-            LDFLAGS     = $(F90FLAGS_1)
-            #
-            #
-            ###################
-            #
-            # Additional definitions that should not be changed
-            #
-            FLIBS		= $(NETCDF_LIBRARY)
-            # BINDIR        : directory for executables
-            BINDIR          = $(ARCHDIR)/bin
-            # LIBBUILD      : contains a directory for each library
-            LIBBUILD        = $(ARCHDIR)/build/lib
-            # INCPSMILE     : includes all *o and *mod for each library
-            INCPSMILE       = -I$(LIBBUILD)/psmile.$(CHAN) -I$(LIBBUILD)/scrip -I$(LIBBUILD)/mct
-
-            F90FLAGS  = $(F90FLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
-            f90FLAGS  = $(f90FLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
-            FFLAGS    = $(FFLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
-            fFLAGS    = $(fFLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
-            CCFLAGS   = $(CCFLAGS_1) $(CPPDEF) $(INCPSMILE) $(NETCDF_INCLUDE)
-            LDFLAGS   = $(F90FLAGS_1)
-            #
-            #############################################################################
-
-
-
-      Then, **include** ``make.intel19_hilo`` **in** ``make.inc``:
-
-      .. dropdown:: ``make.inc``
-
-         .. code:: make
-
-            #
-            # System dependent settings
-            #
-            ##### User configurable options #####
-            #
-            # Note: The absolute path name must be indicated.
-            #
-            # Note: Choose one of these includes files and modify it according to your
-            #       local settings. Replace the currently active file with your own.
-            #
-            include $(OASIS)/util/make_dir/make.intel19_hilo
             #
             ### End User configurable options ###
 

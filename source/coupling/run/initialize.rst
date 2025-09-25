@@ -126,54 +126,6 @@ When you have configured everything as guided above, **save the** ``namcouple``
 
 .. tab-set::
 
-   .. tab-item:: CALMIP
-
-      Then, **edit** ``job.sh`` and modify/check the following points:
-
-      * Set ``--job-name`` to ``init``.
-      * Set ``NPROC1`` and ``NPROC2`` to 36, refering to the allocation for RegCM and SYMPHONIE, respectively.
-      * Set the ``--nodes`` batch parameter to 2.
-      * Point to the right ``namelist-cpl_init.f`` for ``INPUT1``.
-      * Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
-
-
-      .. dropdown:: ``job.sh``
-
-         .. code:: bash
-
-            #!/bin/bash
-
-            #SBATCH --job-name=init
-            #SBATCH --nodes=2
-            #SBATCH --ntasks-per-node=36
-            #SBATCH --ntasks-per-core=1
-            #SBATCH --time=15:00
-            #SBATCH --output=slurm_%x-id_%j.out
-            #SBATCH --error=slurm_%x-id_%j.err
-
-            EXE1=regcm/bin/regcmMPICLM45_OASIS
-            NPROC1=36
-            INPUT1=regcm/namelist-cpl_init.f
-            #
-            EXE2=symphonie/bin/OASIS/symphonie.exe
-            NPROC2=36
-            INPUT2=symphonie/notebook_list.f
-
-            ulimit -s unlimited
-
-            module purge
-            module load intel/18.2
-            module load intelmpi/18.2
-            module load hdf5/1.10.2-intelmpi
-            module load netcdf/4.7.4-intelmpi
-            module load pnetcdf/1.9.0-intelmpi
-            module list 2>./run_modules
-
-            echo -e "Launching...\n"
-
-            mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
-
-
    .. tab-item:: HILO
 
       Then, **edit** ``job.sh`` and modify/check the following points:
@@ -225,6 +177,54 @@ When you have configured everything as guided above, **save the** ``namcouple``
             module load mvapich2/2.3.6_intel
             module load netcdf/4.6.1_intel_64
             module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC1 $EXE1 $INPUT1 : -np $NPROC2 $EXE2 $INPUT2
+
+
+   .. tab-item:: CALMIP
+
+      Then, **edit** ``job.sh`` and modify/check the following points:
+
+      * Set ``--job-name`` to ``init``.
+      * Set ``NPROC1`` and ``NPROC2`` to 36, refering to the allocation for RegCM and SYMPHONIE, respectively.
+      * Set the ``--nodes`` batch parameter to 2.
+      * Point to the right ``namelist-cpl_init.f`` for ``INPUT1``.
+      * Set ``EXE1`` and ``EXE2`` to ``regcm/bin/regcmMPICLM45_OASIS`` and ``symphonie/bin/OASIS/symphonie.exe``.
+
+
+      .. dropdown:: ``job.sh``
+
+         .. code:: bash
+
+            #!/bin/bash
+
+            #SBATCH --job-name=init
+            #SBATCH --nodes=2
+            #SBATCH --ntasks-per-node=36
+            #SBATCH --ntasks-per-core=1
+            #SBATCH --time=15:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE1=regcm/bin/regcmMPICLM45_OASIS
+            NPROC1=36
+            INPUT1=regcm/namelist-cpl_init.f
+            #
+            EXE2=symphonie/bin/OASIS/symphonie.exe
+            NPROC2=36
+            INPUT2=symphonie/notebook_list.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load intel/18.2
+            module load intelmpi/18.2
+            module load hdf5/1.10.2-intelmpi
+            module load netcdf/4.7.4-intelmpi
+            module load pnetcdf/1.9.0-intelmpi
             module list 2>./run_modules
 
             echo -e "Launching...\n"

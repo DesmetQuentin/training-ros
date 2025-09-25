@@ -41,6 +41,48 @@ And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editi
 
 .. tab-set::
 
+   .. tab-item:: HILO
+
+      Then, **edit the** ``job.sh`` **batch script**:
+
+      * Set ``--job-name`` to ``init``.
+      * Set ``NPROC`` and ``--ntasks`` to 48: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
+      * Set ``EXE`` to ``bin/ORIGIN/symphonie.exe``.
+
+
+      .. dropdown:: ``job.sh``
+
+         .. code:: bash
+
+            #!/bin/bash
+
+            #SBATCH --job-name=init
+            #SBATCH --ntasks=48
+            #SBATCH --cpus-per-task=1
+            #SBATCH --time=20:00
+            #SBATCH --output=slurm_%x-id_%j.out
+            #SBATCH --error=slurm_%x-id_%j.err
+
+            EXE=bin/ORIGIN/symphonie.exe
+            NPROC=48
+            INPUT=notebook_list.f
+
+            ulimit -s unlimited
+
+            module purge
+            module load slurm/21.08.5
+            module load intel/2019.u5
+            module load hdf5/1.8.15p1_intel_64
+            module load mvapich2/2.3.6_intel
+            module load netcdf/4.6.1_intel_64
+            module load PnetCDF/1.9.0_intel_64
+            module list 2>./run_modules
+
+            echo -e "Launching...\n"
+
+            mpiexec.hydra -np $NPROC $EXE $INPUT
+
+
    .. tab-item:: CALMIP
 
       Then, **edit the** ``job.sh`` **batch script**:
@@ -77,48 +119,6 @@ And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editi
             module load hdf5/1.10.2-intelmpi
             module load netcdf/4.7.4-intelmpi
             module load pnetcdf/1.9.0-intelmpi
-            module list 2>./run_modules
-
-            echo -e "Launching...\n"
-
-            mpiexec.hydra -np $NPROC $EXE $INPUT
-
-
-   .. tab-item:: HILO
-
-      Then, **edit the** ``job.sh`` **batch script**:
-
-      * Set ``--job-name`` to ``init``.
-      * Set ``NPROC`` and ``--ntasks`` to 48: this corresponds to the size of the grid as indicated in ``notebook_grid.f``.
-      * Set ``EXE`` to ``bin/ORIGIN/symphonie.exe``.
-
-
-      .. dropdown:: ``job.sh``
-
-         .. code:: bash
-
-            #!/bin/bash
-
-            #SBATCH --job-name=init
-            #SBATCH --ntasks=48
-            #SBATCH --cpus-per-task=1
-            #SBATCH --time=20:00
-            #SBATCH --output=slurm_%x-id_%j.out
-            #SBATCH --error=slurm_%x-id_%j.err
-
-            EXE=bin/ORIGIN/symphonie.exe
-            NPROC=48
-            INPUT=notebook_list.f
-
-            ulimit -s unlimited
-
-            module purge
-            module load slurm/21.08.5
-            module load intel/2019.u5
-            module load hdf5/1.8.15p1_intel_64
-            module load mvapich2/2.3.6_intel
-            module load netcdf/4.6.1_intel_64
-            module load PnetCDF/1.9.0_intel_64
             module list 2>./run_modules
 
             echo -e "Launching...\n"
@@ -175,22 +175,22 @@ They are the two files we intended to generate. **Head** ``description_domaine.n
 
 .. tab-set::
 
-   .. tab-item:: CALMIP
-
-      .. code:: console
-
-         $ head -n3 description_domaine.next
-              7     6    36           ! Number of sub-domains in each direction & nbdom
-                  300         300  ! iglb jglb
-         ------------------------
-
-
    .. tab-item:: HILO
 
       .. code:: console
 
          $ head -n3 description_domaine.next
               8     6    40           ! Number of sub-domains in each direction & nbdom
+                  300         300  ! iglb jglb
+         ------------------------
+
+
+   .. tab-item:: CALMIP
+
+      .. code:: console
+
+         $ head -n3 description_domaine.next
+              7     6    36           ! Number of sub-domains in each direction & nbdom
                   300         300  ! iglb jglb
          ------------------------
 

@@ -31,13 +31,6 @@ configurations below, but for now, only run the OASIS-enabled version.
 
       .. tab-set::
 
-         .. tab-item:: CALMIP
-
-            .. code:: bash
-
-               ./configure FC=ifort --enable-clm45 --enable-pnetcdf --enable-oasis --with-oasis-path=$OASIS/intel18_calmip
-
-
          .. tab-item:: HILO
 
             .. code:: bash
@@ -45,22 +38,29 @@ configurations below, but for now, only run the OASIS-enabled version.
                ./configure FC=ifort --enable-clm45 --enable-oasis --with-oasis-path=$OASIS/intel19_hilo
 
 
-   .. tab-item:: OASIS-disabled
-
-      .. tab-set::
-
          .. tab-item:: CALMIP
 
             .. code:: bash
 
-               ./configure FC=ifort --enable-clm45 --enable-pnetcdf
+               ./configure FC=ifort --enable-clm45 --enable-pnetcdf --enable-oasis --with-oasis-path=$OASIS/intel18_calmip
 
+
+   .. tab-item:: OASIS-disabled
+
+      .. tab-set::
 
          .. tab-item:: HILO
 
             .. code:: bash
 
                ./configure FC=ifort --enable-clm45
+
+
+         .. tab-item:: CALMIP
+
+            .. code:: bash
+
+               ./configure FC=ifort --enable-clm45 --enable-pnetcdf
 
 
 .. tip::

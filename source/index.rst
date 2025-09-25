@@ -61,18 +61,18 @@ Materials and setup
 
 .. tab-set::
 
-   .. tab-item:: CALMIP
-
-      .. code:: bash
-
-         source /tmpdir/desmet/training_ROS/config.sh
-
-
    .. tab-item:: HILO
 
       .. code:: bash
 
          source /work/users/desmetq/training_ROS/config.sh
+
+
+   .. tab-item:: CALMIP
+
+      .. code:: bash
+
+         source /tmpdir/desmet/training_ROS/config.sh
 
 
 Make sure both variables ``$TRAINING`` and ``$RUN`` exist and are correct.

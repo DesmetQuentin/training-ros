@@ -23,6 +23,9 @@ dependencies adapted to various setups.
 
    .. tab-item:: HILO
 
+      Our setup is based on ``intel19``. We thus named our include file
+      ``make.intel19_hilo``. **Make sure this file has the content shown below**:
+
       .. dropdown:: ``make.intel19_hilo``
 
          .. code:: make

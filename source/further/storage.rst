@@ -36,7 +36,7 @@ remains as convenient as it was:
 
    ln -sf ~/regcm_namelists/namelist-training_uncoupled.f $RUN/regcm/namelist.f
 
-As for :doc:`RegCM <../regcm/structure>`, we will now **store the simulation's
+As for RegCM, we will now **store the simulation's
 notebooks in our home directory**, so as to have them backed up in case we later need to
 reproduce this same simulation.
 

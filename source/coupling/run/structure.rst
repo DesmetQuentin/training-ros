@@ -2,8 +2,8 @@ Run folder structure
 ====================
 
 If you followed well the "Run folder structure" sections of the training's first part
-for :doc:`RegCM <../component-wise/regcm/index>` and
-:doc:`SYMPHONIE <../component-wise/symphonie/index>`, then your ``$RUN`` directory
+for :doc:`RegCM <../../component-wise/regcm/index>` and
+:doc:`SYMPHONIE <../../component-wise/symphonie/index>`, then your ``$RUN`` directory
 should look like this:
 
 .. code:: console

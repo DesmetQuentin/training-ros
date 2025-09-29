@@ -23,7 +23,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
    The simulation period must be set from one day before the intended coupled
    simulation, and for a duration of one day. Let us say that the intended coupled
    simulation will run two weeks starting 2018-07-03 (consistently as in the
-   :doc:`first part of this training <../component-wise/index>`).
+   :doc:`first part of this training <../../component-wise/index>`).
    Then **relevant start and end dates are 2018-07-02 and 2018-07-03**, respectively.
 
    Let us apply this to the different compartments:
@@ -70,7 +70,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
 
    This initialization run will not exchange data between the components, but instead
    use the OASIS interface as an output stream. The entry mode for this case
-   is ``OUTPUT``. Following the directions of a previous :doc:`page <namelist/namcouple>`
+   is ``OUTPUT``. Following the directions of a previous :doc:`page <../namelist/namcouple>`
    of this training, the ``$STRINGS`` section of the ``namcouple`` file should look like
    this:
 
@@ -147,7 +147,7 @@ When you have configured everything as guided above, **save the** ``namcouple``
          Also: adapt ``--ntasks`` accordingly!
 
 
-      .. dropdown:: ``job.sh`
+      .. dropdown:: ``job.sh``
 
          .. code:: bash
 

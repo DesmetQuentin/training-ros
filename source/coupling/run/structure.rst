@@ -31,7 +31,8 @@ structure** with the following lines:
 
    .. code:: bash
 
-      bash $TRAINING/make_run-coupled_model.sh $RUN
+      bash $TRAINING/scripts/make_run-coupled_model.sh $RUN
+      cp -p $TRAINING/solutions/* $RUN/symphonie/
 
 
 Now, the same ``$RUN`` directory should look like:

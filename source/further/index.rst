@@ -16,7 +16,7 @@ the ``diff`` program, for instance with:
 .. dropdown:: Output
 
    .. code:: diff
-         
+
       diff symphonie/NOTEBOOKS-cpl_init/notebook_airseaflux_s26.f symphonie/NOTEBOOKS-cpl_spinup/notebook_airseaflux_s26.f
       7c7
       < flag_meteodata='ecmwf'           ! Meteorological model key (ecmwf glorys

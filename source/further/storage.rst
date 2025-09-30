@@ -98,9 +98,9 @@ then open the dropdown menu for a proposition of solution.
    To this, we answer: the models (``bin`` directories) and the run's configuration
    files with ``namcouple``, RegCM's ``namelist.f`` and SYMPHONIE's ``NOTEBOOKS``
    folder. Everything else can be recoded easily or recomputed.
-   
+
    .. note::
-      
+
       It's acceptable to also consider ``job.sh`` and ``symphonie/notebook_list.f``
       as crucial, but with experience, you will see that they can be easily retrieved
       or recoded from scratch.
@@ -126,7 +126,7 @@ storage in the same directory, while keeping the same run structure.
 
       ln -sf ~/.bashrc my_link.sh
 
-   with ``-s`` meaning "symbolic", and ``-f`` meaning "force", i.e., overwriting 
+   with ``-s`` meaning "symbolic", and ``-f`` meaning "force", i.e., overwriting
    potentially existing links with the same name.
 
    Note that you may also link directories.

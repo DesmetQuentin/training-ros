@@ -8,21 +8,21 @@ On most supercomputers, users have access to several types of storage, whose cap
 and backup features make them adapted to different types of usage. Two typical storage
 types (at least) generally exist: the so-called "home" and "work" directory:
 
-+-----------------------------+----------------------------+--------------------------------+
-| Type directory              | Home                       | Work                           |
-+=============================+============================+================================+
-| Path on HILO                | ``/home/$USER``            | ``/work/$USER``                |
-+-----------------------------+----------------------------+--------------------------------+
-| Path on CALMIP              | ``/users/$GROUP/$USER``    | ``/tmpdir/$USER``              |
-+-----------------------------+----------------------------+--------------------------------+
-| Backup                      | Frequent                   | None, may even have restiction |
-+-----------------------------+----------------------------+--------------------------------+
-| Capacity                    | A few GB per users         | Many TB (shared)               |
-+-----------------------------+----------------------------+--------------------------------+
-| Typical usage               | Scripts, softwares,        | Simulation outputs,            |
-|                             | models, configurations,    | observation data,              |
-|                             | environments, ...          | tests, ...                     |
-+-----------------------------+----------------------------+--------------------------------+
++-----------------------------+----------------------------+---------------------------------+
+| Type directory              | Home                       | Work                            |
++=============================+============================+=================================+
+| Path on HILO                | ``/home/$USER``            | ``/work/$USER``                 |
++-----------------------------+----------------------------+---------------------------------+
+| Path on CALMIP              | ``/users/$GROUP/$USER``    | ``/tmpdir/$USER``               |
++-----------------------------+----------------------------+---------------------------------+
+| Backup                      | Frequent                   | None, may even have restictions |
++-----------------------------+----------------------------+---------------------------------+
+| Capacity                    | A few GB per users         | Many TB (shared)                |
++-----------------------------+----------------------------+---------------------------------+
+| Typical usage               | Scripts, softwares,        | Simulation outputs,             |
+|                             | models, configurations,    | observation data,               |
+|                             | environments, ...          | tests, ...                      |
++-----------------------------+----------------------------+---------------------------------+
 
 
 Characterizing our coupled run's items
@@ -196,7 +196,7 @@ link them back to the run folder under their original names.
    cp -p notebook_list.f ~/notebooks/
 
 
-Now it is up to you to organise your workflow and apply what we have
-covered on this page the way you like. We suggest creating scripts to make all of this
+Now it is up to you to **organise your workflow and apply what we have
+covered on this page the way you like**. We suggest creating scripts to make all of this
 systematic, so you never risk losing important files while keeping your
 simulation experience comfortable.

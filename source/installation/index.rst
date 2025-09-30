@@ -36,7 +36,7 @@ be loaded after you have ``source`` d the ``config.sh`` script:
 
 
 If they are not loaded yet, you may load each of them manually using
-``module load <module name>``, e.g., ``module load intel/18.2``.
+``module load <module name>``, e.g., ``module load intel/18.2`` on CALMIP.
 
 If you wish to proceed to the installation with a different set of modules and/or on
 another machine, you will need to adapt the various paths to ``include`` and ``lib``

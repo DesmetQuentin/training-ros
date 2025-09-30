@@ -266,3 +266,9 @@ Once those files are configured as indicated, **compile** with the following com
    .. code:: bash
 
       make -f TopMakefileOasis3 realclean
+
+
+At this stage, there should exist a new directory in ``$OASIS``, named as indicated
+in the makefile we used (e.g., ``intel19_hilo`` on HILO). This directory contains the
+``lib`` and ``include`` folders we will provide to compilers for installing RegCM and
+SYMPHONIE.

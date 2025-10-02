@@ -85,7 +85,7 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
         LOCTRANS
         AVERAGE
       #
-        RCM_PREC RCM_PREC 1 3600 1 restart_RCM_PREC.nc OUTPUT
+        RCM_PREC RCM_PREC 1 3600 1 restart_PREC.nc OUTPUT
         rcim rcim LAG=+180
         LOCTRANS
         AVERAGE
@@ -95,12 +95,12 @@ you have prepared with the ``cpl_init`` suffix, as well as to ``$RUN/namcouple``
         LOCTRANS
         AVERAGE
       #
-        RCM_SLP RCM_SLP 1 3600 1 restart_RCM_SLP.nc OUTPUT
+        RCM_SLP RCM_SLP 1 3600 1 restart_SLP.nc OUTPUT
         rcem rcem LAG=+180
         LOCTRANS
         AVERAGE
       #
-        SYM_SST SYM_SST 1 3600 1 restart_SYM_SST.nc OUTPUT
+        SYM_SST SYM_SST 1 3600 1 restart_SST.nc OUTPUT
         symt symt LAG=+180
         LOCTRANS
         AVERAGE

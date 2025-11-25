@@ -1,8 +1,68 @@
 For OASIS: ``namcouple``
 ========================
 
+
+Full file example
+-----------------
+
 ``namcouple`` is a text file separated in sections, each with a specific format.
 Any line beginning with ``#`` is ignored and blank lines are not allowed.
+
+Below is an example ``namcouple`` file, implementing nearly everything we will see on
+this page. This is only a **minimal working example**. This is not exactly the file we
+will use for the coupled model.
+
+.. dropdown:: ``namcouple``
+
+   .. code::
+
+      # This is a typical input file for OASIS3-MCT.
+      # Keywords used in previous versions of OASIS3
+      # but now obsolete are marked "Not used"
+      # Don't hesitate to ask precisions or make suggestions (oasishelp@cerfacs.fr).
+      #
+      # Any line beginning with # is ignored. Blank lines are not allowed.
+      #
+      #--------------------------------------------------------------------------
+      $NNOREST
+      # T (true) or F (false): make the restart file facultative, i.e. if absent
+      # fields are initialized with zero values
+      #
+        F
+      #--------------------------------------------------------------------------
+      $NFIELDS
+      # = total number of field entries
+      #
+        2
+      #--------------------------------------------------------------------------
+      $RUNTIME
+      # The total simulated time for this run in seconds
+      #
+        63072000
+      #--------------------------------------------------------------------------
+      $NLOGPRT
+      # Amount of information written to OASIS3-MCT log files (see User Guide)
+      #
+        0  0  0
+      #--------------------------------------------------------------------------
+      $STRINGS
+      # The above variables are the general parameters for the experiment.
+      # Everything below has to do with the fields being exchanged.
+      #
+        RCM_TAUX:RCM_TAUY SYM_TAUX:SYM_TAUY 1 720 2 restart_TAU.nc EXPORTED
+        253 205 1197 972 rcin symt LAG=+180
+        R  0  R  0
+        LOCTRANS MAPPING
+        AVERAGE
+        rmp_rcin_to_symt_BILINEAR.nc src opt
+      #
+        RCM_NULW SYM_SNSF 1 1440 3 restart_LW.nc EXPORTED
+        253 205 1197 972 rcin symt LAG=+180
+        R  0  R  0
+        LOCTRANS BLASOLD MAPPING
+        AVERAGE
+        -1 0
+        rmp_rcin_to_symt_BILINEAR.nc src opt
 
 
 Head settings
@@ -266,63 +326,3 @@ but positive downward for the receiver:
       1 1
       CONSTANT 273.15
       rmp_symt_to_rcim_BILINEAR.nc src opt
-
-
-Full file example
------------------
-
-Below is an example ``namcouple`` file, implementing nearly everything we will see on
-this page. This is only a **minimal working example**. This is not exactly the file we
-will use for the coupled model.
-
-.. dropdown:: ``namcouple``
-
-   .. code::
-
-      # This is a typical input file for OASIS3-MCT.
-      # Keywords used in previous versions of OASIS3
-      # but now obsolete are marked "Not used"
-      # Don't hesitate to ask precisions or make suggestions (oasishelp@cerfacs.fr).
-      #
-      # Any line beginning with # is ignored. Blank lines are not allowed.
-      #
-      #--------------------------------------------------------------------------
-      $NNOREST
-      # T (true) or F (false): make the restart file facultative, i.e. if absent
-      # fields are initialized with zero values
-      #
-        F
-      #--------------------------------------------------------------------------
-      $NFIELDS
-      # = total number of field entries
-      #
-        2
-      #--------------------------------------------------------------------------
-      $RUNTIME
-      # The total simulated time for this run in seconds
-      #
-        63072000
-      #--------------------------------------------------------------------------
-      $NLOGPRT
-      # Amount of information written to OASIS3-MCT log files (see User Guide)
-      #
-        0  0  0
-      #--------------------------------------------------------------------------
-      $STRINGS
-      # The above variables are the general parameters for the experiment.
-      # Everything below has to do with the fields being exchanged.
-      #
-        RCM_TAUX:RCM_TAUY SYM_TAUX:SYM_TAUY 1 720 2 restart_TAU.nc EXPORTED
-        253 205 1197 972 rcin symt LAG=+180
-        R  0  R  0
-        LOCTRANS MAPPING
-        AVERAGE
-        rmp_rcin_to_symt_BILINEAR.nc src opt
-      #
-        RCM_NULW SYM_SNSF 1 1440 3 restart_LW.nc EXPORTED
-        253 205 1197 972 rcin symt LAG=+180
-        R  0  R  0
-        LOCTRANS BLASOLD MAPPING
-        AVERAGE
-        -1 0
-        rmp_rcin_to_symt_BILINEAR.nc src opt

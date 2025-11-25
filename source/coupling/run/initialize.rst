@@ -154,6 +154,7 @@ When you have configured everything as guided above, **save the** ``namcouple``
             #!/bin/bash
 
             #SBATCH --job-name=init
+            #SBATCH --partition='broadwell'
             #SBATCH --ntasks=80
             #SBATCH --cpus-per-task=1
             #SBATCH --time=25:00
@@ -378,7 +379,7 @@ We now have our grids, ``namcouple`` and restart files in ``oasis``:
 
 We are ready to run our first coupled simulation!
 
-.. tip::
+.. note::
 
    You may now delete the actual output files of this simulation, i.e.,
    ``RCM_*.nc`` and ``SYM_*.nc``.

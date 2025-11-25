@@ -23,6 +23,7 @@ computing nodes' session.
             #!/bin/bash
 
             #SBATCH --job-name=regcm
+            #SBATCH --partition='broadwell'
             #SBATCH --ntasks=40
             #SBATCH --cpus-per-task=1
             #SBATCH --time=10:00

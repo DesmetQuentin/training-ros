@@ -16,32 +16,32 @@ grid, we want, in addition, to filter out the land-only meshes, ultimately resul
 a reduced need of computing resources. In this context, let us set up an initialization
 run to compute which parts of the grid are land-only and can thus be ignored.
 
-First, after changing directory to ``$RUN/symphonie``, change/check the values of the
-following **notebook parameters**:
-
-.. list-table::
-   :header-rows: 1
-
-   * - File
-     - Variable and value
-     - Comment
-   * - ``notebook_time.f``
-     - ``run_option = -1``
-     - Enables the initialization mode.
-   * - ``notebook_grid.f``
-     - ``nbdom_imax = 7`` and ``nbdom_jmax = 6`` on CALMIP/``nbdom_imax = 8`` and ``nbdom_jmax = 6`` on HILO
-     - The initial grid dimensions.
-   * - ``notebook_grid.f``
-     - ``mpi_map_file_name = 'default'`` and ``mpi_hole_plugging = 'none'``
-     - These variables should point to the files that contain information on which part of the grid decomposition are land-only. Setting them to their defaults triggers their computation.
-
-
-And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editing**
-``notebook_list.f``.
-
 .. tab-set::
 
    .. tab-item:: HILO
+      
+      First, after changing directory to ``$RUN/symphonie``, change/check the values of the
+      following **notebook parameters**:
+
+      .. list-table::
+         :header-rows: 1
+
+         * - File
+           - Variable and value
+           - Comment
+         * - ``notebook_time.f``
+           - ``run_option = -1``
+           - Enables the initialization mode.
+         * - ``notebook_grid.f``
+           - ``nbdom_imax = 8`` and ``nbdom_jmax = 6``
+           - The initial grid dimensions.
+         * - ``notebook_grid.f``
+           - ``mpi_map_file_name = 'default'`` and ``mpi_hole_plugging = 'none'``
+           - These variables should point to the files that contain information on which part of the grid decomposition are land-only. Setting them to their defaults triggers their computation.
+
+
+      And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editing**
+      ``notebook_list.f``.
 
       Then, **edit the** ``job.sh`` **batch script**:
 
@@ -57,6 +57,7 @@ And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editi
             #!/bin/bash
 
             #SBATCH --job-name=init
+            #SBATCH --partition='broadwell'
             #SBATCH --ntasks=48
             #SBATCH --cpus-per-task=1
             #SBATCH --time=20:00
@@ -84,6 +85,29 @@ And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editi
 
 
    .. tab-item:: CALMIP
+      
+      First, after changing directory to ``$RUN/symphonie``, change/check the values of the
+      following **notebook parameters**:
+
+      .. list-table::
+         :header-rows: 1
+
+         * - File
+           - Variable and value
+           - Comment
+         * - ``notebook_time.f``
+           - ``run_option = -1``
+           - Enables the initialization mode.
+         * - ``notebook_grid.f``
+           - ``nbdom_imax = 7`` and ``nbdom_jmax = 6``
+           - The initial grid dimensions.
+         * - ``notebook_grid.f``
+           - ``mpi_map_file_name = 'default'`` and ``mpi_hole_plugging = 'none'``
+           - These variables should point to the files that contain information on which part of the grid decomposition are land-only. Setting them to their defaults triggers their computation.
+
+
+      And make sure that you are pointing to the right ``NOTEBOOKS`` folder by **editing**
+      ``notebook_list.f``.
 
       Then, **edit the** ``job.sh`` **batch script**:
 

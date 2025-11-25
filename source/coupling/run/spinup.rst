@@ -7,7 +7,8 @@ With our initialization files ready, let us prepare and run a spinup simulation.
 
    In a realistic setup, the duration of a spinup run depends on each model and is often
    dimensioned by the time required by the ocean to stabilize its domain-integrated
-   turbulent kinetic energy. It should be about within the 6 months to 1 year interval.
+   turbulent kinetic energy. It should be about within the several months to 1 year
+   interval, depending on the domain size.
 
 
 First, **copy the namelist, notebook and job files**, using the ``cpl_spinup`` suffix:
@@ -91,8 +92,30 @@ Then, let us configure our spinup simulation by following the dropdown sections 
 .. dropdown:: 3. Configuring air-sea flux coupling for the models
 
    In comparison with the :doc:`initialization <initialize>` when only exporting fields
-   were enabled, we now **enable exporting and importing fields**. Adapt ``oasisparam``
-   for RegCM and ``notebook_oasis_generic.f`` for SYMPHONIE accordingly.
+   were enabled, we now **enable exporting AND importing fields**. Adapt ``oasisparam``
+   for RegCM and ``notebook_oasis_generic.f`` for SYMPHONIE accordingly, enabling the
+   following:
+
+   * **RegCM:**
+      * ``l_cpl_im_sst``
+      * ``l_cpl_ex_slp``
+      * ``l_cpl_ex_taux``
+      * ``l_cpl_ex_tauy``
+      * ``l_cpl_ex_prec``
+      * ``l_cpl_ex_ulhf``
+      * ``l_cpl_ex_ushf``
+      * ``l_cpl_ex_nulw``
+      * ``l_cpl_ex_ndsw``
+   * **SYMPHONIE** (in ``notebook_oasis_generic.f``):
+      * ``l_cpl_im_slp``
+      * ``l_cpl_im_taux``
+      * ``l_cpl_im_tauy``
+      * ``l_cpl_im_prec``
+      * ``l_cpl_im_slhf``
+      * ``l_cpl_im_sshf``
+      * ``l_cpl_im_snsf``
+      * ``l_cpl_im_ssrf``
+      * ``l_cpl_ex_sst``
 
    In addition, we need to tell SYMPHONIE that it will retrieve its sea-surface fluxes
    from OASIS, instead of using external data. This is done by modifying
@@ -299,6 +322,7 @@ And now, ``job-spinup.sh`` should now look like this:
             #!/bin/bash
 
             #SBATCH --job-name=spinup
+            #SBATCH --partition='broadwell'
             #SBATCH --ntasks=80
             #SBATCH --cpus-per-task=1
             #SBATCH --time=25:00

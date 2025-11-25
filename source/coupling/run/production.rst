@@ -287,6 +287,7 @@ Your job file should now look like the following:
             #!/bin/bash
 
             #SBATCH --job-name=production
+            #SBATCH --partition='broadwell'
             #SBATCH --ntasks=80
             #SBATCH --cpus-per-task=1
             #SBATCH --time=25:00

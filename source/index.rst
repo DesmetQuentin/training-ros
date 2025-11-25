@@ -53,11 +53,35 @@ Moreover, it should be supervised by a so-called training master, who prepared:
 * and a ``training_ROS`` folder containing the materials explained below.
 
 
+Finally, to **inform the OASIS team** about your use of their coupling tool, please fill
+in their form by following this `link <https://oasis.cerfacs.fr/en/download-oasis3-mct-sources/>`_
+(one registration per laboratory is enough). Once you've filled the form, you'll be
+given access to the most updated source code. However, this training does not rely
+on your own codes, so you can download the coupler for yourself only later.
+
+
 Materials and setup
 -------------------
 
-1. ``training_ROS`` is a folder containing all the resources you will need for the training. You can locate it with the help of your training master.
-2. Configure your environment for the training using the ``config.sh`` script:
+1. Log in to your cluster session (replace ``$USER`` by your username):
+
+.. tab-set::
+
+   .. tab-item:: HILO
+
+      .. code:: bash
+
+         scp -XY $USER@hilo.usth.edu.vn
+
+   
+   .. tab-item:: CALMIP
+
+      .. code:: bash
+
+         scp -XY $USER@olympe.calmip.univ-toulouse.fr
+
+
+2. Then, ``training_ROS`` is a folder containing all the resources you will need for the training. Let us start by using its ``config.sh`` script to configure our environment:
 
 .. tab-set::
 

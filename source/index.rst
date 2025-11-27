@@ -53,11 +53,24 @@ Moreover, it should be supervised by a so-called training master, who prepared:
 * and a ``training_ROS`` folder containing the materials explained below.
 
 
-Finally, to **inform the OASIS team** about your use of their coupling tool, please fill
-in their form by following this `link <https://oasis.cerfacs.fr/en/download-oasis3-mct-sources/>`_
+Where to get the sources
+------------------------
+
+**You don't need to get the sources yourself for this training!**
+Nonetheless, below is presented how to get the original source for each component.
+
+RegCM is public with an MIT licence, available on `GitHub <https://github.com/ICTP/RegCM>`_.
+
+SYMPHONIE can be shared freely (you can retrieve the source from the training materials),
+but you first need to contact the `SIROCCO <https://sirocco.obs-mip.fr/register-for-download-access/>`_
+group.
+
+As for OASIS, you must first **inform the OASIS team** about your use of their coupling
+tool, by filling their form at the following `link <https://oasis.cerfacs.fr/en/download-oasis3-mct-sources/>`_
 (one registration per laboratory is enough). Once you've filled the form, you'll be
-given access to the most updated source code. However, this training does not rely
-on your own codes, so you can download the coupler for yourself only later.
+given access to the most updated source code (which merges several licences). However,
+this training does not rely on your own codes, so you can download the coupler for
+yourself only later.
 
 
 Materials and setup

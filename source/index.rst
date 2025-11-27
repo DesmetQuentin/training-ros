@@ -84,14 +84,14 @@ Materials and setup
 
       .. code:: bash
 
-         scp -XY $USER@hilo.usth.edu.vn
+         ssh -XY $USER@hilo.usth.edu.vn
 
    
    .. tab-item:: CALMIP
 
       .. code:: bash
 
-         scp -XY $USER@olympe.calmip.univ-toulouse.fr
+         ssh -XY $USER@olympe.calmip.univ-toulouse.fr
 
 
 2. Then, ``training_ROS`` is a folder containing all the resources you will need for the training. Let us start by using its ``config.sh`` script to configure our environment:

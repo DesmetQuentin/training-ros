@@ -62,7 +62,7 @@ Nonetheless, below is presented how to get the original source for each componen
 RegCM is public with an MIT licence, available on `GitHub <https://github.com/ICTP/RegCM>`_.
 
 SYMPHONIE can be shared freely (you can retrieve the source from the training materials),
-but you first need to contact the `SIROCCO <https://sirocco.obs-mip.fr/register-for-download-access/>`_
+but, in general, you first need to contact the `SIROCCO <https://sirocco.obs-mip.fr/register-for-download-access/>`_
 group.
 
 As for OASIS, you must first **inform the OASIS team** about your use of their coupling

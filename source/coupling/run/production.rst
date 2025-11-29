@@ -158,9 +158,9 @@ below.
 
       .. tab-item:: SYMPHONIE's ``OFFLINE``
 
-         At the end of the ``notebook_offline.f`` file in ``NOTEBOOKS-cpl_production``,
-         let us add a new line indicating a smaller periodicity, e.g., 3 hours, until
-         after the end of the simulation:
+         For this stream, we have already set up the prodcution output frequency from
+         the spinup run. Just make sure this has not changed; the end of the production's
+         ``notebook_offline.f`` file should look like this:
 
          .. code::
 
@@ -170,12 +170,6 @@ below.
             Periodicity (hours) ! until yyyy / mm / dd / hh / mm / ss ! Don't touch this line
             24.                         2018   07   10   00   00   00
             3.                          2018   07   17   00   00   00
-
-
-         .. note::
-
-            You could have written all lines from the spinup run, planning ahead which
-            periodicity will apply for which period.
 
 
 .. dropdown:: 3. Re-employing interpolation files

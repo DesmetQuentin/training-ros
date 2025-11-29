@@ -196,13 +196,16 @@ Then, let us configure our spinup simulation by following the dropdown sections 
 
       .. tab-item:: SYMPHONIE's ``OFFLINE``
 
-         ``OFFLINE`` outputs are for averaged fields. Let us set up a daily frequency
-         for the spinup run, planning to refine this frequency for production.
+         ``OFFLINE`` outputs are for averaged fields. Unlike with the ``GRAPHICS`` stream,
+         here we need to provide output frequencies in advance for all runs, i.e., spinup
+         and production. Let us set up a daily frequency for the spinup run, and a
+         3-hourly frequency for production.
 
          In ``NOTEBOOKS-cpl_spinup``,
          open ``notebook_offline.f``: you should see plain text lines at the very end
-         of it, defining a period and a date. Set this part to one single line, stating
-         a periodicity of 24 hours until 2018-07-10:
+         of it, defining a period and a date. Set this part to two lines, stating
+         a periodicity of 24 hours until 2018-07-10, then refining to 3 hours until
+         the end of the planned production run:
 
          .. code::
 
@@ -211,6 +214,7 @@ Then, let us configure our spinup simulation by following the dropdown sections 
             DO NOT MODIFY THE NEXT LINE AS IT IS THE SIGNAL EXPECTED BY S TO START THE TIME LIST!!!!
             Periodicity (hours) ! until yyyy / mm / dd / hh / mm / ss ! Don't touch this line
             24.                         2018   07   10   00   00   00
+            3.                          2018   07   17   00   00   00
 
 
    .. tip::
